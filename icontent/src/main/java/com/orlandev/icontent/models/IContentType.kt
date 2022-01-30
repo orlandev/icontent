@@ -9,4 +9,5 @@ sealed interface IContentType {
     class Image(@DrawableRes val noImageFound: Int, val context: Context) : IContentType
     object Video : IContentType
     object Pano : IContentType
+    object Undefined : IContentType
 }
