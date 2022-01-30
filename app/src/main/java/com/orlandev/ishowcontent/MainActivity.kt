@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.orlandev.icontent.IContent
+import com.orlandev.icontent.models.IContentModel
+import com.orlandev.icontent.models.IContentType
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,22 +26,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        item {
+                            val content = IContentModel(
+                                field = "This is a text",
+                                typeI = IContentType.Text,
+                            )
+                            IContent(IContentModel = content)
+                        }
+                    }
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    IShowContentTheme {
-        Greeting("Android")
     }
 }
