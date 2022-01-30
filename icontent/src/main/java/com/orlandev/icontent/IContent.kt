@@ -1,5 +1,7 @@
 package com.orlandev.icontent
 
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import coil.annotation.ExperimentalCoilApi
@@ -29,6 +31,7 @@ fun IContent(IContentModel: IContentModel, modifier: Modifier = Modifier) {
             TODO("NOT IMPLEMENTED YET")
         }
     }
+
 }
 
 

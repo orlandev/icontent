@@ -11,7 +11,7 @@ import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-internal fun IImageBlur(field: String, modifier: Modifier, contentType: IContentType) {
+  fun IImageBlur(field: String, modifier: Modifier, contentType: IContentType) {
     val imgRef = field.split(FIELD_IMAGE_BLUR_DELIMITIER)
     if (imgRef.size == 2 && contentType is IContentType.Image) {
         ImageBlur(
