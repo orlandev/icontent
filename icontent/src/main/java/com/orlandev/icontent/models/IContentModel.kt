@@ -1,9 +1,7 @@
 package com.orlandev.icontent.models
 
-import com.orlandev.icontent.ContentType
-
-data class Content(
+data class IContentModel(
     val `field`: String,
-    val type: ContentType,
+    val typeI: IContentType,
     val markups: List<Markup> = emptyList()
 )
