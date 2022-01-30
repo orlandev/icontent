@@ -1,19 +1,13 @@
 package com.orlandev.icontent
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.ondev.imageblurkt_lib.ImageBlur
 import com.orlandev.icontent.composables.IText
 import com.orlandev.icontent.models.Content
-import com.orlandev.icontent.utils.FIELD_DELIMITIER
+import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 
 
 sealed interface ContentType {
@@ -35,7 +29,7 @@ fun IContent(content: Content, modifier: Modifier = Modifier) {
             )
         }
         is ContentType.Image -> {
-            val imgRef = content.field.split(FIELD_DELIMITIER)
+            val imgRef = content.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
             if (imgRef.size == 2) {
                 ImageBlur(
                     modifier = modifier,
