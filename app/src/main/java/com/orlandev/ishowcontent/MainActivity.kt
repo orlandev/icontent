@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
 import com.orlandev.icontent.models.IContentModel
-import com.orlandev.icontent.models.IContentType
+import com.orlandev.icontent.utils.toIContentType
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,14 +29,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val contentText = IContentModel(
                         field = "This is a text using IContent",
-                        typeI = IContentType.Text,
+                        typeI = "text".toIContentType(LocalContext.current, R.drawable.no_image),
                     )
                     val contentImage = IContentModel(
                         field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
-                        typeI = IContentType.Image(
-                            noImageFound = R.drawable.no_image,
-                            context = LocalContext.current
-                        ),
+                        typeI = "image".toIContentType(LocalContext.current, R.drawable.no_image),
                     )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         item {
