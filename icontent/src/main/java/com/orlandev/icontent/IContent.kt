@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.ondev.imageblurkt_lib.ImageBlur
+import com.orlandev.icontent.composables.IText
 import com.orlandev.icontent.models.Content
 import com.orlandev.icontent.utils.FIELD_DELIMITIER
 
