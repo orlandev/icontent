@@ -1,9 +1,7 @@
 package com.orlandev.icontent.composables
 
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import coil.annotation.ExperimentalCoilApi
 import com.ondev.imageblurkt_lib.ImageBlur
 import com.orlandev.icontent.models.IContentType
@@ -22,5 +20,7 @@ import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
             notImageFoundRes = contentType.noImageFound,
             contentDescription = null
         )
+    }else{
+        //TODO TROW AN EXCEPTION
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
@@ -35,6 +36,11 @@ class MainActivity : ComponentActivity() {
                         field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
                         typeI = "image".toIContentType(LocalContext.current, R.drawable.no_image),
                     )
+
+                    val contentVideo = IContentModel(
+                        field = "https://youtu.be/qvDo0SKR8-k",
+                        typeI = "video".toIContentType(LocalContext.current, R.drawable.no_image),
+                    )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         item {
 
@@ -51,6 +57,18 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                                     .height(200.dp)
                             )
+                        }
+                        item {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
+                                IContent(
+                                    IContentModel = contentVideo,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
                         }
                     }
                 }

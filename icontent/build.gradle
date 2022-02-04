@@ -47,6 +47,12 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     //ImageBlurhash
     implementation 'com.github.orlandev:compose-image-blurhash:1.0.0-beta.1'
+
+    //Youtube extractor
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+
+    // Exoplayer (Video)
+    implementation "com.google.android.exoplayer:exoplayer:2.16.1"
 }
 
 afterEvaluate {
@@ -56,7 +62,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.0.1'
+                version = '1.0.2'
             }
         }
     }
