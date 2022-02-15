@@ -1,4 +1,4 @@
-package com.orlandev.icontent.composables
+package com.orlandev.icontent.components
 
 import android.content.Context
 import android.net.Uri

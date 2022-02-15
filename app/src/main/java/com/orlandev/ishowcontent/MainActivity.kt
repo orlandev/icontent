@@ -6,12 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
 import com.orlandev.icontent.models.IContentModel
@@ -30,29 +31,43 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val contentText = IContentModel(
                         field = "This is a text using IContent",
-                        typeI = "text".toIContentType(LocalContext.current, R.drawable.no_image),
+                        typeI = "text".toIContentType(R.drawable.no_image),
+                    )
+                    val contentPano = IContentModel(
+                        field = "url para el pano",
+                        typeI = "pano".toIContentType(R.drawable.no_image),
                     )
                     val contentImage = IContentModel(
                         field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
-                        typeI = "image".toIContentType(LocalContext.current, R.drawable.no_image),
+                        typeI = "image".toIContentType(R.drawable.no_image),
                     )
 
                     val contentVideo = IContentModel(
                         field = "https://youtu.be/qvDo0SKR8-k",
-                        typeI = "video".toIContentType(LocalContext.current, R.drawable.no_image),
+                        typeI = "video".toIContentType(R.drawable.no_image),
                     )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         item {
 
                             IContent(
-                                IContentModel = contentText,
+                                iContentModel = contentText,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
                         }
                         item {
                             IContent(
-                                IContentModel = contentImage,
+                                iContentModel = contentPano,
+                                modifier = Modifier
+                                    .fillMaxWidth().height(200.dp)
+                                    .padding(20.dp)
+                                    .clip(RoundedCornerShape(20.dp))
+                            )
+                        }
+                        /*
+                        item {
+                            IContent(
+                                iContentModel = contentImage,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(200.dp)
@@ -65,11 +80,11 @@ class MainActivity : ComponentActivity() {
                                     .height(200.dp)
                             ) {
                                 IContent(
-                                    IContentModel = contentVideo,
+                                    iContentModel = contentVideo,
                                     modifier = Modifier.fillMaxSize()
                                 )
                             }
-                        }
+                        }*/
                     }
                 }
             }
