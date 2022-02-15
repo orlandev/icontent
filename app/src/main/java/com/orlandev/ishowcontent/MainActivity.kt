@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         typeI = "text".toIContentType(R.drawable.no_image),
                     )
                     val contentPano = IContentModel(
-                        field = "url para el pano",
+                        field = "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg[!]|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
                         typeI = "pano".toIContentType(R.drawable.no_image),
                     )
                     val contentImage = IContentModel(
@@ -64,7 +65,6 @@ class MainActivity : ComponentActivity() {
                                     .clip(RoundedCornerShape(20.dp))
                             )
                         }
-                        /*
                         item {
                             IContent(
                                 iContentModel = contentImage,
@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.fillMaxSize()
                                 )
                             }
-                        }*/
+                        }
                     }
                 }
             }
