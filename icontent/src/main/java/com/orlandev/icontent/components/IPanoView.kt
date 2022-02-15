@@ -1,5 +1,6 @@
 package com.orlandev.icontent.components
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
@@ -32,7 +33,7 @@ fun IPanoView(field: String, modifier: Modifier) {
     val imageUrl = imgRef[0] //Image URL
     val blurhash = imgRef[1] //Blurhash
 
-    val context = LocalContext.current
+    val context = LocalContext.current as Activity
 
     val imageLoader = ImageLoader(context)
 
