@@ -22,17 +22,21 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
             )
         }
         is IContentType.Image -> {
-            IImageBlur(iContentModel.field, modifier, iContentModel.typeI)
+            IImageBlur(
+                contentModel = iContentModel,
+                modifier = modifier,
+                contentType = iContentModel.typeI
+            )
         }
         is IContentType.Video -> {
             //TODO(" ADD VIDEO PROPERTIES")
             IVideoPlayer(modifier = modifier, url = iContentModel.field)
         }
         is IContentType.Pano -> {
-            IPanoView(field = iContentModel.field, modifier = modifier)
+            IPanoView(contentModel = iContentModel, modifier = modifier)
         }
         else -> {
-            TODO("NOT IMPLEMENTED YET")
+            TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
         }
     }
 

@@ -23,6 +23,7 @@ import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val context = this
         setContent {
             IShowContentTheme {
                 // A surface container using the 'background' color from the theme
@@ -32,20 +33,22 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val contentText = IContentModel(
                         field = "This is a text using IContent",
-                        typeI = "text".toIContentType(R.drawable.no_image),
+                        typeI = "text".toIContentType(),
                     )
                     val contentPano = IContentModel(
                         field = "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg[!]|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
-                        typeI = "pano".toIContentType(R.drawable.no_image),
+                        typeI = "pano".toIContentType(),
+                        contextActivity = context
                     )
                     val contentImage = IContentModel(
                         field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
-                        typeI = "image".toIContentType(R.drawable.no_image),
+                        typeI = "image".toIContentType(),
+                        noImageFound = R.drawable.no_image
                     )
 
                     val contentVideo = IContentModel(
                         field = "https://youtu.be/qvDo0SKR8-k",
-                        typeI = "video".toIContentType(R.drawable.no_image),
+                        typeI = "video".toIContentType(),
                     )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         item {
@@ -60,7 +63,8 @@ class MainActivity : ComponentActivity() {
                             IContent(
                                 iContentModel = contentPano,
                                 modifier = Modifier
-                                    .fillMaxWidth().height(200.dp)
+                                    .fillMaxWidth()
+                                    .height(200.dp)
                                     .padding(20.dp)
                                     .clip(RoundedCornerShape(20.dp))
                             )

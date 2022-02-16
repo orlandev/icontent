@@ -18,13 +18,20 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import com.ondev.blurhashkt.BlurhashDecoder
+import com.orlandev.icontent.models.IContentModel
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import kotlinx.coroutines.launch
 
-@Composable
-fun IPanoView(field: String, modifier: Modifier) {
 
-    val imgRef = field.split(FIELD_IMAGE_BLUR_DELIMITIER)
+/***
+ * Google VR PanoView needs the activity as context..,.
+ * for this we pass said context in the contentModel by passing
+ * the context as a parameter we can put this component inside a Fragment
+ */
+@Composable
+fun IPanoView(contentModel: IContentModel, modifier: Modifier) {
+
+    val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 
     val panoBitmap = remember {
         mutableStateOf<Bitmap?>(null)
@@ -33,7 +40,7 @@ fun IPanoView(field: String, modifier: Modifier) {
     val imageUrl = imgRef[0] //Image URL
     val blurhash = imgRef[1] //Blurhash
 
-    val context = LocalContext.current as Activity
+    val context = contentModel.contextActivity ?: LocalContext.current as Activity
 
     val imageLoader = ImageLoader(context)
 
