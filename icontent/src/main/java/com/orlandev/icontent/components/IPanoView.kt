@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
  * the context as a parameter we can put this component inside a Fragment
  */
 @Composable
-fun IPanoView(contentModel: IContentModel, modifier: Modifier) {
+fun IPanoView(contentModel: IContentModel, modifier: Modifier=Modifier) {
 
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 

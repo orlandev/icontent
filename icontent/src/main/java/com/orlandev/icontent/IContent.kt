@@ -3,10 +3,7 @@ package com.orlandev.icontent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import coil.annotation.ExperimentalCoilApi
-import com.orlandev.icontent.components.IImageBlur
-import com.orlandev.icontent.components.IPanoView
-import com.orlandev.icontent.components.IText
-import com.orlandev.icontent.components.IVideoPlayer
+import com.orlandev.icontent.components.*
 import com.orlandev.icontent.models.IContentModel
 import com.orlandev.icontent.models.IContentType
 
@@ -17,6 +14,12 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
     when (iContentModel.typeI) {
         is IContentType.Text -> {
             IText(
+                text = iContentModel.field,
+                modifier = modifier
+            )
+        }
+        is IContentType.ExtendText -> {
+            IExtendText(
                 text = iContentModel.field,
                 modifier = modifier
             )

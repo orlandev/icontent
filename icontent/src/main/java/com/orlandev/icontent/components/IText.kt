@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 
 //TODO - ADD FONTS AND MORE CONFIGURATIONS FOR TEXTS
 @Composable
-  fun IText(
+fun IText(
     text: String, modifier: Modifier = Modifier
 ) {
     Text(text = text, modifier = modifier)
