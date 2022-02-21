@@ -8,6 +8,6 @@ import de.charlex.compose.HtmlText
 fun IHtmlText( text: String, modifier: Modifier = Modifier) {
     HtmlText(
         text=text,
-        modifier = modifier
+        modifier = modifier,
     )
 }

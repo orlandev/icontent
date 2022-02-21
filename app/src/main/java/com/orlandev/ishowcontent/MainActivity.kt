@@ -32,6 +32,10 @@ class MainActivity : ComponentActivity() {
                         field = "This is a text using IContent",
                         typeI = "text".toIContentType(),
                     )
+                    val contentHtmlText = IContentModel(
+                        field = "Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\"https://github.com/orlandev/icontent\">IContent compoenent </a>",
+                        typeI = "htmlText".toIContentType(),
+                    )
 
                     val contentTextExpandable = IContentModel(
                         field = """ 
@@ -72,6 +76,13 @@ class MainActivity : ComponentActivity() {
                         item {
                             IContent(
                                 iContentModel = contentText,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                        item {
+                            IContent(
+                                iContentModel = contentHtmlText,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
