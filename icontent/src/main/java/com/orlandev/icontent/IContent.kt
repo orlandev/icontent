@@ -38,6 +38,11 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
         is IContentType.Pano -> {
             IPanoView(contentModel = iContentModel, modifier = modifier)
         }
+        IContentType.HtmlText ->
+        {
+            IHtmlText(modifier = modifier, text = iContentModel.field)
+        }
+
         else -> {
             TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
         }

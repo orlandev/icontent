@@ -7,6 +7,5 @@ data class IContentModel(
     val `field`: String,
     val typeI: IContentType,
     @DrawableRes val noImageFound: Int? = null,
-    val contextActivity: Activity? = null, //Panovew need the activity context to work
-    val markups: List<Markup> = emptyList()
+    val contextActivity: Activity? = null, //Panoview need the activity context to work
 )

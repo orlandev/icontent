@@ -66,6 +66,9 @@ dependencies {
     implementation "com.google.vr:sdk-base:1.180.0"
     implementation "com.google.vr:sdk-panowidget:1.180.0"
 
+    //Html in Text jetpack compose component
+    implementation 'de.charlex.compose:html-text:1.1.0'
+
 }
 
 afterEvaluate {
