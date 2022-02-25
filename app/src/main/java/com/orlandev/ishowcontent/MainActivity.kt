@@ -50,8 +50,25 @@ class MainActivity : ComponentActivity() {
                         récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus 
                         PageMaker. """
                             .trimIndent(),
-                        typeI = "extendtext".toIContentType(),
+                        typeI = "extendText".toIContentType(),
                     )
+
+                    val contentHtmlTextExpandable = IContentModel(
+                        field = """ 
+                        Qu'est-ce <b>que</b> le Lorem Ipsum? 
+                        Le Lorem Ipsum est simplement du faux texte employé 
+                        dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux 
+                        texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme 
+                        assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de 
+                        texte. Il n'a pas fait <strong> que survivre cinq siècles, mais s'est aussi adapté à la bureautique 
+                        informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 
+                        1960 grâce à la vente de feuilles</strong> Letraset contenant des passages du Lorem Ipsum, et, plus 
+                        récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus 
+                        PageMaker. """
+                            .trimIndent(),
+                        typeI = "extendHtmlText".toIContentType(),
+                    )
+
                     val contentPano = IContentModel(
                         field = "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg[!]|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
                         typeI = "pano".toIContentType(),
@@ -68,7 +85,6 @@ class MainActivity : ComponentActivity() {
                         typeI = "video".toIContentType(),
                     )
 
-
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -80,6 +96,14 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                             )
                         }
+                        item {
+                            IContent(
+                                iContentModel = contentHtmlTextExpandable,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+
                         item {
                             IContent(
                                 iContentModel = contentHtmlText,

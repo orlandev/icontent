@@ -43,6 +43,11 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
             IHtmlText(modifier = modifier, text = iContentModel.field)
         }
 
+        IContentType.ExtendHtmlText ->
+        {
+            IExtendHtmlText(modifier = modifier, text = iContentModel.field)
+        }
+
         else -> {
             TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
         }

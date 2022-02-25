@@ -1,17 +1,21 @@
 package com.orlandev.ishowcontent
 
+import android.text.Html
+import org.junit.Assert
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class HtmlTextTest {
+
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun testHtmlText(){
+        val textX= Html.fromHtml("<b>test</b>")
+        Assert.assertEquals("test",textX)
     }
+
 }

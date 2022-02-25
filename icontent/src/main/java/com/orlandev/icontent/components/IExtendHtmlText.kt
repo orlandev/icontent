@@ -5,19 +5,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import com.orlandev.icontent.utils.smartTruncate
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IExtendText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
+fun IExtendHtmlText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(modifier = modifier, horizontalAlignment = Alignment.End) {
@@ -43,12 +41,11 @@ fun IExtendText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
                 )
             }
         ) { targetExpanded ->
-            Text(
+            IHtmlText(
                 modifier = Modifier.fillMaxWidth(),
                 text = if (targetExpanded) text else text.smartTruncate(
                     max = maxTextTruncate
-                ),
-                textAlign = TextAlign.Justify,
+                )
             )
         }
         IconButton(onClick = { expanded = !expanded }) {
@@ -59,4 +56,3 @@ fun IExtendText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
         }
     }
 }
-

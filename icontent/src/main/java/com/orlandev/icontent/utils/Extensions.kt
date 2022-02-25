@@ -6,7 +6,8 @@ fun String.toIContentType(): IContentType {
     return when (this) {
         "text" -> IContentType.Text
         "htmlText" -> IContentType.HtmlText
-        "extendtext" -> IContentType.ExtendText
+        "extendText" -> IContentType.ExtendText
+        "extendHtmlText" -> IContentType.ExtendHtmlText
         "image" -> IContentType.Image
         "pano" -> IContentType.Pano
         "video" -> IContentType.Video
