@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="open_url">Open Url</string>
+    <string name="navigate_to_map">navigate to</string>
+    <string name="speach_btn">Listen to the content</string>
+    <string name="share">Share</string>
+</resources>

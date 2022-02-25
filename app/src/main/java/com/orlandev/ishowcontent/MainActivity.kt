@@ -1,6 +1,7 @@
 package com.orlandev.ishowcontent
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -11,8 +12,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
+import com.orlandev.icontent.components.ActionButtonUiEvent
+import com.orlandev.icontent.components.ActionButtonsBar
 import com.orlandev.icontent.models.IContentModel
 import com.orlandev.icontent.utils.toIContentType
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
@@ -89,6 +93,26 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+
+                        item {
+                            ActionButtonsBar(strokeColor = Color.Red) { btnEvents ->
+                                when (btnEvents) {
+                                    ActionButtonUiEvent.NavigateToMap -> {
+                                        Log.d("NavigateToMap", "NavigateToMap Event")
+                                    }
+                                    ActionButtonUiEvent.OpenUrl -> {
+                                        Log.d("OpenUrl", "OpenUrl Event")
+                                    }
+
+                                    ActionButtonUiEvent.Share -> {
+                                        Log.d("Share", "Share Event")
+                                    }
+                                    is ActionButtonUiEvent.TextToSpeech -> {
+                                        Log.d("TextToSpeech", "TextToSpeech Event")
+                                    }
+                                }
+                            }
+                        }
                         item {
                             IContent(
                                 iContentModel = contentText,
