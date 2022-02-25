@@ -19,7 +19,7 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
             )
         }
         is IContentType.ExtendText -> {
-            IExtendText(
+            IExpandableText(
                 text = iContentModel.field,
                 modifier = modifier
             )
@@ -43,9 +43,9 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
             IHtmlText(modifier = modifier, text = iContentModel.field)
         }
 
-        IContentType.ExtendHtmlText ->
+        IContentType.ExpandableHtmlText ->
         {
-            IExtendHtmlText(modifier = modifier, text = iContentModel.field)
+            IExpandableHtmlText(modifier = modifier, text = iContentModel.field)
         }
 
         else -> {
