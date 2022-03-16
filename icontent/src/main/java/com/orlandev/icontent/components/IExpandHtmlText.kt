@@ -7,6 +7,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -50,7 +52,7 @@ fun IExtendHtmlText(text: String, modifier: Modifier, maxTextTruncate: Int = 300
         }
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
-                if (!expanded) Icons.Filled.Add else Icons.Filled.Remove,
+                if (!expanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
                 contentDescription = ""
             )
         }
