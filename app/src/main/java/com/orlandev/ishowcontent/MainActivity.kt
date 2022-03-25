@@ -18,6 +18,7 @@ import com.orlandev.icontent.IContent
 import com.orlandev.icontent.components.ActionButtonUiEvent
 import com.orlandev.icontent.components.ActionButtonsBar
 import com.orlandev.icontent.models.IContentModel
+import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.toIContentType
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
@@ -34,11 +35,12 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val contentText = IContentModel(
                         field = "This is a text using IContent",
-                        typeI = "text".toIContentType(),
+                        typeI = IContentType.Text,
+                        textStyle = MaterialTheme.typography.h1
                     )
                     val contentHtmlText = IContentModel(
                         field = "Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\"https://github.com/orlandev/icontent\">IContent compoenent </a>",
-                        typeI = "htmlText".toIContentType(),
+                        typeI = IContentType.HtmlText,
                     )
 
                     val contentTextExpandable = IContentModel(
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
                         récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus 
                         PageMaker. """
                             .trimIndent(),
-                        typeI = "extendText".toIContentType(),
+                        typeI = IContentType.ExtendText,
                     )
 
                     val contentHtmlTextExpandable = IContentModel(
@@ -70,23 +72,23 @@ class MainActivity : ComponentActivity() {
                         récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus 
                         PageMaker. """
                             .trimIndent(),
-                        typeI = "extendHtmlText".toIContentType(),
+                        typeI = IContentType.ExtendHtmlText,
                     )
 
                     val contentPano = IContentModel(
                         field = "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg[!]|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
-                        typeI = "pano".toIContentType(),
+                        typeI =IContentType.Pano,
                         contextActivity = context
                     )
                     val contentImage = IContentModel(
                         field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
-                        typeI = "image".toIContentType(),
+                        typeI =IContentType.Image,
                         noImageFound = R.drawable.no_image
                     )
 
                     val contentVideo = IContentModel(
                         field = "https://youtu.be/qvDo0SKR8-k",
-                        typeI = "video".toIContentType(),
+                        typeI =IContentType.Video,
                     )
 
                     LazyColumn(

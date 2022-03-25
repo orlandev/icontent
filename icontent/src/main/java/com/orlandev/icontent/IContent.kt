@@ -1,7 +1,9 @@
 package com.orlandev.icontent
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import coil.annotation.ExperimentalCoilApi
 import com.orlandev.icontent.components.*
 import com.orlandev.icontent.models.IContentModel
@@ -15,7 +17,8 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
         is IContentType.Text -> {
             IText(
                 text = iContentModel.field,
-                modifier = modifier
+                modifier = modifier,
+                style = (iContentModel.textStyle ?: MaterialTheme.typography.bodyMedium) as TextStyle
             )
         }
         is IContentType.ExtendText -> {
@@ -38,13 +41,11 @@ fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
         is IContentType.Pano -> {
             IPanoView(contentModel = iContentModel, modifier = modifier)
         }
-        IContentType.HtmlText ->
-        {
+        IContentType.HtmlText -> {
             IHtmlText(modifier = modifier, text = iContentModel.field)
         }
 
-        IContentType.ExtendHtmlText ->
-        {
+        IContentType.ExtendHtmlText -> {
             IExtendHtmlText(modifier = modifier, text = iContentModel.field)
         }
 

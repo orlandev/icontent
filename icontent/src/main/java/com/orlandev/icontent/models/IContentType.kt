@@ -1,13 +1,13 @@
 package com.orlandev.icontent.models
 
-sealed interface IContentType {
+sealed class IContentType(typeName: String) {
     //TODO ( CHANGE TEXT TO A CLASS AND ADD TO THIS THE STYLE FOR THE TEXT )
-    object Text : IContentType
-    object HtmlText : IContentType
-    object ExtendHtmlText : IContentType
-    object ExtendText : IContentType
-    object Image : IContentType
-    object Video : IContentType
-    object Pano : IContentType
-    object Undefined : IContentType
+    object Text : IContentType("text")
+    object HtmlText : IContentType("htmlText")
+    object ExtendHtmlText : IContentType("extendText")
+    object ExtendText : IContentType("extendHtmlText")
+    object Image : IContentType("image")
+    object Video : IContentType("pano")
+    object Pano : IContentType("video")
+    object Undefined : IContentType("Undefined")
 }
