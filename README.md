@@ -2,6 +2,8 @@
 IContent is a library that allows loading audio visual content generically within a Composable from a specific data model.
 Content:
 - texts 
+- html Texts
+- Images in Carousel 
 - images
 - videos
 - panoramas (360 images)
