@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
 import com.orlandev.icontent.components.ActionButtonUiEvent
 import com.orlandev.icontent.components.ActionButtonsBar
-import com.orlandev.icontent.models.IContentModel
+import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
-import com.orlandev.icontent.utils.toIContentType
+import com.orlandev.icontent.utils.generateImageContentField
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,17 +33,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val contentText = IContentModel(
+                    val contentText = ContentModel(
                         field = "This is a text using IContent",
                         typeI = IContentType.Text,
                         textStyle = MaterialTheme.typography.h1
                     )
-                    val contentHtmlText = IContentModel(
+                    val contentHtmlText = ContentModel(
                         field = "Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\"https://github.com/orlandev/icontent\">IContent compoenent </a>",
                         typeI = IContentType.HtmlText,
                     )
 
-                    val contentTextExpandable = IContentModel(
+                    val contentTextExpandable = ContentModel(
                         field = """ 
                         Qu'est-ce que le Lorem Ipsum? 
                         Le Lorem Ipsum est simplement du faux texte employé 
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                         typeI = IContentType.ExtendText,
                     )
 
-                    val contentHtmlTextExpandable = IContentModel(
+                    val contentHtmlTextExpandable = ContentModel(
                         field = """ 
                         Qu'est-ce <b>que</b> le Lorem Ipsum? 
                         Le Lorem Ipsum est simplement du faux texte employé 
@@ -75,20 +75,29 @@ class MainActivity : ComponentActivity() {
                         typeI = IContentType.ExtendHtmlText,
                     )
 
-                    val contentPano = IContentModel(
-                        field = "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg[!]|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
-                        typeI =IContentType.Pano,
-                        contextActivity = context
-                    )
-                    val contentImage = IContentModel(
-                        field = "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH",
-                        typeI =IContentType.Image,
-                        noImageFound = R.drawable.no_image
+                    val contentPano =
+                        "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg".generateImageContentField(
+                            blurHash = "|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
+                            type = IContentType.Pano
+                        ).copy(
+                            contextActivity = context
+                        )
+
+                    val contentImage =
+                        "https://blurha.sh/assets/images/img4.jpg".generateImageContentField("LKO2?U%2Tw=w]~RBVZRi};RPxuwH")
+                            .copy(noImageFound = R.drawable.no_image)
+
+
+                    val testUrl =
+                        "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
+                    val carouselContent = ContentModel(
+                        field = testUrl,
+                        typeI = IContentType.Carousel
                     )
 
-                    val contentVideo = IContentModel(
+                    val contentVideo = ContentModel(
                         field = "https://youtu.be/qvDo0SKR8-k",
-                        typeI =IContentType.Video,
+                        typeI = IContentType.Video,
                     )
 
                     LazyColumn(
@@ -117,14 +126,21 @@ class MainActivity : ComponentActivity() {
                         }
                         item {
                             IContent(
-                                iContentModel = contentText,
+                                contentModel = contentText,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
                         }
                         item {
                             IContent(
-                                iContentModel = contentHtmlTextExpandable,
+                                contentModel = contentHtmlTextExpandable,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                        item {
+                            IContent(
+                                contentModel = contentHtmlTextExpandable,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
@@ -132,7 +148,7 @@ class MainActivity : ComponentActivity() {
 
                         item {
                             IContent(
-                                iContentModel = contentHtmlText,
+                                contentModel = contentHtmlText,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
@@ -140,7 +156,14 @@ class MainActivity : ComponentActivity() {
 
                         item {
                             IContent(
-                                iContentModel = contentTextExpandable,
+                                contentModel = contentTextExpandable,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                        item {
+                            IContent(
+                                contentModel = carouselContent,
                                 modifier = Modifier
                                     .fillMaxWidth()
                             )
@@ -148,7 +171,7 @@ class MainActivity : ComponentActivity() {
                         item {
 
                             IContent(
-                                iContentModel = contentPano,
+                                contentModel = contentPano,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(200.dp)
@@ -157,7 +180,7 @@ class MainActivity : ComponentActivity() {
                         item {
 
                             IContent(
-                                iContentModel = contentImage,
+                                contentModel = contentImage,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(200.dp)
@@ -165,7 +188,7 @@ class MainActivity : ComponentActivity() {
                         }
                         item {
                             IContent(
-                                iContentModel = contentVideo,
+                                contentModel = contentVideo,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(200.dp)

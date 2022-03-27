@@ -18,7 +18,7 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import com.ondev.blurhashkt.BlurhashDecoder
-import com.orlandev.icontent.models.IContentModel
+import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import kotlinx.coroutines.launch
 
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
  * the context as a parameter we can put this component inside a Fragment
  */
 @Composable
-fun IPanoView(contentModel: IContentModel, modifier: Modifier=Modifier) {
+fun IPanoView(contentModel: ContentModel, modifier: Modifier=Modifier) {
 
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 

@@ -1,54 +1,68 @@
 package com.orlandev.icontent
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.orlandev.icontent.components.*
-import com.orlandev.icontent.models.IContentModel
+import com.orlandev.icontent.components.carousel.CarouselContainer
+import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
+import com.orlandev.icontent.utils.toCarouselModelList
 
 
 @OptIn(ExperimentalCoilApi::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-fun IContent(iContentModel: IContentModel, modifier: Modifier = Modifier) {
-    when (iContentModel.typeI) {
+fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
+    when (contentModel.typeI) {
         is IContentType.Text -> {
             IText(
-                text = iContentModel.field,
+                text = contentModel.field,
                 modifier = modifier,
-                style = (iContentModel.textStyle ?: MaterialTheme.typography.bodyMedium) as TextStyle
+                style = (contentModel.textStyle ?: MaterialTheme.typography.bodyMedium) as TextStyle
             )
         }
         is IContentType.ExtendText -> {
             IExtendText(
-                text = iContentModel.field,
+                text = contentModel.field,
                 modifier = modifier
             )
         }
         is IContentType.Image -> {
             IImageBlur(
-                contentModel = iContentModel,
+                contentModel = contentModel,
                 modifier = modifier,
-                contentType = iContentModel.typeI
+                contentType = contentModel.typeI
             )
         }
         is IContentType.Video -> {
             //TODO(" ADD VIDEO PROPERTIES")
-            IVideoPlayer(modifier = modifier, url = iContentModel.field)
+            IVideoPlayer(modifier = modifier, url = contentModel.field)
         }
         is IContentType.Pano -> {
-            IPanoView(contentModel = iContentModel, modifier = modifier)
+            IPanoView(contentModel = contentModel, modifier = modifier)
         }
         IContentType.HtmlText -> {
-            IHtmlText(modifier = modifier, text = iContentModel.field)
+            IHtmlText(modifier = modifier, text = contentModel.field)
         }
 
         IContentType.ExtendHtmlText -> {
-            IExtendHtmlText(modifier = modifier, text = iContentModel.field)
+            IExtendHtmlText(modifier = modifier, text = contentModel.field)
         }
-
+        IContentType.Carousel -> {
+            CarouselContainer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .padding(8.dp),
+                carouselDataList = contentModel.field.toCarouselModelList(),
+                onCarouselItemClick = {})
+        }
         else -> {
             TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
         }

@@ -69,6 +69,7 @@ dependencies {
 
     //Html in Text jetpack compose component
     implementation 'de.charlex.compose:html-text:1.1.0'
+    testImplementation 'junit:junit:4.12'
 
 }
 

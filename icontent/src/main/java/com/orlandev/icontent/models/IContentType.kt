@@ -9,5 +9,6 @@ sealed class IContentType(typeName: String) {
     object Image : IContentType("image")
     object Video : IContentType("pano")
     object Pano : IContentType("video")
+    object Carousel : IContentType("carousel")
     object Undefined : IContentType("Undefined")
 }

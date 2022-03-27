@@ -5,7 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.text.font.FontStyle
 import java.time.format.TextStyle
 
-data class IContentModel(
+data class ContentModel(
     val field: String,
     val typeI: IContentType,
     val textStyle: androidx.compose.ui.text.TextStyle? = null,
