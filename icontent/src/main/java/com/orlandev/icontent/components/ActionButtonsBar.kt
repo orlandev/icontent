@@ -24,14 +24,14 @@ sealed class ActionButtonUiEvent {
     object OpenUrl : ActionButtonUiEvent()
 }
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun ActionButtonsBar(
     urlEnable: Boolean = true,
     strokeColor: Color,
     onEvent: (ActionButtonUiEvent) -> Unit
 ) {
-    Card(
+    androidx.compose.material3.Card(
         modifier = Modifier
             .height(80.dp)
             .fillMaxWidth(),
