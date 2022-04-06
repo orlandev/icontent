@@ -4,9 +4,13 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,9 +35,16 @@ fun ActionButtonsBar(
     strokeColor: Color,
     onEvent: (ActionButtonUiEvent) -> Unit
 ) {
-    androidx.compose.material3.Card(
+    androidx.compose.material3.ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            0.dp,
+            0.dp,
+            0.dp,
+            0.dp,
+            0.dp,
+        ),
         modifier = Modifier
-            .height(80.dp)
+            .wrapContentHeight()
             .fillMaxWidth(),
     ) {
         Row(
