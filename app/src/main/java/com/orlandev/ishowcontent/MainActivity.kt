@@ -13,10 +13,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
 import com.orlandev.icontent.components.ActionButtonUiEvent
 import com.orlandev.icontent.components.ActionButtonsBar
+import com.orlandev.icontent.components.MarqueeText
+import com.orlandev.icontent.components.ReviewStars
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.generateImageContentField
@@ -104,6 +107,30 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+
+                        item {
+                            MarqueeText(
+                                text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej ",
+                                modifier = Modifier.fillMaxWidth(),
+                                overflow = TextOverflow.Ellipsis,
+                                gradientEdgeColor = MaterialTheme.colors.surface.copy(alpha = 0.5f)
+                            )
+
+                        }
+
+                        item {
+                            ReviewStars(
+                                siteReview = "Califica este sitio",
+                                shareOption = "Comparte tu opinion con otros usuarios",
+                                comment = "Deja tu comentario...",
+                                buttonText = "Publicar",
+                                onCommentTextFieldFocusChanged = {},
+                                onUserReview = { stars, comment ->
+                                    Log.d("Review", "$stars - $comment")
+
+                                }
+                            )
+                        }
 
                         item {
                             ActionButtonsBar(strokeColor = Color.Red) { btnEvents ->
