@@ -62,31 +62,31 @@ fun ReviewStars(
                     IconButton(onClick = { reviewStars = 1 }) {
                         Icon(
                             if (reviewStars > 0) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                            contentDescription = "Review", tint = MaterialTheme.colors.primary
+                            contentDescription = "Review", tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
                         )
                     }
                     IconButton(onClick = { reviewStars = 2 }) {
                         Icon(
                             if (reviewStars > 1) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                            contentDescription = "Review", tint = MaterialTheme.colors.primary
+                            contentDescription = "Review", tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
                         )
                     }
                     IconButton(onClick = { reviewStars = 3 }) {
                         Icon(
                             if (reviewStars > 2) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                            contentDescription = "Review", tint = MaterialTheme.colors.primary
+                            contentDescription = "Review", tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
                         )
                     }
                     IconButton(onClick = { reviewStars = 4 }) {
                         Icon(
                             if (reviewStars > 3) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                            contentDescription = "Review", tint = MaterialTheme.colors.primary
+                            contentDescription = "Review", tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
                         )
                     }
                     IconButton(onClick = { reviewStars = 5 }) {
                         Icon(
                             if (reviewStars > 4) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                            contentDescription = "Review", tint = MaterialTheme.colors.primary
+                            contentDescription = "Review", tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
                         )
                     }
             }
@@ -94,7 +94,7 @@ fun ReviewStars(
 
                 Column(modifier = Modifier.fillMaxSize()) {
                     val maxReviewChar = 150
-                    OutlinedTextField(
+                    androidx.compose.material3.OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()
                             .onFocusChanged {
@@ -132,7 +132,7 @@ fun ReviewStars(
                             .padding(end = 16.dp)
                     )
 
-                    TextButton(enabled = userReviewComment.value.text.isNotEmpty(), onClick = {
+                    androidx.compose.material3.TextButton(enabled = userReviewComment.value.text.isNotEmpty(), onClick = {
                         onUserReview(
                             reviewStars,
                             userReviewComment.value.text
