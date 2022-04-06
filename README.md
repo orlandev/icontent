@@ -1,4 +1,4 @@
-# icontent
+# icontent [![](https://jitpack.io/v/orlandev/icontent.svg)](https://jitpack.io/#orlandev/icontent)
 
 # The documentation is obsolete... it will be updated later
 
