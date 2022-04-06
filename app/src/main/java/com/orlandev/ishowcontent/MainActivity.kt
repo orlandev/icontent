@@ -1,6 +1,5 @@
 package com.orlandev.ishowcontent
 
-import ReviewStars
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -20,6 +19,7 @@ import com.orlandev.icontent.IContent
 import com.orlandev.icontent.components.ActionButtonUiEvent
 import com.orlandev.icontent.components.ActionButtonsBar
 import com.orlandev.icontent.components.MarqueeText
+import com.orlandev.icontent.components.ReviewStars
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.generateImageContentField
