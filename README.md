@@ -1,4 +1,7 @@
 # icontent
+
+# The documentation is obsolete... it will be updated later
+
 IContent is a library that allows loading audio visual content generically within a Composable from a specific data model.
 IContent components have been created based on the needs of the Inmersoft Development Group to be used in its line of Interactive Digital Guides... but it can be used perfectly in other projects
 The components can be used separately or by calling the main component IContent to which a predefined data model is passed as parameters.
