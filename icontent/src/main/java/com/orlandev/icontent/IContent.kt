@@ -24,13 +24,14 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
             IText(
                 text = contentModel.field,
                 modifier = modifier,
-                style = (contentModel.textStyle ?: MaterialTheme.typography.bodyMedium) as TextStyle
+                style = contentModel.textStyle
             )
         }
         is IContentType.ExtendText -> {
             IExtendText(
                 text = contentModel.field,
-                modifier = modifier
+                modifier = modifier,
+                style = contentModel.textStyle
             )
         }
         is IContentType.Image -> {
@@ -48,11 +49,19 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
             IPanoView(contentModel = contentModel, modifier = modifier)
         }
         IContentType.HtmlText -> {
-            IHtmlText(modifier = modifier, text = contentModel.field)
+            IHtmlText(
+                text = contentModel.field,
+                modifier = modifier,
+                style = contentModel.textStyle
+            )
         }
 
         IContentType.ExtendHtmlText -> {
-            IExtendHtmlText(modifier = modifier, text = contentModel.field)
+            IExtendHtmlText(
+                modifier = modifier,
+                text = contentModel.field,
+                style = contentModel.textStyle
+            )
         }
         IContentType.Carousel -> {
             CarouselContainer(

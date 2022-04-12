@@ -8,7 +8,7 @@ import java.time.format.TextStyle
 data class ContentModel(
     val field: String,
     val typeI: IContentType,
-    val textStyle: androidx.compose.ui.text.TextStyle? = null,
+    val textStyle: androidx.compose.ui.text.TextStyle,
     @DrawableRes val noImageFound: Int? = null,
     val contextActivity: Activity? = null, //Panoview need the activity context to work
 )

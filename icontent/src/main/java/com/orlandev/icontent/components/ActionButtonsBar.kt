@@ -11,6 +11,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +33,7 @@ sealed class ActionButtonUiEvent {
 @Composable
 fun ActionButtonsBar(
     urlEnable: Boolean = true,
-    strokeColor: Color,
+    strokeColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.primaryContainer,
     onEvent: (ActionButtonUiEvent) -> Unit
 ) {
     androidx.compose.material3.ElevatedCard(
@@ -64,7 +65,7 @@ fun ActionButtonsBar(
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = strokeColor,
-                    contentColor = Color.White
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
                 Icon(
@@ -83,7 +84,10 @@ fun ActionButtonsBar(
                 shape = CircleShape,
                 border = BorderStroke(1.dp, strokeColor),
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = strokeColor)
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = strokeColor
+                ),
+
             ) {
                 AnimatedContent(
                     targetState = isSelected,

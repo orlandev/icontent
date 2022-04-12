@@ -16,10 +16,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.orlandev.icontent.utils.smartTruncate
+import java.time.format.TextStyle
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IExtendText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
+fun IExtendText(
+    text: String,
+    modifier: Modifier,
+    maxTextTruncate: Int = 300,
+    style: androidx.compose.ui.text.TextStyle
+) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(modifier = modifier, horizontalAlignment = Alignment.End) {
@@ -50,7 +56,7 @@ fun IExtendText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
                 text = if (targetExpanded) text else text.smartTruncate(
                     max = maxTextTruncate
                 ),
-                textAlign = TextAlign.Justify,
+                style = style,
             )
         }
         IconButton(onClick = { expanded = !expanded }) {

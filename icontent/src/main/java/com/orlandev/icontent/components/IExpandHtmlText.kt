@@ -6,18 +6,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import com.orlandev.icontent.utils.smartTruncate
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun IExtendHtmlText(text: String, modifier: Modifier, maxTextTruncate: Int = 300) {
+fun IExtendHtmlText(
+    text: String,
+    modifier: Modifier,
+    maxTextTruncate: Int = 300,
+    style: TextStyle,
+    iconTint: Color = Color.Black
+) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(modifier = modifier, horizontalAlignment = Alignment.End) {
@@ -47,13 +53,15 @@ fun IExtendHtmlText(text: String, modifier: Modifier, maxTextTruncate: Int = 300
                 modifier = Modifier.fillMaxWidth(),
                 text = if (targetExpanded) text else text.smartTruncate(
                     max = maxTextTruncate
-                )
+                ),
+                style = style
             )
         }
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
                 if (!expanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
-                contentDescription = ""
+                contentDescription = "",
+                tint = iconTint
             )
         }
     }
