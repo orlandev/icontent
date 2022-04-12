@@ -9,6 +9,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.rounded.RateReview
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarBorder
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -39,7 +41,14 @@ fun ReviewStars(
 
     val userReviewComment = remember { mutableStateOf(TextFieldValue()) }
 
-    androidx.compose.material3.Card(
+    androidx.compose.material3.ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            0.dp,
+            0.dp,
+            0.dp,
+            0.dp,
+            0.dp,
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -51,14 +60,14 @@ fun ReviewStars(
                 Text(
                     text = siteReview,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Left
-                , color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                    textAlign = TextAlign.Left,
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
             Text(
                 text = shareOption,
-                style = MaterialTheme.typography.body2
-                , color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                style = MaterialTheme.typography.body2,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -118,8 +127,8 @@ fun ReviewStars(
                         label = {
                             Text(
                                 text = comment,
-                                style = MaterialTheme.typography.body2
-                                , color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                                style = MaterialTheme.typography.body2,
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
                             )
                         },
                         onValueChange = {
@@ -156,8 +165,8 @@ fun ReviewStars(
                         }) {
                         Text(
                             text = buttonText,
-                            style = MaterialTheme.typography.button
-                            , color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                            style = MaterialTheme.typography.button,
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }

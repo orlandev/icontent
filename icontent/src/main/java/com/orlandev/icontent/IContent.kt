@@ -3,6 +3,7 @@ package com.orlandev.icontent
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,14 +25,14 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
             IText(
                 text = contentModel.field,
                 modifier = modifier,
-                style = contentModel.textStyle
+                style = contentModel.textStyle ?: LocalTextStyle.current
             )
         }
         is IContentType.ExtendText -> {
             IExtendText(
                 text = contentModel.field,
                 modifier = modifier,
-                style = contentModel.textStyle
+                style = contentModel.textStyle ?: LocalTextStyle.current
             )
         }
         is IContentType.Image -> {
@@ -52,7 +53,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
             IHtmlText(
                 text = contentModel.field,
                 modifier = modifier,
-                style = contentModel.textStyle
+                style = contentModel.textStyle ?: LocalTextStyle.current
             )
         }
 
@@ -60,7 +61,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
             IExtendHtmlText(
                 modifier = modifier,
                 text = contentModel.field,
-                style = contentModel.textStyle
+                style = contentModel.textStyle ?: LocalTextStyle.current
             )
         }
         IContentType.Carousel -> {

@@ -8,6 +8,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ fun IExtendHtmlText(
     text: String,
     modifier: Modifier,
     maxTextTruncate: Int = 300,
-    style: TextStyle,
+    style: TextStyle = LocalTextStyle.current,
     iconTint: Color = Color.Black
 ) {
     var expanded by remember { mutableStateOf(false) }

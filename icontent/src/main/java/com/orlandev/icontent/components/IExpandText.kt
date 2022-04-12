@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +25,7 @@ fun IExtendText(
     text: String,
     modifier: Modifier,
     maxTextTruncate: Int = 300,
-    style: androidx.compose.ui.text.TextStyle
+    style: androidx.compose.ui.text.TextStyle = LocalTextStyle.current,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
