@@ -1,5 +1,6 @@
 package com.orlandev.icontent.components.carousel
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,6 +14,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.dp
 fun CarouselContainer(
     modifier: Modifier = Modifier,
     carouselDataList: List<CarouselModel>,
+    shape: RoundedCornerShape = RoundedCornerShape(0.dp),
     onCarouselItemClick: (Int) -> Unit //Id for know what item was clicked
 ) {
     val cardElevation = CardDefaults.cardElevation(
@@ -31,9 +34,9 @@ fun CarouselContainer(
         0.dp,
     )
     ElevatedCard(
-        modifier = modifier,
+        modifier = modifier.background(Color.Transparent),
         elevation = cardElevation,
-        shape = RoundedCornerShape(30.dp)
+        shape = shape
     ) {
         LazyRow(
             modifier = Modifier.fillMaxSize(),

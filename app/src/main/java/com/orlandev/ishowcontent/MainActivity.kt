@@ -196,6 +196,13 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         item {
+                            IContent(
+                                contentModel = carouselContent,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                        }
+                        item {
 
                             IContent(
                                 contentModel = contentPano,
