@@ -23,7 +23,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CarouselContainer(
     modifier: Modifier = Modifier,
-    carouselDataList: List<CarouselModel>, itemsWidth: Dp = 300.dp,
+    carouselDataList: List<CarouselModel>,
+    itemsWidth: Dp = 300.dp,
     shape: RoundedCornerShape = RoundedCornerShape(0.dp),
     onCarouselItemClick: (Int) -> Unit //Id for know what item was clicked
 ) {

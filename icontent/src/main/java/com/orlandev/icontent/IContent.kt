@@ -67,8 +67,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
         }
         IContentType.Carousel -> {
             CarouselContainer(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = modifier,
                 carouselDataList = contentModel.field.toCarouselModelList(),
                 onCarouselItemClick = {})
         }

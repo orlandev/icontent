@@ -108,7 +108,9 @@ class MainActivity : ComponentActivity() {
                         item {
                             MarqueeText(
                                 text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w",
-                                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp),
                                 overflow = TextOverflow.Ellipsis,
                                 gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
                             )
@@ -186,18 +188,22 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         item {
-                            IContent(
-                                contentModel = carouselContent,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            )
+                            Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
+                                IContent(
+                                    contentModel = carouselContent,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            }
                         }
                         item {
-                            IContent(
-                                contentModel = carouselContent,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            )
+                            Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
+                                IContent(
+                                    contentModel = carouselContent,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            }
                         }
                         item {
 
