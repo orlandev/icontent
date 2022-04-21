@@ -4,7 +4,7 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -29,7 +29,7 @@ fun MarqueeText(
     text: String,
     modifier: Modifier = Modifier,
     gradientEdgeColor: Color = Color.White,
-    color: Color = Color.Unspecified,
+    color: Color = MaterialTheme.colorScheme.onBackground,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -44,7 +44,7 @@ fun MarqueeText(
     style: TextStyle = LocalTextStyle.current,
 ) {
     val createText = @Composable { localModifier: Modifier ->
-        Text(
+        androidx.compose.material3.Text(
             text,
             textAlign = textAlign,
             modifier = localModifier,

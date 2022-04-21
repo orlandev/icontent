@@ -65,7 +65,7 @@ fun ActionButtonsBar(
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = strokeColor,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
                 Icon(
@@ -85,6 +85,7 @@ fun ActionButtonsBar(
                 border = BorderStroke(1.dp, strokeColor),
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
                 colors = ButtonDefaults.outlinedButtonColors(
+                    backgroundColor = MaterialTheme.colorScheme.background,
                     contentColor = strokeColor
                 ),
 
@@ -128,7 +129,10 @@ fun ActionButtonsBar(
                 shape = CircleShape,
                 border = BorderStroke(1.dp, strokeColor),
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = strokeColor)
+                colors = ButtonDefaults.outlinedButtonColors(
+                    backgroundColor = MaterialTheme.colorScheme.background,
+                    contentColor = strokeColor
+                )
             ) {
                 Icon(
                     Icons.Filled.Share,
@@ -145,7 +149,10 @@ fun ActionButtonsBar(
                 shape = CircleShape,
                 border = BorderStroke(1.dp, strokeColor),
                 contentPadding = PaddingValues(0.dp),  //avoid the little icon
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = strokeColor)
+                colors = ButtonDefaults.outlinedButtonColors(
+                    backgroundColor = MaterialTheme.colorScheme.background,
+                    contentColor = strokeColor
+                )
             ) {
                 Icon(
                     painterResource(R.drawable.ic_button_link_24),

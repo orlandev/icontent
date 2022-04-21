@@ -1,6 +1,7 @@
 package com.orlandev.icontent.components
 
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -11,7 +12,7 @@ import de.charlex.compose.HtmlText
 fun IHtmlText(
     text: String,
     modifier: Modifier = Modifier,
-    primaryColor: Color = Color.White,
+    primaryColor: Color =MaterialTheme.colorScheme.onBackground,
     style: TextStyle = LocalTextStyle.current,
 ) {
     HtmlText(

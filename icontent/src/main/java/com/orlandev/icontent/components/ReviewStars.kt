@@ -3,14 +3,16 @@ package com.orlandev.icontent.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.rounded.RateReview
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarBorder
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -29,8 +31,8 @@ fun ReviewStars(
     shareOption: String,
     comment: String,
     buttonText: String,
-    backgrounColor: Color = Color.White,
-    onBackgrounColor: Color = Color.Black,
+    backgrounColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.primaryContainer,
+    onBackgrounColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer,
     onCommentTextFieldFocusChanged: (FocusState) -> Unit,
     onUserReview: (Int, String) -> Unit
 ) {
@@ -51,23 +53,27 @@ fun ReviewStars(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(vertical = 8.dp)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Row {
-                Icon(Icons.Rounded.RateReview, contentDescription = null)
+                Icon(
+                    Icons.Rounded.RateReview,
+                    contentDescription = null,
+                    tint = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
+                )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = siteReview,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Left,
-                    color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
                 )
             }
             Text(
                 text = shareOption,
                 style = MaterialTheme.typography.body2,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -149,7 +155,7 @@ fun ReviewStars(
                         text = "${userReviewComment.value.text.length} / 150",
                         textAlign = TextAlign.End,
                         style = MaterialTheme.typography.caption,
-                        color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(end = 16.dp)
@@ -166,7 +172,7 @@ fun ReviewStars(
                         Text(
                             text = buttonText,
                             style = MaterialTheme.typography.button,
-                            color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
                         )
                     }
                 }

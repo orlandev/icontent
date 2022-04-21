@@ -7,17 +7,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import com.orlandev.icontent.utils.smartTruncate
-import java.time.format.TextStyle
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -57,13 +54,14 @@ fun IExtendText(
                 text = if (targetExpanded) text else text.smartTruncate(
                     max = maxTextTruncate
                 ),
+                color = MaterialTheme.colorScheme.onBackground,
                 style = style,
             )
         }
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
                 if (!expanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
-                contentDescription = ""
+                contentDescription = "", tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }

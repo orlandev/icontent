@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -34,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.background
                 ) {
                     val contentText = ContentModel(
                         field = "This is a text using IContent",
@@ -110,10 +107,10 @@ class MainActivity : ComponentActivity() {
 
                         item {
                             MarqueeText(
-                                text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej ",
-                                modifier = Modifier.fillMaxWidth(),
+                                text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w",
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
                                 overflow = TextOverflow.Ellipsis,
-                                gradientEdgeColor = MaterialTheme.colors.surface.copy(alpha = 0.5f)
+                                gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
                             )
 
                         }
