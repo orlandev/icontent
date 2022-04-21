@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.components.IImageBlur
+import com.orlandev.icontent.components.MarqueeText
 import com.orlandev.icontent.models.ContentModel
 
 
@@ -24,9 +25,10 @@ fun CarouselItem(
     imageContent: ContentModel,
     title: String,
     subtitle: String,
+    shape: RoundedCornerShape = RoundedCornerShape(0.dp),
 ) {
     Card(
-        shape = RoundedCornerShape(30.dp),
+        shape = shape,
         modifier = modifier
     )
     {
@@ -43,7 +45,7 @@ fun CarouselItem(
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
             ) {
-                Text(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                MarqueeText(text = title, overflow = TextOverflow.Ellipsis)
                 Text(text = subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
