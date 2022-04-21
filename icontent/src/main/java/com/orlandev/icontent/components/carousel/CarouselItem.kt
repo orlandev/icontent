@@ -44,7 +44,7 @@ fun CarouselItem(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
-            ) {
+            ){
                 MarqueeText(text = title, overflow = TextOverflow.Ellipsis)
                 Text(text = subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }

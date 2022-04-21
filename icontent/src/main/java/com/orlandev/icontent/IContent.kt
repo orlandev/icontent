@@ -1,5 +1,6 @@
 package com.orlandev.icontent
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -67,9 +68,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
         IContentType.Carousel -> {
             CarouselContainer(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp)
-                    .padding(8.dp),
+                    .fillMaxSize(),
                 carouselDataList = contentModel.field.toCarouselModelList(),
                 onCarouselItemClick = {})
         }

@@ -15,6 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
@@ -22,7 +23,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CarouselContainer(
     modifier: Modifier = Modifier,
-    carouselDataList: List<CarouselModel>,
+    carouselDataList: List<CarouselModel>, itemsWidth: Dp = 300.dp,
     shape: RoundedCornerShape = RoundedCornerShape(0.dp),
     onCarouselItemClick: (Int) -> Unit //Id for know what item was clicked
 ) {
@@ -47,7 +48,7 @@ fun CarouselContainer(
                     CarouselItem(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(300.dp)
+                            .width(itemsWidth)
                             .clickable {
                                 //If the ID is -1 no need use click feature
                                 if (currentCarouselItem.id != -1) {
