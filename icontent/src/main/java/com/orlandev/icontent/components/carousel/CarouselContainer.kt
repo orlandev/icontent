@@ -63,8 +63,7 @@ fun CarouselContainer(
         } else if (carouselDataList.size == 1) {
             CarouselItem(
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .width(300.dp)
+                    .fillMaxSize()
                     .clickable {
                         //If the ID is -1 no need use click feature
                         if (carouselDataList[0].id != -1) {
