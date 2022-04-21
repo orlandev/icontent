@@ -38,26 +38,44 @@ fun CarouselContainer(
         elevation = cardElevation,
         shape = shape
     ) {
-        LazyRow(
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            items(carouselDataList) { currentCarouselItem ->
-                CarouselItem(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(300.dp)
-                        .clickable {
-                            //If the ID is -1 no need use click feature
-                            if (currentCarouselItem.id != -1) {
-                                onCarouselItemClick(currentCarouselItem.id)
-                            }
-                        },
-                    title = currentCarouselItem.title,
-                    subtitle = currentCarouselItem.subtitle,
-                    imageContent = currentCarouselItem.image
-                )
+        if (carouselDataList.size > 1) {
+            LazyRow(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                items(carouselDataList) { currentCarouselItem ->
+                    CarouselItem(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(300.dp)
+                            .clickable {
+                                //If the ID is -1 no need use click feature
+                                if (currentCarouselItem.id != -1) {
+                                    onCarouselItemClick(currentCarouselItem.id)
+                                }
+                            },
+                        title = currentCarouselItem.title,
+                        subtitle = currentCarouselItem.subtitle,
+                        imageContent = currentCarouselItem.image
+                    )
+                }
             }
+        } else if (carouselDataList.size == 1) {
+            CarouselItem(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(300.dp)
+                    .clickable {
+                        //If the ID is -1 no need use click feature
+                        if (carouselDataList[0].id != -1) {
+                            onCarouselItemClick(carouselDataList[0].id)
+                        }
+                    },
+                title = carouselDataList[0].title,
+                subtitle = carouselDataList[0].subtitle,
+                imageContent = carouselDataList[0].image
+            )
+
         }
     }
 }
