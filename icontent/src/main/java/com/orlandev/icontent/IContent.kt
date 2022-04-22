@@ -1,14 +1,9 @@
 package com.orlandev.icontent
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.orlandev.icontent.components.*
@@ -20,7 +15,7 @@ import com.orlandev.icontent.utils.toCarouselModelList
 
 @OptIn(ExperimentalCoilApi::class, androidx.compose.animation.ExperimentalAnimationApi::class)
 @Composable
-fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier) {
+fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(200.dp)) {
     when (contentModel.typeI) {
         is IContentType.Text -> {
             IText(
