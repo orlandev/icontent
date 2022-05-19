@@ -1,6 +1,14 @@
 buildscript {
     ext {
-        compose_version = '1.2.0-alpha06'
+        compose_version = '1.2.0-beta02'
+        compose_snapshot_version = ''
+    }
+    repositories {
+
+            maven { url "https://androidx.dev/snapshots/builds/" +
+                    "${compose_snapshot_version}/artifacts/repository/" }
+
+        google()
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
