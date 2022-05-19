@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import coil.annotation.ExperimentalCoilApi
-import com.ondev.imageblurkt_lib.ImageBlur
+import com.ondev.imageblurkt_lib.AsyncImageBlur
 import com.orlandev.icontent.R
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
@@ -16,10 +16,10 @@ fun IImageBlur(modifier: Modifier, contentModel: ContentModel, contentType: ICon
     val currentResources = LocalContext.current.resources
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
     if (imgRef.size == 2 && contentType is IContentType.Image) {
-        ImageBlur(
+        AsyncImageBlur(
             modifier = modifier,
             imageUrl = imgRef[0], //Image URL
-            blurhash = imgRef[1], //Blurhash
+            blurHash = imgRef[1], //Blurhash
             resources = currentResources,
             notImageFoundRes = contentModel.noImageFound ?: R.drawable.no_image,
             contentDescription = null
