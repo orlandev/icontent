@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +27,9 @@ fun CarouselContainer(
     carouselDataList: List<CarouselModel>,
     itemsWidth: Dp = 300.dp,
     shape: RoundedCornerShape = RoundedCornerShape(0.dp),
+    addGradient: Boolean = false,
+    gradientEffectColor: Color = MaterialTheme.colorScheme.background,
+    textColorOverGradient: Color = MaterialTheme.colorScheme.onBackground,
     onCarouselItemClick: (Int) -> Unit //Id for know what item was clicked
 ) {
     val cardElevation = CardDefaults.cardElevation(
@@ -58,7 +62,10 @@ fun CarouselContainer(
                             },
                         title = currentCarouselItem.title,
                         subtitle = currentCarouselItem.subtitle,
-                        imageContent = currentCarouselItem.image
+                        imageContent = currentCarouselItem.image,
+                        gradientColor = gradientEffectColor,
+                        textColorOverGradient = textColorOverGradient,
+                        addGradient = addGradient
                     )
                 }
             }
@@ -74,9 +81,11 @@ fun CarouselContainer(
                     },
                 title = carouselDataList[0].title,
                 subtitle = carouselDataList[0].subtitle,
-                imageContent = carouselDataList[0].image
+                imageContent = carouselDataList[0].image,
+                addGradient = addGradient,
+                gradientColor = gradientEffectColor,
+                textColorOverGradient = textColorOverGradient,
             )
-
         }
     }
 }

@@ -17,6 +17,8 @@ import com.orlandev.icontent.components.ActionButtonUiEvent
 import com.orlandev.icontent.components.ActionButtonsBar
 import com.orlandev.icontent.components.MarqueeText
 import com.orlandev.icontent.components.ReviewStars
+import com.orlandev.icontent.components.carousel.CarouselContainer
+import com.orlandev.icontent.components.carousel.CarouselModel
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.generateImageContentField
@@ -90,6 +92,47 @@ class MainActivity : ComponentActivity() {
 
                     val testUrl =
                         "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
+
+
+                    val carouselWithText = listOf<CarouselModel>(
+                        CarouselModel(
+                            id = 0,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                        CarouselModel(
+                            id = 1,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                        CarouselModel(
+                            id = 2,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                        CarouselModel(
+                            id = 3,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                        CarouselModel(
+                            id = 4,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                        CarouselModel(
+                            id = 5,
+                            image = contentImage,
+                            title = "This is the title",
+                            subtitle = "This is the subtitle",
+                        ),
+                    )
+
                     val carouselContent = ContentModel(
                         field = testUrl,
                         typeI = IContentType.Carousel
@@ -112,7 +155,9 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                                     .padding(horizontal = 8.dp),
                                 overflow = TextOverflow.Ellipsis,
-                                gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
+                                gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(
+                                    alpha = 0.9f
+                                )
                             )
 
                         }
@@ -157,6 +202,7 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                             )
                         }
+
                         item {
                             IContent(
                                 contentModel = contentHtmlTextExpandable,
@@ -188,7 +234,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         item {
-                            Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
                                 IContent(
                                     contentModel = carouselContent,
                                     modifier = Modifier
@@ -197,7 +247,11 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         item {
-                            Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
                                 IContent(
                                     contentModel = carouselContent,
                                     modifier = Modifier
@@ -205,6 +259,32 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
+
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
+                                CarouselContainer(
+                                    carouselDataList = carouselWithText,
+                                    addGradient = true,
+                                    onCarouselItemClick = {})
+                            }
+                        }
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
+                                CarouselContainer(
+                                    carouselDataList = carouselWithText,
+                                    addGradient = true,
+                                    onCarouselItemClick = {})
+                            }
+                        }
+
                         item {
 
                             IContent(

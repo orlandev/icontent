@@ -27,7 +27,7 @@ fun ForegroundGradientEffect(
                         Brush.horizontalGradient(
                             colorStops = arrayOf(
                                 Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor)
+                                Pair(1.9f, backgroundColor.copy(0.7f))
                             )
                         )
                     }
@@ -35,7 +35,7 @@ fun ForegroundGradientEffect(
                         Brush.verticalGradient(
                             colorStops = arrayOf(
                                 Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor)
+                                Pair(1.9f, backgroundColor.copy(0.7f))
                             )
                         )
                     }

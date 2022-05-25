@@ -29,6 +29,8 @@ fun CarouselItem(
     title: String,
     subtitle: String,
     gradientColor: Color = MaterialTheme.colorScheme.background,
+    textColorOverGradient: Color = MaterialTheme.colorScheme.onBackground,
+    addGradient: Boolean = false,
     shape: RoundedCornerShape = RoundedCornerShape(0.dp),
 ) {
     Card(
@@ -39,21 +41,30 @@ fun CarouselItem(
         Box(modifier = Modifier.fillMaxSize()) {
             IImageBlur(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.TopCenter),
+                    .fillMaxSize(),
                 contentModel = imageContent,
                 contentType = imageContent.typeI
             )
+            if (addGradient)
+                ForegroundGradientEffect(backgroundColor = gradientColor)
+
+
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
             ) {
                 MarqueeText(text = title, overflow = TextOverflow.Ellipsis)
-                Text(text = subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
+
+                Text(
+                    text = subtitle,
+                    maxLines = 1,
+                    color = textColorOverGradient,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
 
-            ForegroundGradientEffect(backgroundColor = gradientColor)
+
         }
     }
 }
