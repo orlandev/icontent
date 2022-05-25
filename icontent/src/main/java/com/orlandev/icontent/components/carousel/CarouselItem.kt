@@ -17,7 +17,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.components.ForegroundGradientEffect
 import com.orlandev.icontent.components.IImageBlur
-import com.orlandev.icontent.components.MarqueeText
 import com.orlandev.icontent.models.ContentModel
 
 
@@ -54,7 +53,7 @@ fun CarouselItem(
                     .align(Alignment.BottomStart)
                     .padding(8.dp)
             ) {
-                MarqueeText(text = title, overflow = TextOverflow.Ellipsis)
+                Text(text = title, overflow = TextOverflow.Ellipsis)
 
                 Text(
                     text = subtitle,
