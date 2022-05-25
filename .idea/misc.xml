@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.148" />
+        <entry key="icontent/src/main/res/drawable/ic_baseline_directions_24.xml" value="0.148" />
+        <entry key="icontent/src/main/res/drawable/ic_baseline_hearing_24.xml" value="0.148" />
+        <entry key="icontent/src/main/res/drawable/ic_baseline_hearing_disabled_24.xml" value="0.148" />
+        <entry key="icontent/src/main/res/drawable/ic_button_link_24.xml" value="0.148" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
