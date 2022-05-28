@@ -16,7 +16,8 @@ sealed class GradientEffectOrientation() {
 @Composable
 fun ForegroundGradientEffect(
     backgroundColor: Color,
-    orientation: GradientEffectOrientation = GradientEffectOrientation.VerticalOrientation
+    orientation: GradientEffectOrientation = GradientEffectOrientation.VerticalOrientation,
+    alphaValue: Float = 0.9f
 ) {
     Box(
         modifier = Modifier
@@ -27,7 +28,7 @@ fun ForegroundGradientEffect(
                         Brush.horizontalGradient(
                             colorStops = arrayOf(
                                 Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor.copy(0.7f))
+                                Pair(1.9f, backgroundColor.copy(alphaValue))
                             )
                         )
                     }
@@ -35,7 +36,7 @@ fun ForegroundGradientEffect(
                         Brush.verticalGradient(
                             colorStops = arrayOf(
                                 Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor.copy(0.7f))
+                                Pair(1.9f, backgroundColor.copy(alphaValue))
                             )
                         )
                     }

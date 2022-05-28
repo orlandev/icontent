@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.components.ForegroundGradientEffect
@@ -31,6 +32,7 @@ fun CarouselItem(
     textColorOverGradient: Color = MaterialTheme.colorScheme.onBackground,
     addGradient: Boolean = false,
     shape: RoundedCornerShape = RoundedCornerShape(0.dp),
+    contentScale: ContentScale = ContentScale.Crop
 ) {
     Card(
         shape = shape,
@@ -42,11 +44,12 @@ fun CarouselItem(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentModel = imageContent,
-                contentType = imageContent.typeI
+                contentType = imageContent.typeI,
+                contentScale = contentScale
+
             )
             if (addGradient)
                 ForegroundGradientEffect(backgroundColor = gradientColor)
-
 
             Column(
                 modifier = Modifier
@@ -62,8 +65,6 @@ fun CarouselItem(
                     overflow = TextOverflow.Ellipsis
                 )
             }
-
-
         }
     }
 }

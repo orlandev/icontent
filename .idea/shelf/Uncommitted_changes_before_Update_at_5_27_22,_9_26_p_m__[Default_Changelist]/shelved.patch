@@ -1,0 +1,26 @@
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\n    ext {\n        compose_version = '1.2.0-beta02'\n        compose_snapshot_version = ''\n    }\n    repositories {\n\n            maven { url \"https://androidx.dev/snapshots/builds/\" +\n                    \"${compose_snapshot_version}/artifacts/repository/\" }\n\n        google()\n    }\n}// Top-level build file where you can add configuration options common to all sub-projects/modules.\nplugins {\n    id 'com.android.application' version '7.2.0' apply false\n    id 'com.android.library' version '7.2.0' apply false\n    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false\n}\n\ntask clean(type: Delete) {\n    delete rootProject.buildDir\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision eeb0431e0d56843b933bddcf94f557201cbb4277)
++++ b/build.gradle	(date 1653047719627)
+@@ -1,13 +1,9 @@
+ buildscript {
+     ext {
+-        compose_version = '1.2.0-beta02'
+-        compose_snapshot_version = ''
++        compose_version = '1.2.0-alpha06'
++
+     }
+     repositories {
+-
+-            maven { url "https://androidx.dev/snapshots/builds/" +
+-                    "${compose_snapshot_version}/artifacts/repository/" }
+-
+         google()
+     }
+ }// Top-level build file where you can add configuration options common to all sub-projects/modules.

@@ -2,10 +2,7 @@ package com.orlandev.icontent.components.carousel
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,10 +11,14 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,53 +40,82 @@ fun CarouselContainer(
         0.dp,
         0.dp,
     )
+
+    val imageToShow = rememberSaveable {
+        mutableStateOf<CarouselModel?>(null)
+    }
+
     ElevatedCard(
         modifier = modifier.background(Color.Transparent),
         elevation = cardElevation,
         shape = shape
     ) {
-        if (carouselDataList.size > 1) {
-            LazyRow(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                items(carouselDataList) { currentCarouselItem ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (carouselDataList.size > 1) {
+                LazyRow(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    items(carouselDataList) { currentCarouselItem ->
+                        CarouselItem(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .width(itemsWidth)
+                                .clickable {
+                                    //If the ID is -1 no need use click feature
+                                    if (currentCarouselItem.id != -1) {
+                                        onCarouselItemClick(currentCarouselItem.id)
+                                    }
+
+                                    imageToShow.value = currentCarouselItem
+
+                                },
+                            title = currentCarouselItem.title,
+                            subtitle = currentCarouselItem.subtitle,
+                            imageContent = currentCarouselItem.image,
+                            gradientColor = gradientEffectColor,
+                            textColorOverGradient = textColorOverGradient,
+                            addGradient = addGradient
+                        )
+                    }
+                }
+            } else if (carouselDataList.size == 1) {
+                CarouselItem(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable {
+                            //If the ID is -1 no need use click feature
+                            if (carouselDataList[0].id != -1) {
+                                onCarouselItemClick(carouselDataList[0].id)
+                            }
+                            imageToShow.value = carouselDataList[0]
+                        },
+                    title = carouselDataList[0].title,
+                    subtitle = carouselDataList[0].subtitle,
+                    imageContent = carouselDataList[0].image,
+                    addGradient = addGradient,
+                    gradientColor = gradientEffectColor,
+                    textColorOverGradient = textColorOverGradient,
+                )
+            }
+            if (imageToShow.value != null)
+                Dialog(onDismissRequest = { imageToShow.value = null }) {
                     CarouselItem(
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .width(itemsWidth)
+                            .fillMaxWidth()
+                            .height(400.dp)
                             .clickable {
-                                //If the ID is -1 no need use click feature
-                                if (currentCarouselItem.id != -1) {
-                                    onCarouselItemClick(currentCarouselItem.id)
-                                }
+                                imageToShow.value = null
                             },
-                        title = currentCarouselItem.title,
-                        subtitle = currentCarouselItem.subtitle,
-                        imageContent = currentCarouselItem.image,
+                        title = carouselDataList[0].title,
+                        subtitle = carouselDataList[0].subtitle,
+                        imageContent = carouselDataList[0].image,
+                        addGradient = addGradient,
                         gradientColor = gradientEffectColor,
                         textColorOverGradient = textColorOverGradient,
-                        addGradient = addGradient
+                        contentScale = ContentScale.FillWidth
                     )
                 }
-            }
-        } else if (carouselDataList.size == 1) {
-            CarouselItem(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickable {
-                        //If the ID is -1 no need use click feature
-                        if (carouselDataList[0].id != -1) {
-                            onCarouselItemClick(carouselDataList[0].id)
-                        }
-                    },
-                title = carouselDataList[0].title,
-                subtitle = carouselDataList[0].subtitle,
-                imageContent = carouselDataList[0].image,
-                addGradient = addGradient,
-                gradientColor = gradientEffectColor,
-                textColorOverGradient = textColorOverGradient,
-            )
         }
     }
 }

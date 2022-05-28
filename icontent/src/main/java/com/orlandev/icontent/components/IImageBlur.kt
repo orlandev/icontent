@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.annotation.ExperimentalCoilApi
 import com.ondev.imageblurkt_lib.AsyncImageBlur
@@ -21,7 +22,8 @@ fun IImageBlur(
     contentModel: ContentModel,
     contentType: IContentType,
     addGradient: Boolean = false,
-    gradientColor: Color = MaterialTheme.colorScheme.background
+    gradientColor: Color = MaterialTheme.colorScheme.background,
+    contentScale: ContentScale = ContentScale.Crop
 ) {
     val currentResources = LocalContext.current.resources
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
@@ -33,7 +35,8 @@ fun IImageBlur(
                 blurHash = imgRef[1], //Blurhash
                 resources = currentResources,
                 notImageFoundRes = contentModel.noImageFound ?: R.drawable.no_image,
-                contentDescription = null
+                contentDescription = null,
+                contentScale = contentScale
             )
             if (addGradient) {
                 ForegroundGradientEffect(backgroundColor = gradientColor)
