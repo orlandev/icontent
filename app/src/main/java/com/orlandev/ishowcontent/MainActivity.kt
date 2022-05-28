@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,9 +20,11 @@ import com.orlandev.icontent.components.MarqueeText
 import com.orlandev.icontent.components.ReviewStars
 import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.components.carousel.CarouselModel
+import com.orlandev.icontent.components.gallery.IGalleryStaggered
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.generateImageContentField
+import com.orlandev.icontent.utils.toCarouselModelList
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
@@ -91,7 +94,7 @@ class MainActivity : ComponentActivity() {
 
 
                     val testUrl =
-                        "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
+                        "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img3.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
 
 
                     val carouselWithText = listOf<CarouselModel>(
@@ -142,6 +145,8 @@ class MainActivity : ComponentActivity() {
                         field = "https://youtu.be/qvDo0SKR8-k",
                         typeI = IContentType.Video,
                     )
+
+                    val listImages=testUrl.toCarouselModelList().map { it.image }
 
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -195,6 +200,11 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
+                        
+                        item { 
+                            Text(text = "Gallery")
+                        }
+                        
                         item {
                             IContent(
                                 contentModel = contentText,
@@ -202,6 +212,7 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                             )
                         }
+
 
                         item {
                             IContent(
@@ -233,6 +244,10 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxWidth()
                             )
                         }
+                        item {
+                            IGalleryStaggered(imageContentList = listImages)
+                        }
+
                         item {
                             Box(
                                 modifier = Modifier
