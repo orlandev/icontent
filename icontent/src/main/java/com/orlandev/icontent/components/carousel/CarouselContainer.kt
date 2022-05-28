@@ -31,6 +31,7 @@ fun CarouselContainer(
     addGradient: Boolean = false,
     gradientEffectColor: Color = MaterialTheme.colorScheme.background,
     textColorOverGradient: Color = MaterialTheme.colorScheme.onBackground,
+    showImageInDialog: Boolean = true,
     onCarouselItemClick: (Int) -> Unit //Id for know what item was clicked
 ) {
     val cardElevation = CardDefaults.cardElevation(
@@ -63,12 +64,13 @@ fun CarouselContainer(
                                 .width(itemsWidth)
                                 .clickable {
                                     //If the ID is -1 no need use click feature
-                                    if (currentCarouselItem.id != -1) {
-                                        onCarouselItemClick(currentCarouselItem.id)
+                                    if (!showImageInDialog) {
+                                        if (currentCarouselItem.id != -1) {
+                                            onCarouselItemClick(currentCarouselItem.id)
+                                        }
+                                    } else {
+                                        imageToShow.value = currentCarouselItem
                                     }
-
-                                    imageToShow.value = currentCarouselItem
-
                                 },
                             title = currentCarouselItem.title,
                             subtitle = currentCarouselItem.subtitle,
@@ -85,10 +87,13 @@ fun CarouselContainer(
                         .fillMaxSize()
                         .clickable {
                             //If the ID is -1 no need use click feature
-                            if (carouselDataList[0].id != -1) {
-                                onCarouselItemClick(carouselDataList[0].id)
+                            if (!showImageInDialog) {
+                                if (carouselDataList[0].id != -1) {
+                                    onCarouselItemClick(carouselDataList[0].id)
+                                }
+                            }else{
+                                imageToShow.value = carouselDataList[0]
                             }
-                            imageToShow.value = carouselDataList[0]
                         },
                     title = carouselDataList[0].title,
                     subtitle = carouselDataList[0].subtitle,
