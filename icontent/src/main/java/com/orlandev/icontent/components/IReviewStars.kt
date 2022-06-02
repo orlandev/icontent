@@ -18,8 +18,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,14 +29,14 @@ fun ReviewStars(
     shareOption: String,
     comment: String,
     buttonText: String,
-    backgrounColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.primaryContainer,
-    onBackgrounColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer,
+    titleCardTextStyle: androidx.compose.ui.text.TextStyle,
+    subtitleCardTextStyle: androidx.compose.ui.text.TextStyle,
     onCommentTextFieldFocusChanged: (FocusState) -> Unit,
     onUserReview: (Int, String) -> Unit
 ) {
 
     var reviewStars by remember {
-        mutableStateOf<Int>(0)
+        mutableStateOf(0)
     }
 
     val userReviewComment = remember { mutableStateOf(TextFieldValue()) }
@@ -63,17 +61,17 @@ fun ReviewStars(
                     tint = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(
+
+                androidx.compose.material3.Text(
                     text = siteReview,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Left,
-                    color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
+                    style = titleCardTextStyle,
+                    modifier = Modifier.fillMaxWidth()
                 )
+
             }
             Text(
                 text = shareOption,
-                style = MaterialTheme.typography.body2,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
+                style = subtitleCardTextStyle,
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -155,7 +153,6 @@ fun ReviewStars(
                         text = "${userReviewComment.value.text.length} / 150",
                         textAlign = TextAlign.End,
                         style = MaterialTheme.typography.caption,
-                        color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(end = 16.dp)
