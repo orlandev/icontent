@@ -39,7 +39,7 @@ fun IImageBlur(
                 contentScale = contentScale
             )
             if (addGradient) {
-                ForegroundGradientEffect(backgroundColor = gradientColor)
+                IGradientEffect(backgroundColor = gradientColor)
             }
         }
     } else {

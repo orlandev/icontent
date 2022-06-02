@@ -13,10 +13,18 @@ sealed class GradientEffectOrientation() {
     object HorizontalOrientation : GradientEffectOrientation()
 }
 
+sealed class GradientAlignment() {
+    object Start : GradientAlignment()
+    object Center : GradientAlignment()
+    object End : GradientAlignment()
+}
+
+
 @Composable
-fun ForegroundGradientEffect(
+fun IGradientEffect(
     backgroundColor: Color,
     orientation: GradientEffectOrientation = GradientEffectOrientation.VerticalOrientation,
+    align: GradientAlignment = GradientAlignment.End,
     alphaValue: Float = 0.9f
 ) {
     Box(
@@ -26,21 +34,38 @@ fun ForegroundGradientEffect(
                 when (orientation) {
                     GradientEffectOrientation.HorizontalOrientation -> {
                         Brush.horizontalGradient(
-                            colorStops = arrayOf(
-                                Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor.copy(alphaValue))
-                            )
+                            colorStops = getGradient(align,backgroundColor.copy(alpha = alphaValue))
                         )
                     }
                     GradientEffectOrientation.VerticalOrientation -> {
                         Brush.verticalGradient(
-                            colorStops = arrayOf(
-                                Pair(0.50f, Color.Transparent),
-                                Pair(1.9f, backgroundColor.copy(alphaValue))
-                            )
+                            colorStops = getGradient(align,backgroundColor.copy(alpha = alphaValue))
                         )
                     }
                 }
             )
     )
+}
+
+fun getGradient(align: GradientAlignment, backgroundColor: Color): Array<Pair<Float, Color>> {
+    return when (align) {
+        GradientAlignment.End ->
+            arrayOf(
+                Pair(0.50f, Color.Transparent),
+                Pair(1.9f, backgroundColor)
+            )
+        GradientAlignment.Center -> {
+            arrayOf(
+                Pair(0.50f, Color.Transparent),
+                Pair(1.9f, backgroundColor),
+                Pair(0.50f, Color.Transparent),
+            )
+        }
+        GradientAlignment.Start -> {
+            arrayOf(
+                Pair(1.9f, backgroundColor),
+                Pair(0.50f, Color.Transparent)
+            )
+        }
+    }
 }

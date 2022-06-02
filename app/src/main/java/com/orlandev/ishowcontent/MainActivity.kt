@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
-import com.orlandev.icontent.components.ActionButtonUiEvent
-import com.orlandev.icontent.components.ActionButtonsBar
-import com.orlandev.icontent.components.MarqueeText
-import com.orlandev.icontent.components.ReviewStars
+import com.orlandev.icontent.components.*
 import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.components.carousel.CarouselModel
 import com.orlandev.icontent.models.ContentModel
@@ -174,6 +174,23 @@ class MainActivity : ComponentActivity() {
 
                                 }
                             )
+                        }
+
+                        item {
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .background(Color.White)
+                                    .clip(RoundedCornerShape(20.dp))
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    align = GradientAlignment.Start
+                                )
+                            }
+
                         }
 
                         item {
