@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 sealed class GradientEffectOrientation() {
-    object VerticalOrientation : GradientEffectOrientation()
-    object HorizontalOrientation : GradientEffectOrientation()
+    object Vertically : GradientEffectOrientation()
+    object Horizontally : GradientEffectOrientation()
 }
 
 sealed class GradientAlignment() {
@@ -23,7 +23,7 @@ sealed class GradientAlignment() {
 @Composable
 fun IGradientEffect(
     backgroundColor: Color,
-    orientation: GradientEffectOrientation = GradientEffectOrientation.VerticalOrientation,
+    orientation: GradientEffectOrientation = GradientEffectOrientation.Vertically,
     align: GradientAlignment = GradientAlignment.End,
     alphaValue: Float = 0.9f
 ) {
@@ -32,14 +32,20 @@ fun IGradientEffect(
             .fillMaxSize()
             .background(
                 when (orientation) {
-                    GradientEffectOrientation.HorizontalOrientation -> {
+                    GradientEffectOrientation.Horizontally -> {
                         Brush.horizontalGradient(
-                            colorStops = getGradient(align,backgroundColor.copy(alpha = alphaValue))
+                            colorStops = getGradient(
+                                align,
+                                backgroundColor.copy(alpha = alphaValue)
+                            )
                         )
                     }
-                    GradientEffectOrientation.VerticalOrientation -> {
+                    GradientEffectOrientation.Vertically -> {
                         Brush.verticalGradient(
-                            colorStops = getGradient(align,backgroundColor.copy(alpha = alphaValue))
+                            colorStops = getGradient(
+                                align,
+                                backgroundColor.copy(alpha = alphaValue)
+                            )
                         )
                     }
                 }
@@ -49,23 +55,24 @@ fun IGradientEffect(
 
 fun getGradient(align: GradientAlignment, backgroundColor: Color): Array<Pair<Float, Color>> {
     return when (align) {
-        GradientAlignment.End ->
-            arrayOf(
-                Pair(0.50f, Color.Transparent),
-                Pair(1.9f, backgroundColor)
-            )
         GradientAlignment.Center -> {
             arrayOf(
-                Pair(0.50f, Color.Transparent),
-                Pair(1.9f, backgroundColor),
-                Pair(0.50f, Color.Transparent),
+                Pair(0f, Color.Transparent),
+                Pair(0.50f, backgroundColor),
+                Pair(1f, Color.Transparent),
             )
         }
         GradientAlignment.Start -> {
             arrayOf(
-                Pair(1.9f, backgroundColor),
+                Pair(0f, backgroundColor),
                 Pair(0.50f, Color.Transparent)
             )
         }
+        GradientAlignment.End ->
+            arrayOf(
+                Pair(0.40f, Color.Transparent),
+                Pair(1f, backgroundColor)
+            )
+
     }
 }

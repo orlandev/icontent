@@ -182,8 +182,8 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .height(200.dp)
                                     .fillMaxWidth()
-                                    .background(Color.White)
                                     .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
                             ) {
                                 IGradientEffect(
                                     backgroundColor = Color.Black,
@@ -191,6 +191,75 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
 
+                        }
+
+
+                        item {
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black, alphaValue = 0.7f,
+                                    align = GradientAlignment.Center
+                                )
+                            }
+
+                        }
+
+                        item {
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    align = GradientAlignment.End
+                                )
+                            }
+
+                        }
+
+                        //item using a box container of a gradient effect vertically
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    orientation = GradientEffectOrientation.Horizontally,
+                                    align = GradientAlignment.Center
+                                )
+                            }
+                        }
+
+                        //item using a box container of a gradient effect orientation horizontally
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    orientation = GradientEffectOrientation.Horizontally,
+                                    align = GradientAlignment.Start
+                                )
+                            }
                         }
 
                         item {
