@@ -168,6 +168,8 @@ class MainActivity : ComponentActivity() {
                                 shareOption = "Comparte tu opinion con otros usuarios",
                                 comment = "Deja tu comentario...",
                                 buttonText = "Publicar",
+                                titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,
+                                subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
                                 onCommentTextFieldFocusChanged = {},
                                 onUserReview = { stars, comment ->
                                     Log.d("Review", "$stars - $comment")
@@ -263,7 +265,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         item {
-                            ActionButtonsBar(strokeColor = Color.Red) { btnEvents ->
+                            ActionButtonsBar(strokeColor = Color.Red, urlEnable = false) { btnEvents ->
                                 when (btnEvents) {
                                     ActionButtonUiEvent.NavigateToMap -> {
                                         Log.d("NavigateToMap", "NavigateToMap Event")
