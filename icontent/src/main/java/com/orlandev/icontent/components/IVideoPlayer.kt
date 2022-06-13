@@ -151,3 +151,4 @@ private fun playYoutubeUrl(context: Context, simpleExoPlayer: ExoPlayer, videoPr
         }
     }.extract(videoPromo)
 }
+

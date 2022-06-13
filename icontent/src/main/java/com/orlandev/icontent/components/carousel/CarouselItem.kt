@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.orlandev.icontent.components.ForegroundGradientEffect
+import com.orlandev.icontent.components.IGradientEffect
 import com.orlandev.icontent.components.IImageBlur
 import com.orlandev.icontent.models.ContentModel
 
@@ -49,7 +49,7 @@ fun CarouselItem(
 
             )
             if (addGradient)
-                ForegroundGradientEffect(backgroundColor = gradientColor)
+                IGradientEffect(backgroundColor = gradientColor)
 
             Column(
                 modifier = Modifier

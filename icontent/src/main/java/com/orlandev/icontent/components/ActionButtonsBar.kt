@@ -33,7 +33,7 @@ sealed class ActionButtonUiEvent {
 @Composable
 fun ActionButtonsBar(
     urlEnable: Boolean = true,
-    strokeColor: Color = androidx.compose.material3.MaterialTheme.colorScheme.primaryContainer,
+    strokeColor: Color = MaterialTheme.colorScheme.primaryContainer,
     onEvent: (ActionButtonUiEvent) -> Unit
 ) {
     androidx.compose.material3.ElevatedCard(
@@ -140,25 +140,25 @@ fun ActionButtonsBar(
                 )
             }
             //Goto URL
-            OutlinedButton(
-                enabled = urlEnable,
-                onClick = {
-                    onEvent(ActionButtonUiEvent.OpenUrl)
-                },
-                modifier = Modifier.size(50.dp),  //avoid the oval shape
-                shape = CircleShape,
-                border = BorderStroke(1.dp, strokeColor),
-                contentPadding = PaddingValues(0.dp),  //avoid the little icon
-                colors = ButtonDefaults.outlinedButtonColors(
-                    backgroundColor = MaterialTheme.colorScheme.background,
-                    contentColor = strokeColor
-                )
-            ) {
-                Icon(
-                    painterResource(R.drawable.ic_button_link_24),
-                    contentDescription = stringResource(id = R.string.open_url)
-                )
-            }
+            if (urlEnable)
+                OutlinedButton(
+                    onClick = {
+                        onEvent(ActionButtonUiEvent.OpenUrl)
+                    },
+                    modifier = Modifier.size(50.dp),  //avoid the oval shape
+                    shape = CircleShape,
+                    border = BorderStroke(1.dp, strokeColor),
+                    contentPadding = PaddingValues(0.dp),  //avoid the little icon
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        backgroundColor = MaterialTheme.colorScheme.background,
+                        contentColor = strokeColor
+                    )
+                ) {
+                    Icon(
+                        painterResource(R.drawable.ic_button_link_24),
+                        contentDescription = stringResource(id = R.string.open_url)
+                    )
+                }
         }
     }
 }

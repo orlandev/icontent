@@ -4,20 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.IContent
-import com.orlandev.icontent.components.ActionButtonUiEvent
-import com.orlandev.icontent.components.ActionButtonsBar
-import com.orlandev.icontent.components.MarqueeText
-import com.orlandev.icontent.components.ReviewStars
+import com.orlandev.icontent.components.*
 import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.components.carousel.CarouselModel
 import com.orlandev.icontent.components.gallery.IGalleryStaggered
@@ -173,6 +173,8 @@ class MainActivity : ComponentActivity() {
                                 shareOption = "Comparte tu opinion con otros usuarios",
                                 comment = "Deja tu comentario...",
                                 buttonText = "Publicar",
+                                titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,
+                                subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
                                 onCommentTextFieldFocusChanged = {},
                                 onUserReview = { stars, comment ->
                                     Log.d("Review", "$stars - $comment")
@@ -182,7 +184,93 @@ class MainActivity : ComponentActivity() {
                         }
 
                         item {
-                            ActionButtonsBar(strokeColor = Color.Red) { btnEvents ->
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    align = GradientAlignment.Start
+                                )
+                            }
+
+                        }
+
+
+                        item {
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black, alphaValue = 0.7f,
+                                    align = GradientAlignment.Center
+                                )
+                            }
+
+                        }
+
+                        item {
+
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    align = GradientAlignment.End
+                                )
+                            }
+
+                        }
+
+                        //item using a box container of a gradient effect vertically
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    orientation = GradientEffectOrientation.Horizontally,
+                                    align = GradientAlignment.Center
+                                )
+                            }
+                        }
+
+                        //item using a box container of a gradient effect orientation horizontally
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+                            ) {
+                                IGradientEffect(
+                                    backgroundColor = Color.Black,
+                                    orientation = GradientEffectOrientation.Horizontally,
+                                    align = GradientAlignment.Start
+                                )
+                            }
+                        }
+
+                        item {
+                            ActionButtonsBar(strokeColor = Color.Red, urlEnable = false) { btnEvents ->
                                 when (btnEvents) {
                                     ActionButtonUiEvent.NavigateToMap -> {
                                         Log.d("NavigateToMap", "NavigateToMap Event")
