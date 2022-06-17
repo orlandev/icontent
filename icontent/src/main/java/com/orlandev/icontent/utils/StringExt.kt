@@ -4,20 +4,6 @@ import com.orlandev.icontent.components.carousel.CarouselModel
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 
-fun String.toIContentType(): IContentType {
-    return when (this) {
-        "text" -> IContentType.Text
-        "htmlText" -> IContentType.HtmlText
-        "extendText" -> IContentType.ExtendText
-        "extendHtmlText" -> IContentType.ExtendHtmlText
-        "image" -> IContentType.Image
-        "pano" -> IContentType.Pano
-        "video" -> IContentType.Video
-        "carousel" -> IContentType.Carousel
-        else -> IContentType.Undefined
-    }
-}
-
 fun String.toCarouselModelList(): List<CarouselModel> {
     val splitData = this.split(FIELD_IMAGE_BLUR_DELIMITIER)
     val listCarouselModel = mutableListOf<CarouselModel>()
@@ -36,7 +22,7 @@ fun String.toCarouselModelList(): List<CarouselModel> {
 
 fun String.generateImageContentField(
     blurHash: String,
-    type: IContentType = IContentType.Image
+    type: IContentType = IContentType.fromString("image")
 ): ContentModel {
     return ContentModel(
         field = "$this$FIELD_IMAGE_BLUR_DELIMITIER$blurHash",

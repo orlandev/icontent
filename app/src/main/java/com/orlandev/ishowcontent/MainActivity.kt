@@ -37,12 +37,12 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val contentText = ContentModel(
                         field = "This is a text using IContent",
-                        typeI = IContentType.Text,
+                        typeI = IContentType.fromString("text"),
                         textStyle = MaterialTheme.typography.h1
                     )
                     val contentHtmlText = ContentModel(
                         field = "Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\"https://github.com/orlandev/icontent\">IContent compoenent </a>",
-                        typeI = IContentType.HtmlText,
+                        typeI = IContentType.fromString("htmlText"),
                     )
 
                     val contentTextExpandable = ContentModel(
@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                         récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus 
                         PageMaker. """
                             .trimIndent(),
-                        typeI = IContentType.ExtendText,
+                        typeI = IContentType.fromString("extendText"),
                     )
 
                     val contentHtmlTextExpandable = ContentModel(
@@ -74,13 +74,13 @@ class MainActivity : ComponentActivity() {
                         récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus 
                         PageMaker. """
                             .trimIndent(),
-                        typeI = IContentType.ExtendHtmlText,
+                        typeI = IContentType.fromString("extendHtmlText"),
                     )
 
                     val contentPano =
                         "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg".generateImageContentField(
                             blurHash = "|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
-                            type = IContentType.Pano
+                            type = IContentType.fromString("pano")
                         ).copy(
                             contextActivity = context
                         )
@@ -135,12 +135,12 @@ class MainActivity : ComponentActivity() {
 
                     val carouselContent = ContentModel(
                         field = testUrl,
-                        typeI = IContentType.Carousel
+                        typeI = IContentType.fromString("carousel")
                     )
 
                     val contentVideo = ContentModel(
                         field = "https://youtu.be/qvDo0SKR8-k",
-                        typeI = IContentType.Video,
+                        typeI = IContentType.fromString("video"),
                     )
 
                     LazyColumn(

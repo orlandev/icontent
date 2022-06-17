@@ -45,7 +45,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
         is IContentType.Pano -> {
             IPanoView(contentModel = contentModel, modifier = modifier)
         }
-        IContentType.HtmlText -> {
+        is IContentType.HtmlText -> {
             IHtmlText(
                 text = contentModel.field,
                 modifier = modifier,
@@ -53,14 +53,14 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
             )
         }
 
-        IContentType.ExtendHtmlText -> {
+        is IContentType.ExtendHtmlText -> {
             IExtendHtmlText(
                 modifier = modifier,
                 text = contentModel.field,
                 style = contentModel.textStyle ?: LocalTextStyle.current
             )
         }
-        IContentType.Carousel -> {
+        is IContentType.Carousel -> {
             CarouselContainer(
                 modifier = modifier,
                 carouselDataList = contentModel.field.toCarouselModelList(),
