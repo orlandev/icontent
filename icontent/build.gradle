@@ -80,7 +80,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.0.54'
+                version = '1.0.55'
             }
         }
     }
