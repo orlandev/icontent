@@ -44,7 +44,7 @@ android {
 dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     //implementation "androidx.compose.material:material:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-alpha09' //ONLY FOR TEST
+    implementation 'androidx.compose.material3:material3:1.0.0-alpha13' //ONLY FOR TEST
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
 
     //Material Icons for compose
@@ -80,7 +80,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.0.55'
+                version = '1.0.60'
             }
         }
     }
