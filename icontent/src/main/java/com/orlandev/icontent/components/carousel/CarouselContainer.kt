@@ -91,7 +91,7 @@ fun CarouselContainer(
                                 if (carouselDataList[0].id != -1) {
                                     onCarouselItemClick(carouselDataList[0].id)
                                 }
-                            }else{
+                            } else {
                                 imageToShow.value = carouselDataList[0]
                             }
                         },
@@ -104,23 +104,26 @@ fun CarouselContainer(
                 )
             }
             if (imageToShow.value != null)
-                Dialog(onDismissRequest = { imageToShow.value = null }) {
-                    CarouselItem(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp)
-                            .clickable {
-                                imageToShow.value = null
-                            },
-                        title = carouselDataList[0].title,
-                        subtitle = carouselDataList[0].subtitle,
-                        imageContent = carouselDataList[0].image,
-                        addGradient = addGradient,
-                        gradientColor = gradientEffectColor,
-                        textColorOverGradient = textColorOverGradient,
-                        contentScale = ContentScale.FillWidth
-                    )
+                imageToShow.value?.let { currentContentModel ->
+                    Dialog(onDismissRequest = { imageToShow.value = null }) {
+                        CarouselItem(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(400.dp)
+                                .clickable {
+                                    imageToShow.value = null
+                                },
+                            title = currentContentModel.title,
+                            subtitle = currentContentModel.subtitle,
+                            imageContent = currentContentModel.image,
+                            addGradient = addGradient,
+                            gradientColor = gradientEffectColor,
+                            textColorOverGradient = textColorOverGradient,
+                            contentScale = ContentScale.FillWidth
+                        )
+                    }
                 }
+
         }
     }
 }
