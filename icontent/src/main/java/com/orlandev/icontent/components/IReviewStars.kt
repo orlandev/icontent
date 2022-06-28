@@ -9,7 +9,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.RateReview
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarBorder
 import androidx.compose.material3.CardDefaults
@@ -55,29 +54,23 @@ fun ReviewStars(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Row {
-                Icon(
-                    Icons.Rounded.RateReview,
-                    contentDescription = null,
-                    tint = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-
                 androidx.compose.material3.Text(
                     text = siteReview,
                     style = titleCardTextStyle,
                     modifier = Modifier.fillMaxWidth()
                 )
-
             }
-            Text(
+            androidx.compose.material3.Text(
                 text = shareOption,
                 style = subtitleCardTextStyle,
+                color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
 
+                //TODO REFACTOR THIS
 
                 IconButton(onClick = { reviewStars = 1 }) {
                     Icon(
@@ -151,11 +144,12 @@ fun ReviewStars(
                     )
                     Text(
                         text = "${userReviewComment.value.text.length} / 150",
+                        color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.End,
-                        style = MaterialTheme.typography.caption,
+                        style = androidx.compose.material3.MaterialTheme.typography.labelSmall,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(end = 16.dp)
+                            .padding(top = 8.dp, end = 16.dp)
                     )
 
                     androidx.compose.material3.TextButton(
