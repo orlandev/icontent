@@ -4,12 +4,27 @@ IContent is a library that allows you to generically load content into a Composa
 
 ## Content components:
 
-Texts
-Texts with HTML format (Allows navigation through links included in the text)
-Images
-Images in carousel
-Panoramic Images (360*)
-Videos
+- Texts
+
+- Texts with HTML format (Allows navigation through links included in the text)
+
+- Images
+
+- Images in carousel
+
+- Panoramic Images (360*)
+
+- Videos
+
+## How to use? 
+
+- Add Jitpack in the repository configuration
+  
+  ```maven { url 'https://jitpack.io' }```
+
+- Add in project dependencies 
+ 
+  ```implementation 'com.github.orlandev:icontent:1.0.70'``` 
 
 ## Who is using this library
 Inmersoft Guides: This library is being used in the projects they belong to to the line of "Digital Interactive Guides" belonging to the Inmersoft Development Group.
