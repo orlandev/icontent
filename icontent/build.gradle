@@ -61,6 +61,9 @@ dependencies {
     // Exoplayer (Video)
     implementation "com.google.android.exoplayer:exoplayer:2.16.1"
 
+    //Rating Bar
+    implementation 'com.github.a914-gowtham:compose-ratingbar:1.2.3'
+
     //PanoView
     // Google VR SDK
     implementation "com.google.vr:sdk-base:1.180.0"

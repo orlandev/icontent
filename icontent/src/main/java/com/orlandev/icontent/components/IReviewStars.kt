@@ -1,5 +1,6 @@
 package com.orlandev.icontent.components
 
+import android.widget.RatingBar
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,8 +22,25 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+
+fun ReviewStars() {
+    RatingBar(
+        value = rating,
+        config = RatingBarConfig()
+            .style(RatingBarStyle.HighLighted),
+        onValueChange = {
+            rating = it
+        },
+        onRatingChanged = {
+            Log.d("TAG", "onRatingChanged: $it")
+        }
+    )
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 fun ReviewStars(
     siteReview: String,
     shareOption: String,
