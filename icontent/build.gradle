@@ -50,7 +50,7 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
     //ImageBlurhash
-    implementation 'com.github.orlandev:compose-image-blurhash:1.0.2'
+    implementation 'com.github.orlandev:compose-image-blurhash:2.1.0'
 
     //Blurhash lib
     implementation 'com.github.orlandev:blurhashkt:1.0.1-alpha05'
