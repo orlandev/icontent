@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReviewStars(
-    siteReview: String,
-    shareOption: String,
+    siteReview: String?=null,
+    shareOption: String?=null,
     comment: String,
     buttonText: String,
     titleCardTextStyle: androidx.compose.ui.text.TextStyle,
@@ -54,17 +54,21 @@ fun ReviewStars(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Row {
+                siteReview?.let {
+                    androidx.compose.material3.Text(
+                        text = siteReview,
+                        style = titleCardTextStyle,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+            shareOption?.let {
                 androidx.compose.material3.Text(
-                    text = siteReview,
-                    style = titleCardTextStyle,
-                    modifier = Modifier.fillMaxWidth()
+                    text = shareOption,
+                    style = subtitleCardTextStyle,
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
                 )
             }
-            androidx.compose.material3.Text(
-                text = shareOption,
-                style = subtitleCardTextStyle,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
-            )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
