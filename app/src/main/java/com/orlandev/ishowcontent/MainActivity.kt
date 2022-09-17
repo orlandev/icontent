@@ -179,7 +179,8 @@ class MainActivity : ComponentActivity() {
                                 onUserReview = { stars, comment ->
                                     Log.d("Review", "$stars - $comment")
 
-                                }
+                                },
+                                activeColor = Color.Red
                             )
                         }
 

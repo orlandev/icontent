@@ -1,62 +1,49 @@
 package com.orlandev.icontent.components
 
-import android.widget.RatingBar
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material.icons.rounded.StarBorder
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-
-
-fun ReviewStars() {
-    RatingBar(
-        value = rating,
-        config = RatingBarConfig()
-            .style(RatingBarStyle.HighLighted),
-        onValueChange = {
-            rating = it
-        },
-        onRatingChanged = {
-            Log.d("TAG", "onRatingChanged: $it")
-        }
-    )
-}
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarConfig
+import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
 fun ReviewStars(
-    siteReview: String,
-    shareOption: String,
-    comment: String,
+    siteReview: String? = null,
+    shareOption: String? = null,
+    comment: String? = null,
     buttonText: String,
+    activeColor: Color,
     titleCardTextStyle: androidx.compose.ui.text.TextStyle,
     subtitleCardTextStyle: androidx.compose.ui.text.TextStyle,
     onCommentTextFieldFocusChanged: (FocusState) -> Unit,
     onUserReview: (Int, String) -> Unit
 ) {
 
-    var reviewStars by remember {
-        mutableStateOf(0)
-    }
-
     val userReviewComment = remember { mutableStateOf(TextFieldValue()) }
+
+    var rating: Float by remember {
+        mutableStateOf(0f)
+    }
 
     androidx.compose.material3.ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -70,63 +57,48 @@ fun ReviewStars(
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Row {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+
+            siteReview?.let {
                 androidx.compose.material3.Text(
                     text = siteReview,
                     style = titleCardTextStyle,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-            androidx.compose.material3.Text(
-                text = shareOption,
-                style = subtitleCardTextStyle,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
 
-                //TODO REFACTOR THIS
-
-                IconButton(onClick = { reviewStars = 1 }) {
-                    Icon(
-                        if (reviewStars > 0) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                        contentDescription = "Review",
-                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
-                IconButton(onClick = { reviewStars = 2 }) {
-                    Icon(
-                        if (reviewStars > 1) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                        contentDescription = "Review",
-                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
-                IconButton(onClick = { reviewStars = 3 }) {
-                    Icon(
-                        if (reviewStars > 2) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                        contentDescription = "Review",
-                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
-                IconButton(onClick = { reviewStars = 4 }) {
-                    Icon(
-                        if (reviewStars > 3) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                        contentDescription = "Review",
-                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
-                IconButton(onClick = { reviewStars = 5 }) {
-                    Icon(
-                        if (reviewStars > 4) Icons.Rounded.Star else Icons.Rounded.StarBorder,
-                        contentDescription = "Review",
-                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
+            shareOption?.let {
+                androidx.compose.material3.Text(
+                    text = shareOption,
+                    style = subtitleCardTextStyle,
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.onBackground
+                )
             }
-            AnimatedVisibility(visible = reviewStars > 0) {
+
+            RatingBar(
+                value = rating,
+                config = RatingBarConfig()
+                    .activeColor(activeColor)
+                    .hideInactiveStars(false)
+                    .inactiveColor(Color.LightGray)
+                    .stepSize(StepSize.ONE)
+                    .numStars(5)
+                    //.isIndicator(true)
+                    .size(24.dp)
+                    .padding(16.dp)
+                    .style(RatingBarStyle.Normal),
+                onValueChange = {
+                    rating = it
+                },
+                onRatingChanged = {
+                    Log.d("TAG", "onRatingChanged: $it")
+                }
+            )
+
+            AnimatedVisibility(visible = rating > 0) {
 
                 Column(modifier = Modifier.fillMaxSize()) {
                     val maxReviewChar = 150
@@ -135,16 +107,17 @@ fun ReviewStars(
                             .fillMaxWidth()
                             .onFocusChanged {
                                 onCommentTextFieldFocusChanged(it)
-                            }
-                            .padding(horizontal = 8.dp),
+                            },
                         value = userReviewComment.value,
                         maxLines = 5,
                         label = {
-                            Text(
-                                text = comment,
-                                style = MaterialTheme.typography.body2,
-                                color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
-                            )
+                            comment?.let {
+                                Text(
+                                    text = comment,
+                                    style = MaterialTheme.typography.body2,
+                                    color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            }
                         },
                         onValueChange = {
                             if (it.text.length <= maxReviewChar) userReviewComment.value =
@@ -174,7 +147,7 @@ fun ReviewStars(
                         enabled = userReviewComment.value.text.isNotEmpty(),
                         onClick = {
                             onUserReview(
-                                reviewStars,
+                                rating.toInt(),
                                 userReviewComment.value.text
                             )
                         }) {
