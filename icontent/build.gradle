@@ -63,6 +63,9 @@ dependencies {
     // Exoplayer (Video)
     implementation "com.google.android.exoplayer:exoplayer:2.16.1"
 
+    //Rating Bar
+    implementation 'com.github.a914-gowtham:compose-ratingbar:1.2.3'
+
     //PanoView
     // Google VR SDK
     implementation "com.google.vr:sdk-base:1.180.0"
@@ -81,7 +84,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.0.71'
+                version = '1.1.0'
             }
         }
     }

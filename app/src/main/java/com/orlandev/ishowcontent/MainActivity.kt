@@ -168,7 +168,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         item {
-                            ReviewStars(
+                            RatingReviewsBar(
                                 siteReview = "Califica este sitio",
                                 shareOption = "Comparte tu opinion con otros usuarios",
                                 comment = "Deja tu comentario...",
@@ -179,7 +179,8 @@ class MainActivity : ComponentActivity() {
                                 onUserReview = { stars, comment ->
                                     Log.d("Review", "$stars - $comment")
 
-                                }
+                                },
+                                activeColor = Color.Red
                             )
                         }
 
