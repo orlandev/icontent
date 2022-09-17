@@ -27,7 +27,7 @@ import com.gowtham.ratingbar.StepSize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReviewStars(
+fun RatingReviewsBar(
     siteReview: String? = null,
     shareOption: String? = null,
     comment: String? = null,
