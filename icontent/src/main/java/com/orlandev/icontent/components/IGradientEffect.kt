@@ -8,11 +8,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
+/***
+ *  [GradientEffectOrientation]  Gradient Orientation
+ *  @param Vertically sets the Gradient vertically.
+ *  @param Horizontally sets the Gradient horizontally.
+ */
 sealed class GradientEffectOrientation() {
     object Vertically : GradientEffectOrientation()
     object Horizontally : GradientEffectOrientation()
 }
 
+
+/***
+ *  [GradientAlignment]  Gradient Alignment
+ *  @param Start Align the gradient to the start of the component.
+ *  @param Center Align the gradient to the center of the component.
+ *  @param End Align the gradient to the end of the component.
+ */
 sealed class GradientAlignment() {
     object Start : GradientAlignment()
     object Center : GradientAlignment()
@@ -20,6 +32,14 @@ sealed class GradientAlignment() {
 }
 
 
+/**
+ *  [IGradientEffect] Create a component with gradient and transparency which can be used on top of an image.
+ *  @param backgroundColor Main color of the gradient.
+ *  @param orientation Gradient orientation; the default object [GradientAlignment] should be used for orientation.
+ *  @param align Gradient alignment within the component; you must use the default object [GradientAlignment] for alignment.
+ *  @param alpha Transparency that the gradient will have.
+ *
+ */
 @Composable
 fun IGradientEffect(
     backgroundColor: Color,

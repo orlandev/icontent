@@ -16,6 +16,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.orlandev.icontent.utils.smartTruncate
 
+
+
+/***
+ *
+ *  [IExtendText] is a component that allows to display a text adding the property of extending it or not in the form of an accordion.
+ *  @param text Is a String containing text in HTML format or plain text.
+ *  @param modifier Modifiers to control the appearance of the component, such as height, width, padding, etc.
+ *  @param maxTextTruncate This parameter controls the amount of text to display, cutting the text to the suggested size and adding ...
+ *  @param style Allows you to add a general style to the text
+ *
+ *  @author Orlando N. Rodriguez
+ *
+ */
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun IExtendText(
