@@ -11,6 +11,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,21 +30,18 @@ sealed class ActionButtonUiEvent {
     object OpenUrl : ActionButtonUiEvent()
 }
 
+
+@Deprecated("This component will be removed in later versions.")
 @OptIn(ExperimentalAnimationApi::class, androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun ActionButtonsBar(
     urlEnable: Boolean = true,
     strokeColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    cardElevation: CardElevation = CardDefaults.cardElevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     onEvent: (ActionButtonUiEvent) -> Unit
 ) {
     androidx.compose.material3.ElevatedCard(
-        elevation = CardDefaults.cardElevation(
-            0.dp,
-            0.dp,
-            0.dp,
-            0.dp,
-            0.dp,
-        ),
+        elevation = cardElevation,
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth(),
