@@ -8,6 +8,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import de.charlex.compose.HtmlText
 
+/**
+ * [IHtmlText] Allows to display text in html format
+ * @param text String value
+ * @param modifier  Modifiers to control the appearance of the component, such as height, width, padding, etc.
+ * @param primaryColor Primary color for the text.
+ * @param style Style for the text.
+ */
+
 @Composable
 fun IHtmlText(
     text: String,
