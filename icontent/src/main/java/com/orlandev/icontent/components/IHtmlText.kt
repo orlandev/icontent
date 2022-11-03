@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import de.charlex.compose.HtmlText
+import dev.jeziellago.compose.markdowntext.MarkdownText
 
 /**
  * [IHtmlText] Allows to display text in html format
@@ -23,10 +24,17 @@ fun IHtmlText(
     primaryColor: Color =MaterialTheme.colorScheme.onBackground,
     style: TextStyle = LocalTextStyle.current,
 ) {
-    HtmlText(
+
+    MarkdownText(
+        modifier=modifier,
+        markdown = text,
+        style = style
+    )
+
+    /*HtmlText(
         text = text,
         modifier = modifier,
         color = primaryColor,
         style = style
-    )
+    )*/
 }

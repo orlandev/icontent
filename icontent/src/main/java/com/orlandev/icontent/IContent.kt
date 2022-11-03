@@ -1,19 +1,18 @@
 package com.orlandev.icontent
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
 import com.orlandev.icontent.components.*
 import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.toCarouselModelList
 
-
-@OptIn(ExperimentalCoilApi::class, androidx.compose.animation.ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(200.dp)) {
     when (contentModel.typeI) {
