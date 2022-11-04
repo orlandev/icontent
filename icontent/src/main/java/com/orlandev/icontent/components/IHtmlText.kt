@@ -31,10 +31,4 @@ fun IHtmlText(
         style = style
     )
 
-    /*HtmlText(
-        text = text,
-        modifier = modifier,
-        color = primaryColor,
-        style = style
-    )*/
 }
