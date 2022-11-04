@@ -30,6 +30,7 @@ import com.orlandev.icontent.utils.smartTruncate
  *
  */
 
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun IExtendText(

@@ -15,7 +15,11 @@ import dev.jeziellago.compose.markdowntext.MarkdownText
  * @param primaryColor Primary color for the text.
  * @param style Style for the text.
  */
-
+@Deprecated("IT WILL NOT BE USED ANYMORE BECAUSE A SINGLE TEXT COMPONENT WILL BE CREATED IN WHICH ALL THE INFORMATION IS PROCESSED BASED ON TEXT USING SEVERAL FORMATS SUCH AS HTML AND MARKDOWN",
+    ReplaceWith(
+        "IText(modifier = modifier, markdown = text, color = primaryColor, style = style)"
+    )
+)
 @Composable
 fun IHtmlText(
     text: String,

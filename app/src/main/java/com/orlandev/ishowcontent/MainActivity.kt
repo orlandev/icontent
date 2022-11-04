@@ -154,6 +154,10 @@ class MainActivity : ComponentActivity() {
                     ) {
 
                         item {
+                            ImageBeforeAfter(before = "", after = "")
+                        }
+
+                        item {
                             MarqueeText(
                                 text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w",
                                 modifier = Modifier

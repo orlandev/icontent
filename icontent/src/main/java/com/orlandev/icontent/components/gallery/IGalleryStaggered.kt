@@ -14,6 +14,9 @@ fun IGalleryStaggered(
     columnWidth: Dp = 190.dp,
     imageContentList: List<ContentModel>
 ) {
+
+    //TODO REFACTOR THIS COMPONENT TO USE THE STAGGERED LAZY COLUM NATIVE OF JETPACK COMPOSE
+
     StaggeredVerticalGrid(
         maxColumnWidth = columnWidth,
         modifier = modifier.padding(4.dp)

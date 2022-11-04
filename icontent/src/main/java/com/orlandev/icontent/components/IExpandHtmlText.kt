@@ -31,6 +31,7 @@ import com.orlandev.icontent.utils.smartTruncate
  *
  */
 
+@Deprecated("IT WILL NOT BE USED ANYMORE BECAUSE A SINGLE TEXT COMPONENT WILL BE CREATED IN WHICH ALL THE INFORMATION IS PROCESSED BASED ON TEXT USING SEVERAL FORMATS SUCH AS HTML AND MARKDOWN")
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun IExtendHtmlText(
