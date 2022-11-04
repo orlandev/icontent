@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import de.charlex.compose.HtmlText
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
 /**
@@ -26,9 +25,7 @@ fun IHtmlText(
 ) {
 
     MarkdownText(
-        modifier=modifier,
-        markdown = text,
-        style = style
+        modifier = modifier, markdown = text, color = primaryColor, style = style
     )
 
 }
