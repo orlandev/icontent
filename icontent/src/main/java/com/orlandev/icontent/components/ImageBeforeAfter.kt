@@ -26,6 +26,7 @@ import coil.request.ImageRequest
 import com.smarttoolfactory.image.beforeafter.BeforeAfterImage
 import kotlinx.coroutines.launch
 
+@ExperimentalComposeApi
 @Composable
 fun ImageBeforeAfter(
     before:String,
