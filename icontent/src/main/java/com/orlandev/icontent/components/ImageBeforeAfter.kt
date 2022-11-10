@@ -119,6 +119,8 @@ fun ImageBeforeAfter(
             modifier = modifier,
             beforeImage = beforeBitmap!!.asImageBitmap(),
             afterImage = afterBitmap!!.asImageBitmap(),
+            afterLabel = {},
+            beforeLabel = {},
             contentScale = contentScale
         )
     } else {
