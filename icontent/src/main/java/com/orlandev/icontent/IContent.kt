@@ -11,6 +11,7 @@ import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.toCarouselModelList
+import kotlin.reflect.typeOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -66,7 +67,7 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
                 onCarouselItemClick = {})
         }
         else -> {
-            TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
+            TODO("CONTENT TYPE IS UNDEFINED - TYPE: ${contentModel.typeI}")
         }
     }
 
