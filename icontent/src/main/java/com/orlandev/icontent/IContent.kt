@@ -60,11 +60,16 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
             )
         }
         is IContentType.Carousel -> {
-            CarouselContainer(
-                modifier = modifier,
+            CarouselContainer(modifier = modifier,
                 carouselDataList = contentModel.field.toCarouselModelList(),
                 onCarouselItemClick = {})
         }
+        is IContentType.BeforeAfter -> {
+
+            ImageBeforeAfter(modifier = modifier, contentModel = contentModel)
+
+        }
+
         else -> {
             TODO("CONTENT TYPE IS UNDEFINED - NOT IMPLEMENTED YET")
         }

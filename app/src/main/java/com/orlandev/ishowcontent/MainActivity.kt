@@ -28,6 +28,7 @@ import com.orlandev.icontent.utils.toCarouselModelList
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val context = this
@@ -59,8 +60,7 @@ class MainActivity : ComponentActivity() {
                         informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 
                         1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus 
                         récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus 
-                        PageMaker. """
-                            .trimIndent(),
+                        PageMaker. """.trimIndent(),
                         typeI = IContentType.fromString("extendText"),
                     )
 
@@ -75,13 +75,12 @@ class MainActivity : ComponentActivity() {
                         informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 
                         1960 grâce à la vente de feuilles</strong> Letraset contenant des passages du Lorem Ipsum, et, plus 
                         récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus 
-                        PageMaker. """
-                            .trimIndent(),
+                        PageMaker. """.trimIndent(),
                         typeI = IContentType.fromString("extendHtmlText"),
                     )
 
                     val contentPano =
-                        "https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg".generateImageContentField(
+                        "https://ik.imagekit.io/6xgh00mrhaz/fixed_a1diPygsA.jpg".generateImageContentField(
                             blurHash = "|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
                             type = IContentType.fromString("pano")
                         ).copy(
@@ -137,8 +136,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     val carouselContent = ContentModel(
-                        field = testUrl,
-                        typeI = IContentType.fromString("carousel")
+                        field = testUrl, typeI = IContentType.fromString("carousel")
                     )
 
                     val contentVideo = ContentModel(
@@ -153,8 +151,19 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
 
+                        val contentBeforeAfter = ContentModel(
+                            field = "https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]https://ik.imagekit.io/6xgh00mrhaz/after_3uqabisEN.jpg",
+                            typeI = IContentType.fromString("beforeAfter"),
+                        )
+
+
                         item {
-                            ImageBeforeAfter(before = "", after = "")
+                            ImageBeforeAfter(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .aspectRatio(4 / 3f),
+                                contentModel = contentBeforeAfter,
+                            )
                         }
 
                         item {
@@ -198,8 +207,7 @@ class MainActivity : ComponentActivity() {
                                     .background(Color.White)
                             ) {
                                 IGradientEffect(
-                                    backgroundColor = Color.Black,
-                                    align = GradientAlignment.Start
+                                    backgroundColor = Color.Black, align = GradientAlignment.Start
                                 )
                             }
 
@@ -216,7 +224,8 @@ class MainActivity : ComponentActivity() {
                                     .background(Color.White)
                             ) {
                                 IGradientEffect(
-                                    backgroundColor = Color.Black, alphaValue = 0.7f,
+                                    backgroundColor = Color.Black,
+                                    alphaValue = 0.7f,
                                     align = GradientAlignment.Center
                                 )
                             }
@@ -233,8 +242,7 @@ class MainActivity : ComponentActivity() {
                                     .background(Color.White)
                             ) {
                                 IGradientEffect(
-                                    backgroundColor = Color.Black,
-                                    align = GradientAlignment.End
+                                    backgroundColor = Color.Black, align = GradientAlignment.End
                                 )
                             }
 
@@ -293,16 +301,14 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-                        
-                        item { 
+
+                        item {
                             Text(text = "Gallery")
                         }
-                        
+
                         item {
                             IContent(
-                                contentModel = contentText,
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                contentModel = contentText, modifier = Modifier.fillMaxWidth()
                             )
                         }
 
@@ -310,31 +316,26 @@ class MainActivity : ComponentActivity() {
                         item {
                             IContent(
                                 contentModel = contentHtmlTextExpandable,
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth()
                             )
                         }
                         item {
                             IContent(
                                 contentModel = contentHtmlTextExpandable,
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth()
                             )
                         }
 
                         item {
                             IContent(
-                                contentModel = contentHtmlText,
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                contentModel = contentHtmlText, modifier = Modifier.fillMaxWidth()
                             )
                         }
 
                         item {
                             IContent(
                                 contentModel = contentTextExpandable,
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth()
                             )
                         }
                         item {
@@ -349,8 +350,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 IContent(
                                     contentModel = carouselContent,
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                    modifier = Modifier.fillMaxSize()
                                 )
                             }
                         }
@@ -362,8 +362,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 IContent(
                                     contentModel = carouselContent,
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                    modifier = Modifier.fillMaxSize()
                                 )
                             }
                         }

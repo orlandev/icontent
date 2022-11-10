@@ -14,6 +14,7 @@ sealed class IContentType() {
                 "extendHtmlText" -> ExtendHtmlText
                 "pano" -> Pano
                 "carousel" -> Carousel
+                "beforeAfter" -> BeforeAfter
                 else -> Undefined
             }
         }

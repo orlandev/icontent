@@ -1,115 +1,129 @@
 package com.orlandev.icontent.components
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.unit.dp
 import coil.ImageLoader
+import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
+import coil.request.SuccessResult
+import com.orlandev.icontent.models.ContentModel
+import com.orlandev.icontent.models.IContentType
+import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import com.smarttoolfactory.image.beforeafter.BeforeAfterImage
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ImageBeforeAfter(
-    before:String,
-    after:String
+    modifier: Modifier,
+    contentModel: ContentModel,
+) {
+    if (contentModel.typeI == IContentType.BeforeAfter) {
+        //field is URL[!]URL
+        val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
+
+        if (imgRef.size == 2) {
+            ImageBeforeAfter(modifier = modifier, before = imgRef[0], after = imgRef[1], loader = {
+                CircularProgressIndicator()
+            })
+        }
+    } else {
+        Log.e("ImageBeforeAfter", "WRONG CONTENT TYPE: ${contentModel.typeI} ")
+    }
+}
+
+
+@ExperimentalLayoutApi
+@Composable
+fun ImageBeforeAfter(
+    modifier: Modifier = Modifier, before: String, after: String, loader: @Composable () -> Unit
 ) {
 
-    val scope = rememberCoroutineScope()
 
     val context = LocalContext.current
 
-    val beforeBitmapState = rememberSaveable {
-        mutableStateOf<ImageBitmap?>(null)
-    }
+    val imageLoader = ImageLoader(context)
 
-    val afterBitmapState = rememberSaveable {
-        mutableStateOf<ImageBitmap?>(null)
-    }
+    val request = ImageRequest.Builder(context).data(before).build()
+    val request2 = ImageRequest.Builder(context).data(after).build()
 
-    LaunchedEffect(Unit) {
-            val beforeBitmap =
-                getImageAsBitmap("https://images.dog.ceo/breeds/saluki/n02091831_3400.jpg", context)
-
-            val afterBitmap =
-                getImageAsBitmap("https://blurha.sh/ea9e499f8080ce9956a8.jpg", context)
-
-            beforeBitmapState.value = beforeBitmap?.asImageBitmap()
-            afterBitmapState.value = afterBitmap?.asImageBitmap()
-    }
-
-
-    val imageBefore = ImageBitmap.imageResource(
-        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img
+    val imagePainter = rememberImagePainter(
+        request = request, imageLoader = imageLoader
     )
 
-    val imageAfter = ImageBitmap.imageResource(
-        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img2
+    val imagePainter2 = rememberImagePainter(
+        request = request, imageLoader = imageLoader
     )
 
-    val contentScale by remember { mutableStateOf(ContentScale.FillBounds) }
+    var beforeBitmap by remember {
+        mutableStateOf<Bitmap?>(null)
+    }
+
+    var afterBitmap by remember {
+        mutableStateOf<Bitmap?>(null)
+    }
 
 
+    LaunchedEffect(key1 = imagePainter) {
 
-    if (beforeBitmapState.value != null && afterBitmapState.value != null) {
+        Log.d("ImageBeforeAfter", "CALL LAUNCHED EFFECT")
 
-        BeforeAfterImage(
-            modifier = Modifier
-                .shadow(1.dp, RoundedCornerShape(10.dp))
-                .fillMaxWidth()
-                .aspectRatio(4 / 3f),
-            beforeImage = beforeBitmapState.value!!,
-            afterImage = afterBitmapState.value!!,
-            contentScale = contentScale
-        )
+        if (beforeBitmap == null) {
+            launch {
 
-    } else {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp), contentAlignment = Alignment.Center
-        ) {
+                val result = (imageLoader.execute(request) as SuccessResult).drawable
 
-            CircularProgressIndicator()
+                /*val vibrant = Palette.from(bitmap)
+                    .generate()
+                    .getVibrantolor(defaultColor)
+                        */
 
+                beforeBitmap = (result as BitmapDrawable).bitmap
+            }
         }
     }
 
-}
+    LaunchedEffect(key1 = imagePainter2) {
 
-internal fun getImageAsBitmap(url: String, context: Context): Bitmap? {
-    var bitmap: Bitmap? = null
-    val loader = ImageLoader(context)
-    val requestBuilder = ImageRequest.Builder(context)
-    val beforeRequest = requestBuilder.data(url).allowHardware(false) // Disable hardware bitmaps.
-        .target { result ->
+        Log.d("ImageBeforeAfter", "CALL LAUNCHED EFFECT")
 
-            Log.d("ICOIL","RESULT FETCH IMAGE")
+        if (afterBitmap == null) {
+            launch {
 
-            bitmap = (result as BitmapDrawable).bitmap
+                val result = (imageLoader.execute(request2) as SuccessResult).drawable
 
-        }.build()
+                /*val vibrant = Palette.from(bitmap)
+                    .generate()
+                    .getVibrantolor(defaultColor)
+                        */
 
-    //val result = (loader.execute(beforeRequest) as SuccessResult).drawable
+                afterBitmap = (result as BitmapDrawable).bitmap
+            }
+        }
+    }
 
-    val disposable = loader.enqueue(beforeRequest)
+    val contentScale by remember { mutableStateOf(ContentScale.FillBounds) }
 
-    return bitmap
+    if (afterBitmap != null && beforeBitmap != null) {
+        BeforeAfterImage(
+            modifier = modifier,
+            beforeImage = beforeBitmap!!.asImageBitmap(),
+            afterImage = afterBitmap!!.asImageBitmap(),
+            contentScale = contentScale
+        )
+    } else {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            loader()
+        }
+    }
 }
