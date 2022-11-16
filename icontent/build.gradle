@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
 
     // Exoplayer (Video)
-    implementation "com.google.android.exoplayer:exoplayer:2.16.1"
+    implementation "com.google.android.exoplayer:exoplayer:2.18.1"
 
     //Rating Bar
     implementation 'com.github.a914-gowtham:compose-ratingbar:1.2.3'
@@ -92,7 +92,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.2.0'
+                version = '1.2.8'
             }
         }
     }
