@@ -88,12 +88,12 @@ class MainActivity : ComponentActivity() {
                         )
 
                     val contentImage =
-                        "https://blurha.sh/assets/images/img4.jpg".generateImageContentField("LKO2?U%2Tw=w]~RBVZRi};RPxuwH")
+                        "https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg".generateImageContentField("LKO2?U%2Tw=w]~RBVZRi};RPxuwH")
                             .copy(noImageFound = R.drawable.no_image)
 
 
                     val testUrl =
-                        "https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img3.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
+                        "https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]"
 
 
                     val carouselWithText = listOf<CarouselModel>(
@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     val contentVideo = ContentModel(
-                        field = "https://youtu.be/qvDo0SKR8-k",
+                        field = "https://www.youtube.com/watch?v=qvDo0SKR8-k",
                         typeI = IContentType.fromString("video"),
                     )
 
