@@ -19,6 +19,7 @@ import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import com.orlandev.icontent.utils.getCoilBitmap
 
+//TODO EXTRACT THIS COMPONENT TO A SEPARATED MODULE
 
 /***
  * Google VR PanoView needs the activity as context..,.

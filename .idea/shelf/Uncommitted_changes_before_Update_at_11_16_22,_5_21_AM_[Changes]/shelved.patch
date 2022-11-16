@@ -1,0 +1,691 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    id 'com.android.application'\n    id 'org.jetbrains.kotlin.android'\n}\n\nandroid {\n    compileSdk rootProject.compileSdk\n\n    defaultConfig {\n        applicationId \"com.orlandev.ishowcontent\"\n        minSdk rootProject.minSdk\n        targetSdk rootProject.targetSdk\n        versionCode 1\n        versionName \"1.0\"\n\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\n        vectorDrawables {\n            useSupportLibrary true\n        }\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_1_8\n        targetCompatibility JavaVersion.VERSION_1_8\n    }\n    kotlinOptions {\n        jvmTarget = '1.8'\n    }\n    buildFeatures {\n        compose true\n    }\n    composeOptions {\n        kotlinCompilerExtensionVersion compose_compiler\n    }\n    packagingOptions {\n        resources {\n            excludes += '/META-INF/{AL2.0,LGPL2.1}'\n        }\n    }\n    namespace 'com.orlandev.ishowcontent'\n}\n\ndependencies {\n\n    implementation project(':icontent')\n//COMPOSE\n    implementation platform(\"androidx.compose:compose-bom:$compose_bom\")\n    implementation \"androidx.compose.foundation:foundation\"\n    implementation \"androidx.compose.ui:ui\"\n    implementation \"androidx.compose.ui:ui-tooling-preview\"\n    implementation \"androidx.compose.ui:ui-util\"\n    implementation \"androidx.compose.material:material\"\n    implementation \"androidx.compose.material3:material3\"\n    implementation \"androidx.compose.material3:material3-window-size-class\"\n    implementation \"androidx.compose.runtime:runtime\"\n    implementation \"androidx.compose.compiler:compiler:$compose_compiler\"\n    implementation \"androidx.compose.material:material-icons-core\"\n    implementation \"androidx.compose.material:material-icons-extended\"\n\n    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'\n    implementation 'androidx.activity:activity-compose:1.6.1'\n    testImplementation 'junit:junit:4.13.2'\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/app/build.gradle	(date 1668593682013)
+@@ -66,6 +66,6 @@
+     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+     implementation 'androidx.activity:activity-compose:1.6.1'
+     testImplementation 'junit:junit:4.13.2'
+-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
++    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
++    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+ }
+\ No newline at end of file
+Index: icontent/src/main/java/com/orlandev/icontent/components/ImageBeforeAfter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent.components\n\nimport android.content.Context\nimport android.graphics.Bitmap\nimport android.graphics.drawable.BitmapDrawable\nimport android.util.Log\nimport androidx.compose.foundation.layout.Box\nimport androidx.compose.foundation.layout.aspectRatio\nimport androidx.compose.foundation.layout.fillMaxWidth\nimport androidx.compose.foundation.layout.height\nimport androidx.compose.foundation.shape.RoundedCornerShape\nimport androidx.compose.material3.CircularProgressIndicator\nimport androidx.compose.runtime.*\nimport androidx.compose.runtime.saveable.rememberSaveable\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.draw.shadow\nimport androidx.compose.ui.graphics.ImageBitmap\nimport androidx.compose.ui.graphics.asImageBitmap\nimport androidx.compose.ui.layout.ContentScale\nimport androidx.compose.ui.platform.LocalContext\nimport androidx.compose.ui.res.imageResource\nimport androidx.compose.ui.unit.dp\nimport coil.ImageLoader\nimport coil.request.ImageRequest\nimport com.smarttoolfactory.image.beforeafter.BeforeAfterImage\nimport kotlinx.coroutines.launch\n\n@ExperimentalComposeApi\n@Composable\nfun ImageBeforeAfter(\n    before:String,\n    after:String\n) {\n\n    val scope = rememberCoroutineScope()\n\n    val context = LocalContext.current\n\n    val beforeBitmapState = rememberSaveable {\n        mutableStateOf<ImageBitmap?>(null)\n    }\n\n    val afterBitmapState = rememberSaveable {\n        mutableStateOf<ImageBitmap?>(null)\n    }\n\n    LaunchedEffect(Unit) {\n            val beforeBitmap =\n                getImageAsBitmap(\"https://images.dog.ceo/breeds/saluki/n02091831_3400.jpg\", context)\n\n            val afterBitmap =\n                getImageAsBitmap(\"https://blurha.sh/ea9e499f8080ce9956a8.jpg\", context)\n\n            beforeBitmapState.value = beforeBitmap?.asImageBitmap()\n            afterBitmapState.value = afterBitmap?.asImageBitmap()\n    }\n\n\n    val imageBefore = ImageBitmap.imageResource(\n        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img\n    )\n\n    val imageAfter = ImageBitmap.imageResource(\n        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img2\n    )\n\n    val contentScale by remember { mutableStateOf(ContentScale.FillBounds) }\n\n\n\n    if (beforeBitmapState.value != null && afterBitmapState.value != null) {\n\n        BeforeAfterImage(\n            modifier = Modifier\n                .shadow(1.dp, RoundedCornerShape(10.dp))\n                .fillMaxWidth()\n                .aspectRatio(4 / 3f),\n            beforeImage = beforeBitmapState.value!!,\n            afterImage = afterBitmapState.value!!,\n            contentScale = contentScale\n        )\n\n    } else {\n        Box(\n            modifier = Modifier\n                .fillMaxWidth()\n                .height(200.dp), contentAlignment = Alignment.Center\n        ) {\n\n            CircularProgressIndicator()\n\n        }\n    }\n\n}\n\ninternal fun getImageAsBitmap(url: String, context: Context): Bitmap? {\n    var bitmap: Bitmap? = null\n    val loader = ImageLoader(context)\n    val requestBuilder = ImageRequest.Builder(context)\n    val beforeRequest = requestBuilder.data(url).allowHardware(false) // Disable hardware bitmaps.\n        .target { result ->\n\n            Log.d(\"ICOIL\",\"RESULT FETCH IMAGE\")\n\n            bitmap = (result as BitmapDrawable).bitmap\n\n        }.build()\n\n    //val result = (loader.execute(beforeRequest) as SuccessResult).drawable\n\n    val disposable = loader.enqueue(beforeRequest)\n\n    return bitmap\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/components/ImageBeforeAfter.kt b/icontent/src/main/java/com/orlandev/icontent/components/ImageBeforeAfter.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/components/ImageBeforeAfter.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/components/ImageBeforeAfter.kt	(date 1668564409458)
+@@ -1,116 +1,131 @@
+ package com.orlandev.icontent.components
+ 
+-import android.content.Context
+ import android.graphics.Bitmap
+ import android.graphics.drawable.BitmapDrawable
+ import android.util.Log
+ import androidx.compose.foundation.layout.Box
+-import androidx.compose.foundation.layout.aspectRatio
+-import androidx.compose.foundation.layout.fillMaxWidth
+-import androidx.compose.foundation.layout.height
+-import androidx.compose.foundation.shape.RoundedCornerShape
+-import androidx.compose.material3.CircularProgressIndicator
++import androidx.compose.foundation.layout.ExperimentalLayoutApi
++import androidx.compose.material.CircularProgressIndicator
+ import androidx.compose.runtime.*
+-import androidx.compose.runtime.saveable.rememberSaveable
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+-import androidx.compose.ui.draw.shadow
+-import androidx.compose.ui.graphics.ImageBitmap
+ import androidx.compose.ui.graphics.asImageBitmap
+ import androidx.compose.ui.layout.ContentScale
+ import androidx.compose.ui.platform.LocalContext
+-import androidx.compose.ui.res.imageResource
+-import androidx.compose.ui.unit.dp
+ import coil.ImageLoader
++import coil.compose.rememberImagePainter
+ import coil.request.ImageRequest
++import coil.request.SuccessResult
++import com.orlandev.icontent.models.ContentModel
++import com.orlandev.icontent.models.IContentType
++import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
+ import com.smarttoolfactory.image.beforeafter.BeforeAfterImage
+ import kotlinx.coroutines.launch
+ 
+-@ExperimentalComposeApi
++@OptIn(ExperimentalLayoutApi::class)
+ @Composable
+ fun ImageBeforeAfter(
+-    before:String,
+-    after:String
++    modifier: Modifier,
++    contentModel: ContentModel,
++) {
++    if (contentModel.typeI == IContentType.BeforeAfter) {
++        //field is URL[!]URL
++        val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
++
++        if (imgRef.size == 2) {
++            ImageBeforeAfter(modifier = modifier, before = imgRef[0], after = imgRef[1], loader = {
++                CircularProgressIndicator()
++            })
++        }
++    } else {
++        Log.e("ImageBeforeAfter", "WRONG CONTENT TYPE: ${contentModel.typeI} ")
++    }
++}
++
++
++@ExperimentalLayoutApi
++@Composable
++fun ImageBeforeAfter(
++    modifier: Modifier = Modifier, before: String, after: String, loader: @Composable () -> Unit
+ ) {
+ 
+-    val scope = rememberCoroutineScope()
+ 
+     val context = LocalContext.current
+ 
+-    val beforeBitmapState = rememberSaveable {
+-        mutableStateOf<ImageBitmap?>(null)
++    val imageLoader = ImageLoader(context)
++
++    val request = ImageRequest.Builder(context).data(before).build()
++    val request2 = ImageRequest.Builder(context).data(after).build()
++
++    val imagePainter = rememberImagePainter(
++        request = request, imageLoader = imageLoader
++    )
++
++    val imagePainter2 = rememberImagePainter(
++        request = request, imageLoader = imageLoader
++    )
++
++    var beforeBitmap by remember {
++        mutableStateOf<Bitmap?>(null)
+     }
+ 
+-    val afterBitmapState = rememberSaveable {
+-        mutableStateOf<ImageBitmap?>(null)
++    var afterBitmap by remember {
++        mutableStateOf<Bitmap?>(null)
+     }
+ 
+-    LaunchedEffect(Unit) {
+-            val beforeBitmap =
+-                getImageAsBitmap("https://images.dog.ceo/breeds/saluki/n02091831_3400.jpg", context)
++
++    LaunchedEffect(key1 = imagePainter) {
++
++        Log.d("ImageBeforeAfter", "CALL LAUNCHED EFFECT")
++
++        if (beforeBitmap == null) {
++            launch {
++
++                val result = (imageLoader.execute(request) as SuccessResult).drawable
+ 
+-            val afterBitmap =
+-                getImageAsBitmap("https://blurha.sh/ea9e499f8080ce9956a8.jpg", context)
++                /*val vibrant = Palette.from(bitmap)
++                    .generate()
++                    .getVibrantolor(defaultColor)
++                        */
+ 
+-            beforeBitmapState.value = beforeBitmap?.asImageBitmap()
+-            afterBitmapState.value = afterBitmap?.asImageBitmap()
++                beforeBitmap = (result as BitmapDrawable).bitmap
++            }
++        }
+     }
+ 
++    LaunchedEffect(key1 = imagePainter2) {
+ 
+-    val imageBefore = ImageBitmap.imageResource(
+-        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img
+-    )
++        Log.d("ImageBeforeAfter", "CALL LAUNCHED EFFECT")
++
++        if (afterBitmap == null) {
++            launch {
+ 
+-    val imageAfter = ImageBitmap.imageResource(
+-        LocalContext.current.resources, com.orlandev.icontent.R.drawable.img2
+-    )
++                val result = (imageLoader.execute(request2) as SuccessResult).drawable
++
++                /*val vibrant = Palette.from(bitmap)
++                    .generate()
++                    .getVibrantolor(defaultColor)
++                        */
++
++                afterBitmap = (result as BitmapDrawable).bitmap
++            }
++        }
++    }
+ 
+     val contentScale by remember { mutableStateOf(ContentScale.FillBounds) }
+ 
+-
+-
+-    if (beforeBitmapState.value != null && afterBitmapState.value != null) {
+-
++    if (afterBitmap != null && beforeBitmap != null) {
+         BeforeAfterImage(
+-            modifier = Modifier
+-                .shadow(1.dp, RoundedCornerShape(10.dp))
+-                .fillMaxWidth()
+-                .aspectRatio(4 / 3f),
+-            beforeImage = beforeBitmapState.value!!,
+-            afterImage = afterBitmapState.value!!,
++            modifier = modifier,
++            beforeImage = beforeBitmap!!.asImageBitmap(),
++            afterImage = afterBitmap!!.asImageBitmap(),
++            afterLabel = {},
++            beforeLabel = {},
+             contentScale = contentScale
+         )
+-
+     } else {
+-        Box(
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .height(200.dp), contentAlignment = Alignment.Center
+-        ) {
+-
+-            CircularProgressIndicator()
+-
++        Box(modifier = modifier, contentAlignment = Alignment.Center) {
++            loader()
+         }
+     }
+-
+-}
+-
+-internal fun getImageAsBitmap(url: String, context: Context): Bitmap? {
+-    var bitmap: Bitmap? = null
+-    val loader = ImageLoader(context)
+-    val requestBuilder = ImageRequest.Builder(context)
+-    val beforeRequest = requestBuilder.data(url).allowHardware(false) // Disable hardware bitmaps.
+-        .target { result ->
+-
+-            Log.d("ICOIL","RESULT FETCH IMAGE")
+-
+-            bitmap = (result as BitmapDrawable).bitmap
+-
+-        }.build()
+-
+-    //val result = (loader.execute(beforeRequest) as SuccessResult).drawable
+-
+-    val disposable = loader.enqueue(beforeRequest)
+-
+-    return bitmap
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/orlandev/ishowcontent/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.ishowcontent\n\nimport android.os.Bundle\nimport android.util.Log\nimport androidx.activity.ComponentActivity\nimport androidx.activity.compose.setContent\nimport androidx.compose.foundation.background\nimport androidx.compose.foundation.layout.*\nimport androidx.compose.foundation.lazy.LazyColumn\nimport androidx.compose.foundation.shape.RoundedCornerShape\nimport androidx.compose.material.MaterialTheme\nimport androidx.compose.material.Surface\nimport androidx.compose.material.Text\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.draw.clip\nimport androidx.compose.ui.graphics.Color\nimport androidx.compose.ui.text.style.TextOverflow\nimport androidx.compose.ui.unit.dp\nimport com.orlandev.icontent.IContent\nimport com.orlandev.icontent.components.*\nimport com.orlandev.icontent.components.carousel.CarouselContainer\nimport com.orlandev.icontent.components.carousel.CarouselModel\nimport com.orlandev.icontent.components.gallery.IGalleryStaggered\nimport com.orlandev.icontent.models.ContentModel\nimport com.orlandev.icontent.models.IContentType\nimport com.orlandev.icontent.utils.generateImageContentField\nimport com.orlandev.icontent.utils.toCarouselModelList\nimport com.orlandev.ishowcontent.ui.theme.IShowContentTheme\n\nclass MainActivity : ComponentActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        val context = this\n        setContent {\n            IShowContentTheme {\n                // A surface container using the 'background' color from the theme\n                Surface(\n                    modifier = Modifier.fillMaxSize(),\n                    color = androidx.compose.material3.MaterialTheme.colorScheme.background\n                ) {\n                    val contentText = ContentModel(\n                        field = \"This is a text using IContent\",\n                        typeI = IContentType.fromString(\"text\"),\n                        textStyle = MaterialTheme.typography.h1\n                    )\n                    val contentHtmlText = ContentModel(\n                        field = \"Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\\\"https://github.com/orlandev/icontent\\\">IContent compoenent </a>\",\n                        typeI = IContentType.fromString(\"htmlText\"),\n                    )\n\n                    val contentTextExpandable = ContentModel(\n                        field = \"\"\" \n                        Qu'est-ce que le Lorem Ipsum? \n                        Le Lorem Ipsum est simplement du faux texte employé \n                        dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux \n                        texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme \n                        assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de \n                        texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique \n                        informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années \n                        1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus \n                        récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus \n                        PageMaker. \"\"\"\n                            .trimIndent(),\n                        typeI = IContentType.fromString(\"extendText\"),\n                    )\n\n                    val contentHtmlTextExpandable = ContentModel(\n                        field = \"\"\" \n                        Qu'est-ce <b>que</b> le Lorem Ipsum? \n                        Le Lorem Ipsum est simplement du faux texte employé \n                        dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux \n                        texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme \n                        assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de \n                        texte. Il n'a pas fait <strong> que survivre cinq siècles, mais s'est aussi adapté à la bureautique \n                        informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années \n                        1960 grâce à la vente de feuilles</strong> Letraset contenant des passages du Lorem Ipsum, et, plus \n                        récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus \n                        PageMaker. \"\"\"\n                            .trimIndent(),\n                        typeI = IContentType.fromString(\"extendHtmlText\"),\n                    )\n\n                    val contentPano =\n                        \"https://cdn.pixabay.com/photo/2017/06/08/15/39/winter-2383930_960_720.jpg\".generateImageContentField(\n                            blurHash = \"|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[\",\n                            type = IContentType.fromString(\"pano\")\n                        ).copy(\n                            contextActivity = context\n                        )\n\n                    val contentImage =\n                        \"https://blurha.sh/assets/images/img4.jpg\".generateImageContentField(\"LKO2?U%2Tw=w]~RBVZRi};RPxuwH\")\n                            .copy(noImageFound = R.drawable.no_image)\n\n\n                    val testUrl =\n                        \"https://blurha.sh/assets/images/img4.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img3.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img1.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]https://blurha.sh/assets/images/img2.jpg[!]LKO2?U%2Tw=w]~RBVZRi};RPxuwH[!]\"\n\n\n                    val carouselWithText = listOf<CarouselModel>(\n                        CarouselModel(\n                            id = 0,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                        CarouselModel(\n                            id = 1,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                        CarouselModel(\n                            id = 2,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                        CarouselModel(\n                            id = 3,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                        CarouselModel(\n                            id = 4,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                        CarouselModel(\n                            id = 5,\n                            image = contentImage,\n                            title = \"This is the title\",\n                            subtitle = \"This is the subtitle\",\n                        ),\n                    )\n\n                    val carouselContent = ContentModel(\n                        field = testUrl,\n                        typeI = IContentType.fromString(\"carousel\")\n                    )\n\n                    val contentVideo = ContentModel(\n                        field = \"https://youtu.be/qvDo0SKR8-k\",\n                        typeI = IContentType.fromString(\"video\"),\n                    )\n\n                    val listImages=testUrl.toCarouselModelList().map { it.image }\n\n                    LazyColumn(\n                        modifier = Modifier.fillMaxSize(),\n                        verticalArrangement = Arrangement.spacedBy(8.dp)\n                    ) {\n\n                        item {\n                            ImageBeforeAfter(before = \"\", after = \"\")\n                        }\n\n                        item {\n                            MarqueeText(\n                                text = \"This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w\",\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .padding(horizontal = 8.dp),\n                                overflow = TextOverflow.Ellipsis,\n                                gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(\n                                    alpha = 0.9f\n                                )\n                            )\n\n                        }\n\n                        item {\n                            RatingReviewsBar(\n                                siteReview = \"Califica este sitio\",\n                                shareOption = \"Comparte tu opinion con otros usuarios\",\n                                comment = \"Deja tu comentario...\",\n                                buttonText = \"Publicar\",\n                                titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,\n                                subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,\n                                onCommentTextFieldFocusChanged = {},\n                                onUserReview = { stars, comment ->\n                                    Log.d(\"Review\", \"$stars - $comment\")\n\n                                },\n                                activeColor = Color.Red\n                            )\n                        }\n\n                        item {\n\n                            Box(\n                                modifier = Modifier\n                                    .height(200.dp)\n                                    .fillMaxWidth()\n                                    .clip(RoundedCornerShape(20.dp))\n                                    .background(Color.White)\n                            ) {\n                                IGradientEffect(\n                                    backgroundColor = Color.Black,\n                                    align = GradientAlignment.Start\n                                )\n                            }\n\n                        }\n\n\n                        item {\n\n                            Box(\n                                modifier = Modifier\n                                    .height(200.dp)\n                                    .fillMaxWidth()\n                                    .clip(RoundedCornerShape(20.dp))\n                                    .background(Color.White)\n                            ) {\n                                IGradientEffect(\n                                    backgroundColor = Color.Black, alphaValue = 0.7f,\n                                    align = GradientAlignment.Center\n                                )\n                            }\n\n                        }\n\n                        item {\n\n                            Box(\n                                modifier = Modifier\n                                    .height(200.dp)\n                                    .fillMaxWidth()\n                                    .clip(RoundedCornerShape(20.dp))\n                                    .background(Color.White)\n                            ) {\n                                IGradientEffect(\n                                    backgroundColor = Color.Black,\n                                    align = GradientAlignment.End\n                                )\n                            }\n\n                        }\n\n                        //item using a box container of a gradient effect vertically\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .height(200.dp)\n                                    .fillMaxWidth()\n                                    .clip(RoundedCornerShape(20.dp))\n                                    .background(Color.White)\n                            ) {\n                                IGradientEffect(\n                                    backgroundColor = Color.Black,\n                                    orientation = GradientEffectOrientation.Horizontally,\n                                    align = GradientAlignment.Center\n                                )\n                            }\n                        }\n\n                        //item using a box container of a gradient effect orientation horizontally\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .height(200.dp)\n                                    .fillMaxWidth()\n                                    .clip(RoundedCornerShape(20.dp))\n                                    .background(Color.White)\n                            ) {\n                                IGradientEffect(\n                                    backgroundColor = Color.Black,\n                                    orientation = GradientEffectOrientation.Horizontally,\n                                    align = GradientAlignment.Start\n                                )\n                            }\n                        }\n\n                        item {\n                            ActionButtonsBar(strokeColor = Color.Red, urlEnable = false) { btnEvents ->\n                                when (btnEvents) {\n                                    ActionButtonUiEvent.NavigateToMap -> {\n                                        Log.d(\"NavigateToMap\", \"NavigateToMap Event\")\n                                    }\n                                    ActionButtonUiEvent.OpenUrl -> {\n                                        Log.d(\"OpenUrl\", \"OpenUrl Event\")\n                                    }\n\n                                    ActionButtonUiEvent.Share -> {\n                                        Log.d(\"Share\", \"Share Event\")\n                                    }\n                                    is ActionButtonUiEvent.TextToSpeech -> {\n                                        Log.d(\"TextToSpeech\", \"TextToSpeech Event\")\n                                    }\n                                }\n                            }\n                        }\n                        \n                        item { \n                            Text(text = \"Gallery\")\n                        }\n                        \n                        item {\n                            IContent(\n                                contentModel = contentText,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                            )\n                        }\n\n\n                        item {\n                            IContent(\n                                contentModel = contentHtmlTextExpandable,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                            )\n                        }\n                        item {\n                            IContent(\n                                contentModel = contentHtmlTextExpandable,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                            )\n                        }\n\n                        item {\n                            IContent(\n                                contentModel = contentHtmlText,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                            )\n                        }\n\n                        item {\n                            IContent(\n                                contentModel = contentTextExpandable,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                            )\n                        }\n                        item {\n                            IGalleryStaggered(imageContentList = listImages)\n                        }\n\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            ) {\n                                IContent(\n                                    contentModel = carouselContent,\n                                    modifier = Modifier\n                                        .fillMaxSize()\n                                )\n                            }\n                        }\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            ) {\n                                IContent(\n                                    contentModel = carouselContent,\n                                    modifier = Modifier\n                                        .fillMaxSize()\n                                )\n                            }\n                        }\n\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            ) {\n                                CarouselContainer(\n                                    carouselDataList = carouselWithText,\n                                    addGradient = true,\n                                    onCarouselItemClick = {})\n                            }\n                        }\n                        item {\n                            Box(\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            ) {\n                                CarouselContainer(\n                                    carouselDataList = carouselWithText,\n                                    addGradient = true,\n                                    onCarouselItemClick = {})\n                            }\n                        }\n\n                        item {\n\n                            IContent(\n                                contentModel = contentPano,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            )\n                        }\n                        item {\n\n                            IContent(\n                                contentModel = contentImage,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            )\n                        }\n                        item {\n                            IContent(\n                                contentModel = contentVideo,\n                                modifier = Modifier\n                                    .fillMaxWidth()\n                                    .height(200.dp)\n                            )\n                        }\n\n                    }\n                }\n            }\n        }\n    }\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/orlandev/ishowcontent/MainActivity.kt b/app/src/main/java/com/orlandev/ishowcontent/MainActivity.kt
+--- a/app/src/main/java/com/orlandev/ishowcontent/MainActivity.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/app/src/main/java/com/orlandev/ishowcontent/MainActivity.kt	(date 1668594096784)
+@@ -154,7 +154,7 @@
+                     ) {
+ 
+                         item {
+-                            ImageBeforeAfter(before = "", after = "")
++                           
+                         }
+ 
+                         item {
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\n    ext {\n        compileSdk = 33\n        minSdk = 21\n        targetSdk = 33\n\n        compose_bom = '2022.10.00'\n        compose_compiler = '1.3.2'\n\n    }\n    repositories {\n        google()\n    }\n}// Top-level build file where you can add configuration options common to all sub-projects/modules.\nplugins {\n    id 'com.android.application' version '7.3.1' apply false\n    id 'com.android.library' version '7.3.1' apply false\n    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false\n}\n\ntask clean(type: Delete) {\n    delete rootProject.buildDir\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/build.gradle	(date 1668593682017)
+@@ -4,7 +4,7 @@
+         minSdk = 21
+         targetSdk = 33
+ 
+-        compose_bom = '2022.10.00'
++        compose_bom = '2022.11.00'
+         compose_compiler = '1.3.2'
+ 
+     }
+Index: icontent/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    id 'com.android.library'\n    id 'org.jetbrains.kotlin.android'\n    id 'maven-publish'\n}\n\nandroid {\n    compileSdk rootProject.compileSdk\n\n    defaultConfig {\n        minSdk rootProject.minSdk\n        targetSdk rootProject.targetSdk\n        consumerProguardFiles \"consumer-rules.pro\"\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_1_8\n        targetCompatibility JavaVersion.VERSION_1_8\n    }\n\n    kotlinOptions {\n        jvmTarget = '1.8'\n    }\n    buildFeatures {\n        compose true\n    }\n    composeOptions {\n        kotlinCompilerExtensionVersion compose_compiler\n    }\n    packagingOptions {\n        resources {\n            excludes += '/META-INF/{AL2.0,LGPL2.1}'\n        }\n    }\n    namespace 'com.orlandev.icontent'\n}\n\ndependencies {\n    implementation platform(\"androidx.compose:compose-bom:$compose_bom\")\n    implementation \"androidx.compose.ui:ui\"\n    implementation \"androidx.compose.foundation:foundation\"\n    implementation \"androidx.compose.ui:ui-tooling-preview\"\n    implementation \"androidx.compose.ui:ui-util\"\n    implementation \"androidx.compose.material:material\"\n    implementation \"androidx.compose.material3:material3\"\n    implementation \"androidx.compose.runtime:runtime\"\n    implementation \"androidx.compose.compiler:compiler:$compose_compiler\"\n    implementation \"androidx.compose.material:material-icons-core\"\n    implementation \"androidx.compose.material:material-icons-extended\"\n\n    //For use Before/After image component\n    implementation 'com.github.SmartToolFactory:Compose-Image:1.2.1'\n\n    //ImageBlurhash\n    implementation 'com.github.orlandev:compose-image-blurhash:2.1.0'\n\n    //Blurhash lib\n  //  implementation 'com.github.orlandev:blurhashkt:1.0.1-alpha05'\n\n    //Youtube extractor\n    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'\n\n    // Exoplayer (Video)\n    implementation \"com.google.android.exoplayer:exoplayer:2.16.1\"\n\n    //Rating Bar\n    implementation 'com.github.a914-gowtham:compose-ratingbar:1.2.3'\n\n    //PanoView\n    // Google VR SDK\n    implementation \"com.google.vr:sdk-base:1.180.0\"\n    implementation \"com.google.vr:sdk-panowidget:1.180.0\"\n\n    //To use Html or Markdown in Text jetpack compose component\n    implementation 'com.github.jeziellago:compose-markdown:0.3.1'\n\n\n    testImplementation 'junit:junit:4.13.2'\n\n}\n\nafterEvaluate {\n    publishing {\n        publications {\n            release(MavenPublication) {\n                from components.release\n                groupId = 'com.github.orlandev'\n                artifactId = 'icontent'\n                version = '1.2.0'\n            }\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/build.gradle b/icontent/build.gradle
+--- a/icontent/build.gradle	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/build.gradle	(date 1668593682020)
+@@ -67,7 +67,7 @@
+     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+ 
+     // Exoplayer (Video)
+-    implementation "com.google.android.exoplayer:exoplayer:2.16.1"
++    implementation "com.google.android.exoplayer:exoplayer:2.18.1"
+ 
+     //Rating Bar
+     implementation 'com.github.a914-gowtham:compose-ratingbar:1.2.3'
+@@ -92,7 +92,7 @@
+                 from components.release
+                 groupId = 'com.github.orlandev'
+                 artifactId = 'icontent'
+-                version = '1.2.0'
++                version = '1.2.8'
+             }
+         }
+     }
+Index: icontent/src/main/java/com/orlandev/icontent/IContent.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent\n\nimport androidx.compose.animation.ExperimentalAnimationApi\nimport androidx.compose.foundation.layout.height\nimport androidx.compose.material3.LocalTextStyle\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.unit.dp\nimport com.orlandev.icontent.components.*\nimport com.orlandev.icontent.components.carousel.CarouselContainer\nimport com.orlandev.icontent.models.ContentModel\nimport com.orlandev.icontent.models.IContentType\nimport com.orlandev.icontent.utils.toCarouselModelList\nimport kotlin.reflect.typeOf\n\n@OptIn(ExperimentalAnimationApi::class)\n@Composable\nfun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(200.dp)) {\n    when (contentModel.typeI) {\n        is IContentType.Text -> {\n            IText(\n                text = contentModel.field,\n                modifier = modifier,\n                style = contentModel.textStyle ?: LocalTextStyle.current\n            )\n        }\n        is IContentType.ExtendText -> {\n            IExtendText(\n                text = contentModel.field,\n                modifier = modifier,\n                style = contentModel.textStyle ?: LocalTextStyle.current\n            )\n        }\n        is IContentType.Image -> {\n            IImageBlur(\n                contentModel = contentModel,\n                modifier = modifier,\n                contentType = contentModel.typeI\n            )\n        }\n        is IContentType.Video -> {\n            //TODO(\" ADD VIDEO PROPERTIES\")\n            IVideoPlayer(modifier = modifier, url = contentModel.field)\n        }\n        is IContentType.Pano -> {\n            IPanoView(contentModel = contentModel, modifier = modifier)\n        }\n        is IContentType.HtmlText -> {\n            IHtmlText(\n                text = contentModel.field,\n                modifier = modifier,\n                style = contentModel.textStyle ?: LocalTextStyle.current\n            )\n        }\n\n        is IContentType.ExtendHtmlText -> {\n            IExtendHtmlText(\n                modifier = modifier,\n                text = contentModel.field,\n                style = contentModel.textStyle ?: LocalTextStyle.current\n            )\n        }\n        is IContentType.Carousel -> {\n            CarouselContainer(\n                modifier = modifier,\n                carouselDataList = contentModel.field.toCarouselModelList(),\n                onCarouselItemClick = {})\n        }\n        else -> {\n            TODO(\"CONTENT TYPE IS UNDEFINED - TYPE: ${contentModel.typeI}\")\n        }\n    }\n\n}\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/IContent.kt b/icontent/src/main/java/com/orlandev/icontent/IContent.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/IContent.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/IContent.kt	(date 1668564409457)
+@@ -61,11 +61,16 @@
+             )
+         }
+         is IContentType.Carousel -> {
+-            CarouselContainer(
+-                modifier = modifier,
++            CarouselContainer(modifier = modifier,
+                 carouselDataList = contentModel.field.toCarouselModelList(),
+                 onCarouselItemClick = {})
+         }
++        is IContentType.BeforeAfter -> {
++
++            ImageBeforeAfter(modifier = modifier, contentModel = contentModel)
++
++        }
++
+         else -> {
+             TODO("CONTENT TYPE IS UNDEFINED - TYPE: ${contentModel.typeI}")
+         }
+Index: icontent/src/main/java/com/orlandev/icontent/utils/BitmapUtils.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/utils/BitmapUtils.kt b/icontent/src/main/java/com/orlandev/icontent/utils/BitmapUtils.kt
+new file mode 100644
+--- /dev/null	(date 1668564409461)
++++ b/icontent/src/main/java/com/orlandev/icontent/utils/BitmapUtils.kt	(date 1668564409461)
+@@ -0,0 +1,30 @@
++package com.orlandev.icontent.utils
++
++import android.graphics.Bitmap
++import android.graphics.BitmapFactory
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.withContext
++import java.io.IOException
++import java.io.InputStream
++import java.net.HttpURLConnection
++import java.net.URL
++
++
++suspend fun getBitmapFromURL(strURL: String?): Bitmap? {
++    try {
++        val bitmap = withContext(Dispatchers.IO) {
++
++            val url = URL(strURL)
++            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
++            connection.doInput = true
++            connection.connect()
++            val input: InputStream = connection.inputStream
++            BitmapFactory.decodeStream(input)
++        }
++        return bitmap
++
++    } catch (e: IOException) {
++        e.printStackTrace()
++        return null
++    }
++}
+\ No newline at end of file
+Index: icontent/src/main/java/com/orlandev/icontent/components/IText.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent.components\n\nimport androidx.compose.material3.LocalTextStyle\nimport androidx.compose.material3.MaterialTheme\nimport androidx.compose.runtime.Composable\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.text.TextStyle\nimport dev.jeziellago.compose.markdowntext.MarkdownText\n\n//TODO - ADD FONTS AND MORE CONFIGURATIONS FOR TEXTS\n@Composable\nfun IText(\n    text: String, modifier: Modifier = Modifier, style: TextStyle = LocalTextStyle.current\n) {\n    androidx.compose.material3.Text(\n        text = text,\n        color = MaterialTheme.colorScheme.onBackground,\n        modifier = modifier,\n        style = style\n    )\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/components/IText.kt b/icontent/src/main/java/com/orlandev/icontent/components/IText.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/components/IText.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/components/IText.kt	(date 1668564409457)
+@@ -1,7 +1,6 @@
+ package com.orlandev.icontent.components
+ 
+ import androidx.compose.material3.LocalTextStyle
+-import androidx.compose.material3.MaterialTheme
+ import androidx.compose.runtime.Composable
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.text.TextStyle
+@@ -12,10 +11,9 @@
+ fun IText(
+     text: String, modifier: Modifier = Modifier, style: TextStyle = LocalTextStyle.current
+ ) {
+-    androidx.compose.material3.Text(
+-        text = text,
+-        color = MaterialTheme.colorScheme.onBackground,
+-        modifier = modifier,
+-        style = style
++
++    MarkdownText(
++        markdown = text, modifier = modifier, style = style
+     )
++
+ }
+Index: icontent/src/main/java/com/orlandev/icontent/components/IPanoView.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent.components\n\nimport android.app.Activity\nimport android.graphics.Bitmap\nimport android.graphics.drawable.BitmapDrawable\nimport androidx.compose.foundation.Image\nimport androidx.compose.runtime.Composable\nimport androidx.compose.runtime.LaunchedEffect\nimport androidx.compose.runtime.mutableStateOf\nimport androidx.compose.runtime.remember\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.layout.ContentScale\nimport androidx.compose.ui.platform.LocalContext\nimport androidx.compose.ui.viewinterop.AndroidView\nimport coil.ImageLoader\nimport coil.compose.rememberImagePainter\nimport coil.request.ImageRequest\nimport coil.request.SuccessResult\nimport com.google.vr.sdk.widgets.pano.VrPanoramaView\nimport com.ondev.blurhashkt.BlurhashDecoder\nimport com.orlandev.icontent.models.ContentModel\nimport com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER\nimport kotlinx.coroutines.launch\n\n\n/***\n * Google VR PanoView needs the activity as context..,.\n * for this we pass said context in the contentModel by passing\n * the context as a parameter we can put this component inside a Fragment\n */\n@Composable\nfun IPanoView(contentModel: ContentModel, modifier: Modifier=Modifier) {\n\n    val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)\n\n    val panoBitmap = remember {\n        mutableStateOf<Bitmap?>(null)\n    }\n\n    val imageUrl = imgRef[0] //Image URL\n    val blurhash = imgRef[1] //Blurhash\n\n    val context = contentModel.contextActivity ?: LocalContext.current as Activity\n\n    val imageLoader = ImageLoader(context)\n\n    val request = ImageRequest.Builder(context)\n        .data(imageUrl)\n        .build()\n\n    val imagePainter = rememberImagePainter(\n        request = request,\n        imageLoader = imageLoader\n    )\n\n    LaunchedEffect(key1 = imagePainter) {\n        launch {\n            try {\n\n                val result = (imageLoader.execute(request) as SuccessResult).drawable\n\n                /*val vibrant = Palette.from(bitmap)\n                    .generate()\n                    .getVibrantolor(defaultColor)\n                        */\n\n                panoBitmap.value = (result as BitmapDrawable).bitmap\n\n            } catch (e: Exception) {\n                e.printStackTrace()\n            }\n        }\n    }\n\n    //val blurhash = imgRef[1] //Blurhash\n    //val blurhash = \"LEHV6nWB2yk8pyo0adR*.7kCMdnj\"\n    val bitmapPlaceholder = BlurhashDecoder.decode(blurhash, 100, 50)\n\n    if (panoBitmap.value == null) {\n        Image(\n            painter = rememberImagePainter(bitmapPlaceholder),\n            modifier = modifier,\n            contentScale = ContentScale.Crop,\n            contentDescription = null\n        )\n    } else {\n        AndroidView(\n            {\n                VrPanoramaView(context).apply {\n                    val options = VrPanoramaView.Options()\n                    options.inputType = VrPanoramaView.Options.TYPE_MONO\n\n                    setInfoButtonEnabled(false)\n                    setFullscreenButtonEnabled(true)\n                    setStereoModeButtonEnabled(true)\n                    setTouchTrackingEnabled(true)\n\n                    loadImageFromBitmap(panoBitmap.value, options)\n                }\n            },\n            modifier = modifier\n        ) // Occupy the max size in the Compose UI tree\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/components/IPanoView.kt b/icontent/src/main/java/com/orlandev/icontent/components/IPanoView.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/components/IPanoView.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/components/IPanoView.kt	(date 1668564409457)
+@@ -2,15 +2,18 @@
+ 
+ import android.app.Activity
+ import android.graphics.Bitmap
++import android.graphics.BitmapFactory
+ import android.graphics.drawable.BitmapDrawable
++import androidx.annotation.DrawableRes
+ import androidx.compose.foundation.Image
+-import androidx.compose.runtime.Composable
+-import androidx.compose.runtime.LaunchedEffect
+-import androidx.compose.runtime.mutableStateOf
+-import androidx.compose.runtime.remember
++import androidx.compose.foundation.layout.Box
++import androidx.compose.material.CircularProgressIndicator
++import androidx.compose.runtime.*
++import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.layout.ContentScale
+ import androidx.compose.ui.platform.LocalContext
++import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.viewinterop.AndroidView
+ import coil.ImageLoader
+ import coil.compose.rememberImagePainter
+@@ -20,6 +23,7 @@
+ import com.ondev.blurhashkt.BlurhashDecoder
+ import com.orlandev.icontent.models.ContentModel
+ import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
++import com.orlandev.icontent.utils.getBitmapFromURL
+ import kotlinx.coroutines.launch
+ 
+ 
+@@ -37,39 +41,36 @@
+         mutableStateOf<Bitmap?>(null)
+     }
+ 
+-    val imageUrl = imgRef[0] //Image URL
++    val imageUrl = "https://ik.imagekit.io/6xgh00mrhaz/fixed_a1diPygsA.jpg" //Image URL
+     val blurhash = imgRef[1] //Blurhash
+ 
+-    val context = contentModel.contextActivity ?: LocalContext.current as Activity
++    val context = LocalContext.current as Activity
+ 
+     val imageLoader = ImageLoader(context)
+ 
+-    val request = ImageRequest.Builder(context)
+-        .data(imageUrl)
+-        .build()
++    val request = ImageRequest.Builder(context).data(imageUrl).build()
+ 
+     val imagePainter = rememberImagePainter(
+-        request = request,
+-        imageLoader = imageLoader
++        request = request, imageLoader = imageLoader
+     )
+ 
+-    LaunchedEffect(key1 = imagePainter) {
+-        launch {
+-            try {
++    LaunchedEffect(Unit) {
++
++        try {
+ 
+-                val result = (imageLoader.execute(request) as SuccessResult).drawable
++            val result = (imageLoader.execute(request) as SuccessResult).drawable
+ 
+-                /*val vibrant = Palette.from(bitmap)
+-                    .generate()
+-                    .getVibrantolor(defaultColor)
+-                        */
++            /*val vibrant = Palette.from(bitmap)
++                .generate()
++                .getVibrantolor(defaultColor)
++                    */
+ 
+-                panoBitmap.value = (result as BitmapDrawable).bitmap
++            panoBitmap.value = (result as BitmapDrawable).bitmap
+ 
+-            } catch (e: Exception) {
+-                e.printStackTrace()
+-            }
++        } catch (e: Exception) {
++            e.printStackTrace()
+         }
++
+     }
+ 
+     //val blurhash = imgRef[1] //Blurhash
+@@ -97,8 +98,92 @@
+ 
+                     loadImageFromBitmap(panoBitmap.value, options)
+                 }
+-            },
+-            modifier = modifier
++            }, modifier = modifier
+         ) // Occupy the max size in the Compose UI tree
+     }
+-}
+\ No newline at end of file
++}
++
++
++@Composable
++fun PanoView(imageResUrl: String, modifier: Modifier = Modifier, @DrawableRes localImage: Int) {
++
++    val context = LocalContext.current as Activity
++
++    var bitmap by remember {
++        mutableStateOf<Bitmap?>(null)
++    }
++
++    var isLoading by remember {
++        mutableStateOf(true)
++    }
++
++    LaunchedEffect(Unit) {
++        launch {
++            bitmap = getBitmapFromURL(imageResUrl)
++            isLoading = false
++        }
++    }
++
++    if (isLoading) {
++        //TODO MAKE LOADING EFFECT
++        Box(modifier = modifier, contentAlignment = Alignment.Center) {
++            CircularProgressIndicator()
++        }
++        return
++    }
++
++    if (bitmap == null) {
++        Image(
++            modifier = modifier,
++            painter = painterResource(id = localImage),
++            contentDescription = null,
++            contentScale = ContentScale.Crop
++        )
++        return
++    }
++
++    AndroidView(
++        {
++            VrPanoramaView(context).apply {
++                val options = VrPanoramaView.Options()
++                options.inputType = VrPanoramaView.Options.TYPE_MONO
++
++                setInfoButtonEnabled(false)
++                setFullscreenButtonEnabled(false)
++                setStereoModeButtonEnabled(false)
++                setTouchTrackingEnabled(false)
++
++                loadImageFromBitmap(bitmap, options)
++            }
++        }, modifier = modifier
++    ) // Occupy the max size in the Compose UI tree
++}
++
++@Composable
++fun PanoView(@DrawableRes imageRes: Int, modifier: Modifier = Modifier) {
++
++    val context = LocalContext.current as Activity
++
++    val bitmap: State<Bitmap> = remember {
++        derivedStateOf {
++            BitmapFactory.decodeResource(context.resources, imageRes)
++        }
++    }
++
++    AndroidView(
++        {
++            VrPanoramaView(context).apply {
++                val options = VrPanoramaView.Options()
++                options.inputType = VrPanoramaView.Options.TYPE_MONO
++
++                setInfoButtonEnabled(false)
++                setFullscreenButtonEnabled(false)
++                setStereoModeButtonEnabled(false)
++                setTouchTrackingEnabled(false)
++
++                loadImageFromBitmap(bitmap.value, options)
++            }
++        }, modifier = modifier
++    ) // Occupy the max size in the Compose UI tree
++
++}
+Index: icontent/src/main/java/com/orlandev/icontent/components/IExpandText.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent.components\n\nimport androidx.compose.animation.*\nimport androidx.compose.foundation.layout.Column\nimport androidx.compose.foundation.layout.fillMaxWidth\nimport androidx.compose.material.Icon\nimport androidx.compose.material.IconButton\nimport androidx.compose.material.Text\nimport androidx.compose.material.icons.Icons\nimport androidx.compose.material.icons.filled.KeyboardArrowDown\nimport androidx.compose.material.icons.filled.KeyboardArrowUp\nimport androidx.compose.material3.LocalTextStyle\nimport androidx.compose.material3.MaterialTheme\nimport androidx.compose.runtime.*\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\nimport com.orlandev.icontent.utils.smartTruncate\n\n\n\n/***\n *\n *  [IExtendText] is a component that allows to display a text adding the property of extending it or not in the form of an accordion.\n *  @param text Is a String containing text in HTML format or plain text.\n *  @param modifier Modifiers to control the appearance of the component, such as height, width, padding, etc.\n *  @param maxTextTruncate This parameter controls the amount of text to display, cutting the text to the suggested size and adding ...\n *  @param style Allows you to add a general style to the text\n *\n *  @author Orlando N. Rodriguez\n *\n */\n\n\n@OptIn(ExperimentalAnimationApi::class)\n@Composable\nfun IExtendText(\n    text: String,\n    modifier: Modifier,\n    maxTextTruncate: Int = 300,\n    style: androidx.compose.ui.text.TextStyle = LocalTextStyle.current,\n) {\n    var expanded by remember { mutableStateOf(false) }\n\n    Column(modifier = modifier, horizontalAlignment = Alignment.End) {\n        AnimatedContent(\n            modifier = Modifier.fillMaxWidth(),\n            targetState = expanded,\n            transitionSpec = {\n                // Compare the incoming number with the previous number.\n                if (expanded) {\n                    // If the target number is larger, it slides up and fades in\n                    // while the initial (smaller) number slides up and fades out.\n                    fadeIn() with\n                            fadeOut()\n                } else {\n                    // If the target number is smaller, it slides down and fades in\n                    // while the initial number slides down and fades out.\n                    fadeIn() with\n                            fadeOut()\n                }.using(\n                    // Disable clipping since the faded slide-in/out should\n                    // be displayed out of bounds.\n                    SizeTransform(clip = false)\n                )\n            }\n        ) { targetExpanded ->\n            Text(\n                modifier = Modifier.fillMaxWidth(),\n                text = if (targetExpanded) text else text.smartTruncate(\n                    max = maxTextTruncate\n                ),\n                color = MaterialTheme.colorScheme.onBackground,\n                style = style,\n            )\n        }\n        IconButton(onClick = { expanded = !expanded }) {\n            Icon(\n                if (!expanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,\n                contentDescription = \"\", tint = MaterialTheme.colorScheme.onBackground\n            )\n        }\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/components/IExpandText.kt b/icontent/src/main/java/com/orlandev/icontent/components/IExpandText.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/components/IExpandText.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/components/IExpandText.kt	(date 1668564409457)
+@@ -5,7 +5,6 @@
+ import androidx.compose.foundation.layout.fillMaxWidth
+ import androidx.compose.material.Icon
+ import androidx.compose.material.IconButton
+-import androidx.compose.material.Text
+ import androidx.compose.material.icons.Icons
+ import androidx.compose.material.icons.filled.KeyboardArrowDown
+ import androidx.compose.material.icons.filled.KeyboardArrowUp
+@@ -17,7 +16,6 @@
+ import com.orlandev.icontent.utils.smartTruncate
+ 
+ 
+-
+ /***
+  *
+  *  [IExtendText] is a component that allows to display a text adding the property of extending it or not in the form of an accordion.
+@@ -42,41 +40,37 @@
+     var expanded by remember { mutableStateOf(false) }
+ 
+     Column(modifier = modifier, horizontalAlignment = Alignment.End) {
+-        AnimatedContent(
+-            modifier = Modifier.fillMaxWidth(),
++        AnimatedContent(modifier = Modifier.fillMaxWidth(),
+             targetState = expanded,
+             transitionSpec = {
+                 // Compare the incoming number with the previous number.
+                 if (expanded) {
+                     // If the target number is larger, it slides up and fades in
+                     // while the initial (smaller) number slides up and fades out.
+-                    fadeIn() with
+-                            fadeOut()
++                    fadeIn() with fadeOut()
+                 } else {
+                     // If the target number is smaller, it slides down and fades in
+                     // while the initial number slides down and fades out.
+-                    fadeIn() with
+-                            fadeOut()
++                    fadeIn() with fadeOut()
+                 }.using(
+                     // Disable clipping since the faded slide-in/out should
+                     // be displayed out of bounds.
+                     SizeTransform(clip = false)
+                 )
+-            }
+-        ) { targetExpanded ->
+-            Text(
++            }) { targetExpanded ->
++            IText(
+                 modifier = Modifier.fillMaxWidth(),
+                 text = if (targetExpanded) text else text.smartTruncate(
+                     max = maxTextTruncate
+                 ),
+-                color = MaterialTheme.colorScheme.onBackground,
+                 style = style,
+             )
+         }
+         IconButton(onClick = { expanded = !expanded }) {
+             Icon(
+                 if (!expanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
+-                contentDescription = "", tint = MaterialTheme.colorScheme.onBackground
++                contentDescription = "",
++                tint = MaterialTheme.colorScheme.onBackground
+             )
+         }
+     }
+Index: icontent/src/main/java/com/orlandev/icontent/models/IContentType.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.orlandev.icontent.models\n\nsealed class IContentType() {\n    //TODO ( CHANGE TEXT TO A CLASS AND ADD TO THIS THE STYLE FOR THE TEXT )\n\n    companion object {\n        fun fromString(typeName: String): IContentType {\n            return when (typeName) {\n                \"text\" -> Text\n                \"htmlText\" -> HtmlText\n                \"image\" -> Image\n                \"video\" -> Video\n                \"extendText\" -> ExtendText\n                \"extendHtmlText\" -> ExtendHtmlText\n                \"pano\" -> Pano\n                \"carousel\" -> Carousel\n                else -> Undefined\n            }\n        }\n    }\n\n    object Text : IContentType()\n    object HtmlText : IContentType()\n    object ExtendHtmlText : IContentType()\n    object ExtendText : IContentType()\n    object Image : IContentType()\n    object Video : IContentType()\n    object Pano : IContentType()\n    object Carousel : IContentType()\n    object BeforeAfter : IContentType()\n    object Undefined : IContentType()\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/icontent/src/main/java/com/orlandev/icontent/models/IContentType.kt b/icontent/src/main/java/com/orlandev/icontent/models/IContentType.kt
+--- a/icontent/src/main/java/com/orlandev/icontent/models/IContentType.kt	(revision fb51394b2dd09a4f833a1685071bb0b3a23b7ce3)
++++ b/icontent/src/main/java/com/orlandev/icontent/models/IContentType.kt	(date 1668564409461)
+@@ -14,6 +14,7 @@
+                 "extendHtmlText" -> ExtendHtmlText
+                 "pano" -> Pano
+                 "carousel" -> Carousel
++                "beforeAfter" -> BeforeAfter
+                 else -> Undefined
+             }
+         }
