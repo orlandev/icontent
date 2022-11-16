@@ -1,7 +1,12 @@
 package com.orlandev.icontent.utils
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -10,21 +15,13 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-suspend fun getBitmapFromURL(strURL: String?): Bitmap? {
-    try {
-        val bitmap = withContext(Dispatchers.IO) {
-
-            val url = URL(strURL)
-            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-            val input: InputStream = connection.inputStream
-            BitmapFactory.decodeStream(input)
-        }
-        return bitmap
-
-    } catch (e: IOException) {
-        e.printStackTrace()
-        return null
-    }
+suspend fun getCoilBitmap(ctx: Context, url: String): Bitmap {
+    val loading = ImageLoader(ctx)
+    val request = ImageRequest.Builder(ctx)
+        .allowConversionToBitmap(true)
+        .allowHardware(false)
+        .data(url)
+        .build()
+    val result = (loading.execute(request) as SuccessResult).drawable
+    return (result as BitmapDrawable).bitmap
 }

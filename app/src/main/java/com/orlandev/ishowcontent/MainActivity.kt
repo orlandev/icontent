@@ -148,7 +148,7 @@ class MainActivity : ComponentActivity() {
 
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
 
                         val contentBeforeAfter = ContentModel(

@@ -1,6 +1,8 @@
 package com.orlandev.icontent
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
@@ -11,7 +13,6 @@ import com.orlandev.icontent.components.carousel.CarouselContainer
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.toCarouselModelList
-import kotlin.reflect.typeOf
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -43,7 +44,11 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
             IVideoPlayer(modifier = modifier, url = contentModel.field)
         }
         is IContentType.Pano -> {
-            IPanoView(contentModel = contentModel, modifier = modifier)
+            IPanoView(
+                contentModel = contentModel, modifier = modifier
+                    .fillMaxWidth()
+
+            )
         }
         is IContentType.HtmlText -> {
             IHtmlText(
