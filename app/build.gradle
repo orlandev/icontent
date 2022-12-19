@@ -5,9 +5,10 @@ plugins {
 
 android {
     compileSdk rootProject.compileSdk
+    namespace 'com.orlandev.ishowcontent'
 
     defaultConfig {
-        applicationId "com.orlandev.ishowcontent"
+
         minSdk rootProject.minSdk
         targetSdk rootProject.targetSdk
         versionCode 1
@@ -43,7 +44,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
-    namespace 'com.orlandev.ishowcontent'
+
 }
 
 dependencies {

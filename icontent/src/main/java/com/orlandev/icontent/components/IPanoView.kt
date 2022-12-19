@@ -35,7 +35,7 @@ fun IPanoView(
     setStereoModeButtonEnabled: Boolean = true,
     setTouchTrackingEnabled: Boolean = true
 ) {
-
+  // TODO REFACTOR MODEL DATA
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 
     val panoBitmap = remember {

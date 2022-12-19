@@ -24,6 +24,8 @@ import kotlin.math.ceil
  * limitations under the License.
  */
 
+
+@Deprecated(message = "Change this for use a LazyGrid in Compose")
 @Composable
 fun StaggeredVerticalGrid(
     modifier: Modifier = Modifier,
