@@ -24,7 +24,7 @@ IContent is a library that allows you to generically load content into a Composa
 
 - Add in project dependencies 
  
-  ```implementation 'com.github.orlandev:icontent:1.0.70'``` 
+  ```implementation 'com.github.orlandev:icontent:1.3.1'``` 
 
 ## Who is using this library
 Inmersoft Guides: This library is being used in the projects they belong to to the line of "Digital Interactive Guides" belonging to the Inmersoft Development Group.
