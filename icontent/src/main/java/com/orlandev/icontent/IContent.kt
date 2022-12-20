@@ -1,7 +1,6 @@
 package com.orlandev.icontent
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LocalTextStyle
@@ -45,26 +44,11 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
         }
         is IContentType.Pano -> {
             IPanoView(
-                contentModel = contentModel, modifier = modifier
-                    .fillMaxWidth()
-
-            )
-        }
-        is IContentType.HtmlText -> {
-            IHtmlText(
-                text = contentModel.field,
-                modifier = modifier,
-                style = contentModel.textStyle ?: LocalTextStyle.current
+                contentModel = contentModel,
+                modifier = modifier.fillMaxWidth()
             )
         }
 
-        is IContentType.ExtendHtmlText -> {
-            IExtendHtmlText(
-                modifier = modifier,
-                text = contentModel.field,
-                style = contentModel.textStyle ?: LocalTextStyle.current
-            )
-        }
         is IContentType.Carousel -> {
             CarouselContainer(modifier = modifier,
                 carouselDataList = contentModel.field.toCarouselModelList(),

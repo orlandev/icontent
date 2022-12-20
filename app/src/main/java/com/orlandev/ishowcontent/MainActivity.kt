@@ -7,7 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -46,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     )
                     val contentHtmlText = ContentModel(
                         field = "Hello <b>World</b>. This <i><strike>text</strike>sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href=\"https://github.com/orlandev/icontent\">IContent compoenent </a>",
-                        typeI = IContentType.fromString("htmlText"),
+                        typeI = IContentType.fromString("text"),
                     )
 
                     val contentTextExpandable = ContentModel(
@@ -76,7 +78,7 @@ class MainActivity : ComponentActivity() {
                         1960 grâce à la vente de feuilles</strong> Letraset contenant des passages du Lorem Ipsum, et, plus 
                         récemment, par son <i>inclusion dans des applications de mise en page de texte</i>, comme Aldus 
                         PageMaker. """.trimIndent(),
-                        typeI = IContentType.fromString("extendHtmlText"),
+                        typeI = IContentType.fromString("extendText"),
                     )
 
                     val contentPano =
@@ -147,7 +149,9 @@ class MainActivity : ComponentActivity() {
                     val listImages=testUrl.toCarouselModelList().map { it.image }
 
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(8.dp),
                         verticalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
 
@@ -181,109 +185,114 @@ class MainActivity : ComponentActivity() {
                         }
 
                         item {
-                            RatingReviewsBar(
-                                siteReview = "Califica este sitio",
-                                shareOption = "Comparte tu opinion con otros usuarios",
-                                comment = "Deja tu comentario...",
-                                buttonText = "Publicar",
-                                titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,
-                                subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                                onCommentTextFieldFocusChanged = {},
-                                onUserReview = { stars, comment ->
-                                    Log.d("Review", "$stars - $comment")
+                            Card(modifier = Modifier) {
+                                RatingReviewsBar(
+                                    siteReview = "Califica este sitio",
+                                    shareOption = "Comparte tu opinion con otros usuarios",
+                                    comment = "Deja tu comentario...",
+                                    buttonText = "Publicar",
+                                    titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,
+                                    subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                                    onCommentTextFieldFocusChanged = {},
+                                    onUserReview = { stars, comment ->
+                                        Log.d("Review", "$stars - $comment")
 
-                                },
-                                activeColor = Color.Red
-                            )
-                        }
-
-                        item {
-
-                            Box(
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(Color.White)
-                            ) {
-                                IGradientEffect(
-                                    backgroundColor = Color.Black, align = GradientAlignment.Start
-                                )
-                            }
-
-                        }
-
-
-                        item {
-
-                            Box(
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(Color.White)
-                            ) {
-                                IGradientEffect(
-                                    backgroundColor = Color.Black,
-                                    alphaValue = 0.7f,
-                                    align = GradientAlignment.Center
-                                )
-                            }
-
-                        }
-
-                        item {
-
-                            Box(
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(Color.White)
-                            ) {
-                                IGradientEffect(
-                                    backgroundColor = Color.Black, align = GradientAlignment.End
-                                )
-                            }
-
-                        }
-
-                        //item using a box container of a gradient effect vertically
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(Color.White)
-                            ) {
-                                IGradientEffect(
-                                    backgroundColor = Color.Black,
-                                    orientation = GradientEffectOrientation.Horizontally,
-                                    align = GradientAlignment.Center
-                                )
-                            }
-                        }
-
-                        //item using a box container of a gradient effect orientation horizontally
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .background(Color.White)
-                            ) {
-                                IGradientEffect(
-                                    backgroundColor = Color.Black,
-                                    orientation = GradientEffectOrientation.Horizontally,
-                                    align = GradientAlignment.Start
+                                    },
+                                    activeColor = Color.Red
                                 )
                             }
                         }
 
                         item {
-                            ActionButtonsBar(strokeColor = Color.Red, urlEnable = false) { btnEvents ->
+
+                            val cmod = Modifier
+                                .width(200.dp)
+                                .fillMaxHeight()
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color.White)
+
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                            ) {
+                                item {
+
+                                    Box(
+                                        modifier = cmod
+                                    ) {
+                                        IGradientEffect(
+                                            backgroundColor = Color.Black,
+                                            align = GradientAlignment.Start
+                                        )
+                                    }
+
+                                }
+
+
+                                item {
+
+                                    Box(
+                                        modifier = cmod
+                                    ) {
+                                        IGradientEffect(
+                                            backgroundColor = Color.Black,
+                                            alphaValue = 0.7f,
+                                            align = GradientAlignment.Center
+                                        )
+                                    }
+
+                                }
+
+                                item {
+
+                                    Box(
+                                        modifier = cmod
+                                    ) {
+                                        IGradientEffect(
+                                            backgroundColor = Color.Black,
+                                            align = GradientAlignment.End
+                                        )
+                                    }
+
+                                }
+
+                                //item using a box container of a gradient effect vertically
+                                item {
+                                    Box(
+                                        modifier = cmod
+                                    ) {
+                                        IGradientEffect(
+                                            backgroundColor = Color.Black,
+                                            orientation = GradientEffectOrientation.Horizontally,
+                                            align = GradientAlignment.Center
+                                        )
+                                    }
+                                }
+
+                                //item using a box container of a gradient effect orientation horizontally
+                                item {
+                                    Box(
+                                        modifier = cmod
+                                    ) {
+                                        IGradientEffect(
+                                            backgroundColor = Color.Black,
+                                            orientation = GradientEffectOrientation.Horizontally,
+                                            align = GradientAlignment.Start
+                                        )
+                                    }
+                                }
+
+
+                            }
+                        }
+
+
+                        item {
+                            ActionButtonsBar(
+                                strokeColor = Color.Red,
+                                urlEnable = false
+                            ) { btnEvents ->
                                 when (btnEvents) {
                                     ActionButtonUiEvent.NavigateToMap -> {
                                         Log.d("NavigateToMap", "NavigateToMap Event")
