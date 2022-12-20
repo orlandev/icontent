@@ -32,5 +32,5 @@ Inmersoft Guides: This library is being used in the projects they belong to to t
 
 ## App using this library
 - Descubre Trinidad ( Inmersoft ) - https://play.google.com/store/apps/details?id=com.inmersoft.descubretrinidad 
-
+- Cementerio Santa Ifigenia (Santiago de Cuba) - https://play.google.com/store/apps/details?id=com.inmersoft.santaifigenialite
 ### You can see an example of use in the application module... 
