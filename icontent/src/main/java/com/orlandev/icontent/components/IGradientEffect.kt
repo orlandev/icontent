@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
  *  @param Vertically sets the Gradient vertically.
  *  @param Horizontally sets the Gradient horizontally.
  */
-sealed class GradientEffectOrientation() {
+sealed class GradientEffectOrientation {
     object Vertically : GradientEffectOrientation()
     object Horizontally : GradientEffectOrientation()
 }
@@ -25,7 +25,7 @@ sealed class GradientEffectOrientation() {
  *  @param Center Align the gradient to the center of the component.
  *  @param End Align the gradient to the end of the component.
  */
-sealed class GradientAlignment() {
+sealed class GradientAlignment {
     object Start : GradientAlignment()
     object Center : GradientAlignment()
     object End : GradientAlignment()

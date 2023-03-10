@@ -17,7 +17,7 @@ import com.google.vr.sdk.widgets.pano.VrPanoramaView
 import com.ondev.blurhashkt.BlurhashDecoder
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
-import com.orlandev.icontent.utils.getCoilBitmap
+import com.orlandev.icontent.utils.fetchImageAsCoilBitmap
 
 //TODO EXTRACT THIS COMPONENT TO A SEPARATED MODULE
 
@@ -35,7 +35,7 @@ fun IPanoView(
     setStereoModeButtonEnabled: Boolean = true,
     setTouchTrackingEnabled: Boolean = true
 ) {
-  // TODO REFACTOR MODEL DATA
+    // TODO REFACTOR MODEL DATA
     val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 
     val panoBitmap = remember {
@@ -47,13 +47,13 @@ fun IPanoView(
 
     val context = LocalContext.current as Activity
 
-    LaunchedEffect(Unit) {
-        panoBitmap.value = getCoilBitmap(context, imageUrl)
+    LaunchedEffect(contentModel) {
+        panoBitmap.value = fetchImageAsCoilBitmap(context, imageUrl)
     }
 
     //val blurhash = imgRef[1] //Blurhash
     //val blurhash = "LEHV6nWB2yk8pyo0adR*.7kCMdnj"
-    val bitmapPlaceholder = BlurhashDecoder.decode(blurhash, 100, 50)
+    val bitmapPlaceholder = BlurhashDecoder.decode(blurhash, 4, 3)
 
     Crossfade(targetState = panoBitmap.value, animationSpec = tween(800)) {
         if (it == null) {

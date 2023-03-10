@@ -1,6 +1,7 @@
 package com.orlandev.icontent.components
 
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -13,7 +14,10 @@ fun IText(
 ) {
 
     MarkdownText(
-        markdown = text, modifier = modifier, style = style
+        markdown = text,
+        modifier = modifier,
+        style = style,
+        color = MaterialTheme.colorScheme.onBackground
     )
 
 }

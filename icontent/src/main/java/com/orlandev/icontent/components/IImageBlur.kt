@@ -11,8 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import com.ondev.imageblurkt_lib.AsyncBlurImage
-import com.ondev.imageblurkt_lib.IBlurModel
-import com.orlandev.icontent.R
+import com.ondev.imageblurkt_lib.BlurModel
 import com.orlandev.icontent.models.ContentModel
 import com.orlandev.icontent.models.IContentType
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
@@ -34,7 +33,7 @@ fun IImageBlur(
         derivedStateOf {
             val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
             if (imgRef.size == 2 && contentType is IContentType.Image) {
-                IBlurModel(imageUrl = imgRef[0], blurHash = imgRef[1])
+                BlurModel(imageUrl = imgRef[0], blurHash = imgRef[1])
             } else {
                 null
             }
@@ -46,7 +45,7 @@ fun IImageBlur(
             AsyncBlurImage(
                 modifier = modifier,
                 data = currentData,
-                notImageFoundRes = contentModel.noImageFound ?: R.drawable.no_image,
+                notImageFoundRes = contentModel.noImageFound,
                 contentDescription = null,
                 contentScale = contentScale
             )

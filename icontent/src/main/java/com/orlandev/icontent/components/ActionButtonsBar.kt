@@ -87,7 +87,7 @@ fun ActionButtonsBar(
                     contentColor = strokeColor
                 ),
 
-            ) {
+                ) {
                 AnimatedContent(
                     targetState = isSelected,
                     transitionSpec = {

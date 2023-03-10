@@ -66,6 +66,3 @@ fun IContent(contentModel: ContentModel, modifier: Modifier = Modifier.height(20
     }
 
 }
-
-
-

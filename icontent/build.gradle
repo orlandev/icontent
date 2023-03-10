@@ -58,10 +58,7 @@ dependencies {
     implementation 'com.github.SmartToolFactory:Compose-Image:1.2.1'
 
     //ImageBlurhash
-    implementation 'com.github.orlandev:compose-image-blurhash:2.1.0'
-
-    //Blurhash lib
-  //  implementation 'com.github.orlandev:blurhashkt:1.0.1-alpha05'
+    implementation 'com.github.orlandev:compose-image-blurhash:2.1.2'
 
     //Youtube extractor
     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
@@ -92,7 +89,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.orlandev'
                 artifactId = 'icontent'
-                version = '1.3.2'
+                version = '1.3.3'
             }
         }
     }

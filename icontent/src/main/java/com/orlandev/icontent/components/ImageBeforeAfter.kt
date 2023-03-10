@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.ImageLoader
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.orlandev.icontent.models.ContentModel
@@ -57,12 +57,12 @@ fun ImageBeforeAfter(
     val request = ImageRequest.Builder(context).data(before).build()
     val request2 = ImageRequest.Builder(context).data(after).build()
 
-    val imagePainter = rememberImagePainter(
-        request = request, imageLoader = imageLoader
+    val imagePainter = rememberAsyncImagePainter(
+        model = request, imageLoader = imageLoader
     )
 
-    val imagePainter2 = rememberImagePainter(
-        request = request, imageLoader = imageLoader
+    val imagePainter2 = rememberAsyncImagePainter(
+        model = request, imageLoader = imageLoader
     )
 
     var beforeBitmap by remember {

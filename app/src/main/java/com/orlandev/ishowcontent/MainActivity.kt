@@ -85,8 +85,6 @@ class MainActivity : ComponentActivity() {
                         "https://ik.imagekit.io/6xgh00mrhaz/fixed_a1diPygsA.jpg".generateImageContentField(
                             blurHash = "|JED*ptRVsD%V[xt%0t6j[03o#RPM{RPoeodoeaf8^o#R%xZkBRjR.WDa#wsM_xu%Lx[kCM}RkfkI8Mxx]xutQj[V@ayoL%%t7RjRlMxRjs,ocoJs;xaRkRlR-bIs:oJWBROadbIoetRt7j]kCkDRNR*t7adadf5WCflj[",
                             type = IContentType.fromString("pano")
-                        ).copy(
-                            contextActivity = context
                         )
 
                     val contentImage =
