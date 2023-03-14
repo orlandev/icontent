@@ -12,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.components.IImageBlur
-import com.orlandev.icontent.models.ContentModel
-
+import com.orlandev.icontent.models.ContentUIModel
+@Deprecated(message = "This will be deleted in the future versions")
 @Composable
 fun GalleryItem(
     modifier: Modifier = Modifier,
-    imageContent: ContentModel,
+    imageContent: ContentUIModel,
     contentScale: ContentScale = ContentScale.Crop
 ) {
     Surface(
@@ -33,7 +33,7 @@ fun GalleryItem(
             IImageBlur(
                 modifier = Modifier
                     .fillMaxSize(),
-                contentModel = imageContent,
+                contentUIModel = imageContent,
                 contentType = imageContent.typeI,
                 contentScale = contentScale
             )

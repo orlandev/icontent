@@ -9,22 +9,15 @@ import coil.request.SuccessResult
 import coil.transform.CircleCropTransformation
 
 
-suspend fun fetchImageAsCoilBitmap(ctx: Context, url: String, cropCircular: Boolean = false): Bitmap? {
+suspend fun fetchImageAsBitmap(
+    ctx: Context, data: Any, cropCircular: Boolean = false
+): Bitmap? {
     return try {
         val loading = ImageLoader(ctx)
-        val request =
-            if (cropCircular)
-                ImageRequest.Builder(ctx)
-                    .allowConversionToBitmap(true)
-                    .allowHardware(false)
-                    .data(url)
-                    .transformations(CircleCropTransformation()).build()
-            else
-                ImageRequest.Builder(ctx)
-                    .allowConversionToBitmap(true)
-                    .allowHardware(false)
-                    .data(url)
-                    .build()
+        val request = if (cropCircular) ImageRequest.Builder(ctx).allowConversionToBitmap(true)
+            .allowHardware(false).data(data).transformations(CircleCropTransformation()).build()
+        else ImageRequest.Builder(ctx).allowConversionToBitmap(true).allowHardware(false).data(data)
+            .build()
 
         val result = (loading.execute(request) as SuccessResult).drawable
         (result as BitmapDrawable).bitmap

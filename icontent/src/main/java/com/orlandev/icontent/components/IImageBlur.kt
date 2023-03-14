@@ -10,18 +10,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
-import com.ondev.imageblurkt_lib.AsyncBlurImage
-import com.ondev.imageblurkt_lib.BlurModel
-import com.orlandev.icontent.models.ContentModel
-import com.orlandev.icontent.models.IContentType
+import com.ondev.imageblurkt_lib.AsyncImageBlurHash
+import com.ondev.imageblurkt_lib.ImageBlurHashModel
+import com.orlandev.icontent.models.ContentUIModel
+import com.orlandev.icontent.models.ContentUIType
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 
+@Deprecated(
+    message = "This component will be deleted in teh future."
+)
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun IImageBlur(
     modifier: Modifier,
-    contentModel: ContentModel,
-    contentType: IContentType,
+    contentUIModel: ContentUIModel,
+    contentType: ContentUIType,
     contentScale: ContentScale = ContentScale.Crop,
     addGradient: Boolean = false,
     gradientColor: Color = MaterialTheme.colorScheme.background,
@@ -31,9 +34,9 @@ fun IImageBlur(
 ) {
     val data = remember {
         derivedStateOf {
-            val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
-            if (imgRef.size == 2 && contentType is IContentType.Image) {
-                BlurModel(imageUrl = imgRef[0], blurHash = imgRef[1])
+            val imgRef = contentUIModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
+            if (imgRef.size == 2 && contentType is ContentUIType.Image) {
+                ImageBlurHashModel(data = imgRef[0], blurHash = imgRef[1])
             } else {
                 null
             }
@@ -42,21 +45,53 @@ fun IImageBlur(
 
     data.value?.let { currentData ->
         Box(modifier = Modifier.wrapContentSize()) {
-            AsyncBlurImage(
+            AsyncImageBlurHash(
                 modifier = modifier,
-                data = currentData,
-                notImageFoundRes = contentModel.noImageFound,
+                model = currentData,
+                notImageFoundRes = contentUIModel.noImageFound,
                 contentDescription = null,
                 contentScale = contentScale
             )
             if (addGradient) {
-                IGradientEffect(
+                GradientEffect(
                     backgroundColor = gradientColor,
                     orientation = orientation,
                     align = align,
                     alphaValue = alphaValue
                 )
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+fun ImageBlurHash(
+    modifier: Modifier,
+    model: ImageBlurHashModel,
+    notImageFound: Any,
+    contentScale: ContentScale = ContentScale.Crop,
+    addGradient: Boolean = false,
+    gradientColor: Color = MaterialTheme.colorScheme.background,
+    orientation: GradientEffectOrientation = GradientEffectOrientation.Vertically,
+    align: GradientAlignment = GradientAlignment.End,
+    alphaValue: Float = 0.9f
+) {
+    Box(modifier = Modifier.wrapContentSize()) {
+        AsyncImageBlurHash(
+            modifier = modifier,
+            model = model,
+            notImageFoundRes = notImageFound,
+            contentDescription = null,
+            contentScale = contentScale
+        )
+        if (addGradient) {
+            GradientEffect(
+                backgroundColor = gradientColor,
+                orientation = orientation,
+                align = align,
+                alphaValue = alphaValue
+            )
         }
     }
 }

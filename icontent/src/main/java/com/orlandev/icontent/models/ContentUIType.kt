@@ -1,10 +1,10 @@
 package com.orlandev.icontent.models
 
-sealed class IContentType {
+sealed class ContentUIType {
     //TODO ( CHANGE TEXT TO A CLASS AND ADD TO THIS THE STYLE FOR THE TEXT )
 
     companion object {
-        fun fromString(typeName: String): IContentType {
+        fun fromString(typeName: String): ContentUIType {
             return when (typeName) {
                 "text" -> Text
                 "extendText" -> ExtendText
@@ -18,12 +18,12 @@ sealed class IContentType {
         }
     }
 
-    object Text : IContentType()
-    object ExtendText : IContentType()
-    object Image : IContentType()
-    object Video : IContentType()
-    object Pano : IContentType()
-    object Carousel : IContentType()
-    object BeforeAfter : IContentType()
-    object Undefined : IContentType()
+    object Text : ContentUIType()
+    object ExtendText : ContentUIType()
+    object Image : ContentUIType()
+    object Video : ContentUIType()
+    object Pano : ContentUIType()
+    object Carousel : ContentUIType()
+    object BeforeAfter : ContentUIType()
+    object Undefined : ContentUIType()
 }

@@ -16,8 +16,8 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.request.SuccessResult
-import com.orlandev.icontent.models.ContentModel
-import com.orlandev.icontent.models.IContentType
+import com.orlandev.icontent.models.ContentUIModel
+import com.orlandev.icontent.models.ContentUIType
 import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import com.smarttoolfactory.image.beforeafter.BeforeAfterImage
 import kotlinx.coroutines.launch
@@ -26,11 +26,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun ImageBeforeAfter(
     modifier: Modifier,
-    contentModel: ContentModel,
+    contentUIModel: ContentUIModel,
 ) {
-    if (contentModel.typeI == IContentType.BeforeAfter) {
+    if (contentUIModel.typeI == ContentUIType.BeforeAfter) {
         //field is URL[!]URL
-        val imgRef = contentModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
+        val imgRef = contentUIModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 
         if (imgRef.size == 2) {
             ImageBeforeAfter(modifier = modifier, before = imgRef[0], after = imgRef[1], loader = {
@@ -38,7 +38,7 @@ fun ImageBeforeAfter(
             })
         }
     } else {
-        Log.e("ImageBeforeAfter", "WRONG CONTENT TYPE: ${contentModel.typeI} ")
+        Log.e("ImageBeforeAfter", "WRONG CONTENT TYPE: ${contentUIModel.typeI} ")
     }
 }
 

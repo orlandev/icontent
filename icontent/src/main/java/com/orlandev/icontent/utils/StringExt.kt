@@ -1,8 +1,23 @@
 package com.orlandev.icontent.utils
 
+import com.ondev.imageblurkt_lib.ImageBlurHashModel
 import com.orlandev.icontent.components.carousel.CarouselModel
-import com.orlandev.icontent.models.ContentModel
-import com.orlandev.icontent.models.IContentType
+import com.orlandev.icontent.models.ContentUIModel
+import com.orlandev.icontent.models.ContentUIType
+
+
+
+fun String.toImageBlurHashModel(): ImageBlurHashModel {
+    val imgRef = this.split(FIELD_IMAGE_BLUR_DELIMITIER)
+    val imgData = if (imgRef.size == 2) {
+        ImageBlurHashModel(data = imgRef.first(), blurHash = imgRef[1])
+    } else {
+        ImageBlurHashModel(data = "", blurHash = "")
+    }
+
+    return imgData
+
+}
 
 fun String.toCarouselModelList(): List<CarouselModel> {
     val splitData = this.split(FIELD_IMAGE_BLUR_DELIMITIER)
@@ -21,9 +36,9 @@ fun String.toCarouselModelList(): List<CarouselModel> {
 }
 
 fun String.generateImageContentField(
-    blurHash: String, type: IContentType = IContentType.fromString("image")
-): ContentModel {
-    return ContentModel(
+    blurHash: String, type: ContentUIType = ContentUIType.fromString("image")
+): ContentUIModel {
+    return ContentUIModel(
         field = "$this$FIELD_IMAGE_BLUR_DELIMITIER$blurHash", typeI = type
     )
 }

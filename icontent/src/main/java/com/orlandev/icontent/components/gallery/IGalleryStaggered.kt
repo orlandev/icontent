@@ -6,13 +6,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.orlandev.icontent.components.StaggeredVerticalGrid
-import com.orlandev.icontent.models.ContentModel
-
+import com.orlandev.icontent.models.ContentUIModel
+@Deprecated(message = "This will be deleted in the future versions")
 @Composable
 fun IGalleryStaggered(
     modifier: Modifier = Modifier,
     columnWidth: Dp = 190.dp,
-    imageContentList: List<ContentModel>
+    imageContentList: List<ContentUIModel>
 ) {
 
     //TODO REFACTOR THIS COMPONENT TO USE THE STAGGERED LAZY COLUM NATIVE OF JETPACK COMPOSE

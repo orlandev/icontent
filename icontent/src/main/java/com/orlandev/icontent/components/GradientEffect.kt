@@ -33,7 +33,7 @@ sealed class GradientAlignment {
 
 
 /**
- *  [IGradientEffect] Create a component with gradient and transparency which can be used on top of an image.
+ *  [GradientEffect] Create a component with gradient and transparency which can be used on top of an image.
  *  @param backgroundColor Main color of the gradient.
  *  @param orientation Gradient orientation; the default object [GradientAlignment] should be used for orientation.
  *  @param align Gradient alignment within the component; you must use the default object [GradientAlignment] for alignment.
@@ -41,7 +41,7 @@ sealed class GradientAlignment {
  *
  */
 @Composable
-fun IGradientEffect(
+fun GradientEffect(
     backgroundColor: Color,
     orientation: GradientEffectOrientation = GradientEffectOrientation.Vertically,
     align: GradientAlignment = GradientAlignment.End,

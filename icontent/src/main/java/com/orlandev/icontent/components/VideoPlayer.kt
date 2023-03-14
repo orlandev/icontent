@@ -33,7 +33,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 
 @ExperimentalAnimationApi
 @Composable
-fun IVideoPlayer(
+fun VideoPlayer(
     modifier: Modifier = Modifier,
     url: String,
     loadFromYoutube: Boolean = true,

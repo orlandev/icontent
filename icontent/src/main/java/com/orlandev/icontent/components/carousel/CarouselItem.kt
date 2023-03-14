@@ -16,16 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.orlandev.icontent.components.IGradientEffect
+import com.orlandev.icontent.components.GradientEffect
 import com.orlandev.icontent.components.IImageBlur
-import com.orlandev.icontent.models.ContentModel
+import com.orlandev.icontent.models.ContentUIModel
 
-
+@Deprecated(message = "This will be deleted in the future versions")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CarouselItem(
     modifier: Modifier = Modifier,
-    imageContent: ContentModel,
+    imageContent: ContentUIModel,
     title: String,
     subtitle: String,
     gradientColor: Color = MaterialTheme.colorScheme.background,
@@ -43,13 +43,13 @@ fun CarouselItem(
             IImageBlur(
                 modifier = Modifier
                     .fillMaxSize(),
-                contentModel = imageContent,
+                contentUIModel = imageContent,
                 contentType = imageContent.typeI,
                 contentScale = contentScale
 
             )
             if (addGradient)
-                IGradientEffect(backgroundColor = gradientColor)
+                GradientEffect(backgroundColor = gradientColor)
 
             Column(
                 modifier = Modifier

@@ -9,7 +9,7 @@ import dev.jeziellago.compose.markdowntext.MarkdownText
 
 //TODO - ADD FONTS AND MORE CONFIGURATIONS FOR TEXTS
 @Composable
-fun IText(
+fun HtmlText(
     text: String, modifier: Modifier = Modifier, style: TextStyle = LocalTextStyle.current
 ) {
 

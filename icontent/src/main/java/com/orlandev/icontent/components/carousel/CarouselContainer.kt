@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
-
+@Deprecated(message = "This will be deleted in the future versions")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CarouselContainer(
