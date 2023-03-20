@@ -1,4 +1,4 @@
-package com.orlandev.icontent
+package com.orlandev.icontent.components
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
