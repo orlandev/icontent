@@ -55,6 +55,7 @@ data class AudioContent(
  *  Use TtsAudioManager.showUi.value to Show or Hide the component in
  *  AnimatedVisibility
  *
+ *  issue: Do not put inside vertical lists
  *
  *
  */
@@ -340,7 +341,7 @@ object TtsAudioManager {
         nextTTS()
     }
 
-    fun play(textToSpeech: String) {
+    private fun play(textToSpeech: String) {
 
         if (!initialized) return
 

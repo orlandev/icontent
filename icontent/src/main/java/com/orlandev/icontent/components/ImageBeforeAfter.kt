@@ -33,7 +33,7 @@ fun ImageBeforeAfter(
         val imgRef = contentUIModel.field.split(FIELD_IMAGE_BLUR_DELIMITIER)
 
         if (imgRef.size == 2) {
-            ImageBeforeAfter(modifier = modifier, before = imgRef[0], after = imgRef[1], loader = {
+            ImageBeforeAfter(modifier = modifier, before = imgRef.first(), after = imgRef[1], loader = {
                 CircularProgressIndicator()
             })
         }
@@ -82,12 +82,6 @@ fun ImageBeforeAfter(
             launch {
 
                 val result = (imageLoader.execute(request) as SuccessResult).drawable
-
-                /*val vibrant = Palette.from(bitmap)
-                    .generate()
-                    .getVibrantolor(defaultColor)
-                        */
-
                 beforeBitmap = (result as BitmapDrawable).bitmap
             }
         }
@@ -101,11 +95,6 @@ fun ImageBeforeAfter(
             launch {
 
                 val result = (imageLoader.execute(request2) as SuccessResult).drawable
-
-                /*val vibrant = Palette.from(bitmap)
-                    .generate()
-                    .getVibrantolor(defaultColor)
-                        */
 
                 afterBitmap = (result as BitmapDrawable).bitmap
             }

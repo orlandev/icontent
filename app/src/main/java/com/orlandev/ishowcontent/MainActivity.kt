@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,15 +35,18 @@ import com.orlandev.icontent.components.carousel.CarouselModel
 import com.orlandev.icontent.components.gallery.IGalleryStaggered
 import com.orlandev.icontent.models.ContentUIModel
 import com.orlandev.icontent.models.ContentUIType
+import com.orlandev.icontent.utils.FIELD_IMAGE_BLUR_DELIMITIER
 import com.orlandev.icontent.utils.generateImageContentField
 import com.orlandev.icontent.utils.toCarouselModelList
 import com.orlandev.ishowcontent.ui.theme.IShowContentTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalLayoutApi::class, ExperimentalCoilApi::class)
+    @OptIn(ExperimentalCoilApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val context = this
+
+        TtsAudioManager.initialize(this@MainActivity, java.util.Locale.getDefault())
+
         setContent {
             IShowContentTheme {
                 // A surface container using the 'background' color from the theme
@@ -158,359 +163,391 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf("")
                     }
 
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(20.dp)
-                    ) {
+                    //TODO Add example for TTS system
 
-                        val contentBeforeAfter = ContentUIModel(
-                            field = "https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg[!]https://ik.imagekit.io/6xgh00mrhaz/after_3uqabisEN.jpg",
-                            typeI = ContentUIType.fromString("beforeAfter"),
-                        )
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(20.dp)
+                        ) {
 
-
-                        item {
-                            ImageBeforeAfter(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(4 / 3f),
-                                contentUIModel = contentBeforeAfter,
-                            )
-                        }
-
-                        item {
-                            CardImageSlider(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(250.dp),
-                                imageList = listOf(
-                                    ImageBlurHashModel(
-                                        blurHash = "@#$%TYU",
-                                        data = com.orlandev.icontent.R.drawable.img
-                                    ),
-                                    ImageBlurHashModel(
-                                        blurHash = "@#$%TYU",
-                                        data = com.orlandev.icontent.R.drawable.img
-                                    ),
-                                    ImageBlurHashModel(
-                                        blurHash = "@#$%TYU",
-                                        data = com.orlandev.icontent.R.drawable.img
-                                    ),
-                                    ImageBlurHashModel(
-                                        blurHash = "@#$%TYU",
-                                        data = com.orlandev.icontent.R.drawable.img
-                                    ),
-                                ),
-
-                                notImageFound = R.drawable.no_image,
-                                onPageClicked = {
-
-                                    clicked = it.toString()
-                                    Log.d("Clicked", "Page clicked : $it")
-
-                                }) {
-
-                                Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                                    GradientEffect(
-                                        backgroundColor = Color.Black,
-                                        align = GradientAlignment.Center
-                                    )
-                                    CardTextInfo(
-                                        title = "Orlando", subtitle = "Novas Rodriguez $clicked"
-                                    )
-                                }
-
-                            }
-                        }
-
-                        item {
-                            CardImageSlider(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(250.dp),
-                                imageList = listOf(
-                                    ImageBlurHashModel(
-                                        blurHash = "@#$%TYU",
-                                        data = com.orlandev.icontent.R.drawable.img
-                                    )
-                                ),
-                                notImageFound = R.drawable.no_image,
-                                onPageClicked = {
-                                    clicked = it.toString()
-                                    Log.d("Clicked", "Page clicked : $it")
-
-                                }) {
-
-                                Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                                    GradientEffect(
-                                        backgroundColor = Color.Black,
-                                        align = GradientAlignment.Center
-                                    )
-                                    CardTextInfo(
-                                        title = "Orlando", subtitle = "Novas Rodriguez $clicked"
-                                    )
-                                }
-
-                            }
-                        }
-
-
-                        item {
-                            MarqueeText(
-                                text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 8.dp),
-                                overflow = TextOverflow.Ellipsis,
-                                gradientEdgeColor = androidx.compose.material3.MaterialTheme.colorScheme.background.copy(
-                                    alpha = 0.9f
-                                )
+                            val contentBeforeAfter = ContentUIModel(
+                                field = "https://ik.imagekit.io/6xgh00mrhaz/after_3uqabisEN.jpg[!]https://ik.imagekit.io/6xgh00mrhaz/before_M6xdpfY7N.jpg",
+                                typeI = ContentUIType.fromString("beforeAfter"),
                             )
 
-                        }
 
-                        item {
-                            Card(modifier = Modifier) {
-                                RatingReviewsBar(
-                                    siteReview = "Califica este sitio",
-                                    shareOption = "Comparte tu opinion con otros usuarios",
-                                    comment = "Deja tu comentario...",
-                                    buttonText = "Publicar",
-                                    titleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.titleSmall,
-                                    subtitleCardTextStyle = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                                    onCommentTextFieldFocusChanged = {},
-                                    onUserReview = { stars, comment ->
-                                        Log.d("Review", "$stars - $comment")
-
-                                    },
-                                    activeColor = Color.Red
+                            item {
+                                ImageBeforeAfter(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .aspectRatio(4 / 3f),
+                                    contentUIModel = contentBeforeAfter,
                                 )
                             }
-                        }
+                            item {
+                                Column {
+                                    Button(onClick = {
+                                        TtsAudioManager.addTTS(
+                                            AudioContent(
 
-                        item {
-
-                            val cmod = Modifier
-                                .width(200.dp)
-                                .fillMaxHeight()
-                                .clip(RoundedCornerShape(20.dp))
-                                .background(Color.White)
-
-                            LazyRow(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            ) {
-                                item {
-
-                                    Box(
-                                        modifier = cmod
-                                    ) {
-                                        GradientEffect(
-                                            backgroundColor = Color.Black,
-                                            align = GradientAlignment.Start
+                                                imgUrl = contentBeforeAfter.field.split(
+                                                    FIELD_IMAGE_BLUR_DELIMITIER
+                                                ).first(),
+                                                title = "Title",
+                                                textToSpeech = "Esto es una prueba de TTS",
+                                            )
                                         )
+                                        TtsAudioManager.start()
+                                    }) {
+                                        Text(text = "Test TTS ")
                                     }
-
                                 }
+                            }
 
+                            item {
+                                CardImageSlider(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(250.dp),
+                                    imageList = listOf(
+                                        ImageBlurHashModel(
+                                            blurHash = "@#$%TYU",
+                                            data = com.orlandev.icontent.R.drawable.img
+                                        ),
+                                        ImageBlurHashModel(
+                                            blurHash = "@#$%TYU",
+                                            data = com.orlandev.icontent.R.drawable.img
+                                        ),
+                                        ImageBlurHashModel(
+                                            blurHash = "@#$%TYU",
+                                            data = com.orlandev.icontent.R.drawable.img
+                                        ),
+                                        ImageBlurHashModel(
+                                            blurHash = "@#$%TYU",
+                                            data = com.orlandev.icontent.R.drawable.img
+                                        ),
+                                    ),
 
-                                item {
+                                    notImageFound = R.drawable.no_image,
+                                    onPageClicked = {
 
-                                    Box(
-                                        modifier = cmod
-                                    ) {
+                                        clicked = it.toString()
+                                        Log.d("Clicked", "Page clicked : $it")
+
+                                    }) {
+
+                                    Box(modifier = Modifier, contentAlignment = Alignment.Center) {
                                         GradientEffect(
                                             backgroundColor = Color.Black,
-                                            alphaValue = 0.7f,
                                             align = GradientAlignment.Center
                                         )
-                                    }
-
-                                }
-
-                                item {
-
-                                    Box(
-                                        modifier = cmod
-                                    ) {
-                                        GradientEffect(
-                                            backgroundColor = Color.Black,
-                                            align = GradientAlignment.End
+                                        CardTextInfo(
+                                            title = "Orlando", subtitle = "Novas Rodriguez $clicked"
                                         )
                                     }
 
                                 }
+                            }
 
-                                //item using a box container of a gradient effect vertically
-                                item {
-                                    Box(
-                                        modifier = cmod
-                                    ) {
+                            item {
+                                CardImageSlider(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(250.dp),
+                                    imageList = listOf(
+                                        ImageBlurHashModel(
+                                            blurHash = "@#$%TYU",
+                                            data = com.orlandev.icontent.R.drawable.img
+                                        )
+                                    ),
+                                    notImageFound = R.drawable.no_image,
+                                    onPageClicked = {
+                                        clicked = it.toString()
+                                        Log.d("Clicked", "Page clicked : $it")
+
+                                    }) {
+
+                                    Box(modifier = Modifier, contentAlignment = Alignment.Center) {
                                         GradientEffect(
                                             backgroundColor = Color.Black,
-                                            orientation = GradientEffectOrientation.Horizontally,
                                             align = GradientAlignment.Center
                                         )
-                                    }
-                                }
-
-                                //item using a box container of a gradient effect orientation horizontally
-                                item {
-                                    Box(
-                                        modifier = cmod
-                                    ) {
-                                        GradientEffect(
-                                            backgroundColor = Color.Black,
-                                            orientation = GradientEffectOrientation.Horizontally,
-                                            align = GradientAlignment.Start
+                                        CardTextInfo(
+                                            title = "Orlando", subtitle = "Novas Rodriguez $clicked"
                                         )
                                     }
-                                }
 
-
-                            }
-                        }
-
-
-                        item {
-                            ActionButtonsBar(
-                                strokeColor = Color.Red, urlEnable = false
-                            ) { btnEvents ->
-                                when (btnEvents) {
-                                    ActionButtonUiEvent.NavigateToMap -> {
-                                        Log.d("NavigateToMap", "NavigateToMap Event")
-                                    }
-                                    ActionButtonUiEvent.OpenUrl -> {
-                                        Log.d("OpenUrl", "OpenUrl Event")
-                                    }
-
-                                    ActionButtonUiEvent.Share -> {
-                                        Log.d("Share", "Share Event")
-                                    }
-                                    is ActionButtonUiEvent.TextToSpeech -> {
-                                        Log.d("TextToSpeech", "TextToSpeech Event")
-                                    }
-                                    else -> {}
                                 }
                             }
-                        }
-
-                        item {
-                            Text(text = "Gallery")
-                        }
-
-                        item {
-                            ContentUI(
-                                contentUIModel = contentText, modifier = Modifier.fillMaxWidth()
-                            )
-                        }
 
 
-                        item {
-                            ContentUI(
-                                contentUIModel = contentHtmlTextExpandable,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-                        item {
-                            ContentUI(
-                                contentUIModel = contentHtmlTextExpandable,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
+                            item {
+                                MarqueeText(
+                                    text = "This is a marquee text kfjwef klw flwkfj lkwef klwef lkwjef lkwfej werw erwekrj werlkjwe rlkwejr wjr wejrwjrwljrw ljr wlkejr w",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 8.dp),
+                                    overflow = TextOverflow.Ellipsis,
+                                    gradientEdgeColor = MaterialTheme.colorScheme.background.copy(
+                                        alpha = 0.9f
+                                    )
+                                )
 
-                        item {
-                            ContentUI(
-                                contentUIModel = contentHtmlText, modifier = Modifier.fillMaxWidth()
-                            )
-                        }
+                            }
 
-                        item {
-                            ContentUI(
-                                contentUIModel = contentTextExpandable,
-                                modifier = Modifier.fillMaxWidth()
-                            )
-                        }
-                        item {
-                            IGalleryStaggered(imageContentList = listImages)
-                        }
+                            item {
+                                Card(modifier = Modifier) {
+                                    RatingReviewsBar(
+                                        siteReview = "Califica este sitio",
+                                        shareOption = "Comparte tu opinion con otros usuarios",
+                                        comment = "Deja tu comentario...",
+                                        buttonText = "Publicar",
+                                        titleCardTextStyle = MaterialTheme.typography.titleSmall,
+                                        subtitleCardTextStyle = MaterialTheme.typography.bodyMedium,
+                                        onCommentTextFieldFocusChanged = {},
+                                        onUserReview = { stars, comment ->
+                                            Log.d("Review", "$stars - $comment")
 
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            ) {
+                                        },
+                                        activeColor = Color.Red
+                                    )
+                                }
+                            }
+
+                            item {
+
+                                val cmod = Modifier
+                                    .width(200.dp)
+                                    .fillMaxHeight()
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .background(Color.White)
+
+                                LazyRow(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                ) {
+                                    item {
+
+                                        Box(
+                                            modifier = cmod
+                                        ) {
+                                            GradientEffect(
+                                                backgroundColor = Color.Black,
+                                                align = GradientAlignment.Start
+                                            )
+                                        }
+
+                                    }
+
+
+                                    item {
+
+                                        Box(
+                                            modifier = cmod
+                                        ) {
+                                            GradientEffect(
+                                                backgroundColor = Color.Black,
+                                                alphaValue = 0.7f,
+                                                align = GradientAlignment.Center
+                                            )
+                                        }
+
+                                    }
+
+                                    item {
+
+                                        Box(
+                                            modifier = cmod
+                                        ) {
+                                            GradientEffect(
+                                                backgroundColor = Color.Black,
+                                                align = GradientAlignment.End
+                                            )
+                                        }
+
+                                    }
+
+                                    //item using a box container of a gradient effect vertically
+                                    item {
+                                        Box(
+                                            modifier = cmod
+                                        ) {
+                                            GradientEffect(
+                                                backgroundColor = Color.Black,
+                                                orientation = GradientEffectOrientation.Horizontally,
+                                                align = GradientAlignment.Center
+                                            )
+                                        }
+                                    }
+
+                                    //item using a box container of a gradient effect orientation horizontally
+                                    item {
+                                        Box(
+                                            modifier = cmod
+                                        ) {
+                                            GradientEffect(
+                                                backgroundColor = Color.Black,
+                                                orientation = GradientEffectOrientation.Horizontally,
+                                                align = GradientAlignment.Start
+                                            )
+                                        }
+                                    }
+
+
+                                }
+                            }
+
+
+                            item {
+                                ActionButtonsBar(
+                                    strokeColor = Color.Red, urlEnable = false
+                                ) { btnEvents ->
+                                    when (btnEvents) {
+                                        ActionButtonUiEvent.NavigateToMap -> {
+                                            Log.d("NavigateToMap", "NavigateToMap Event")
+                                        }
+                                        ActionButtonUiEvent.OpenUrl -> {
+                                            Log.d("OpenUrl", "OpenUrl Event")
+                                        }
+
+                                        ActionButtonUiEvent.Share -> {
+                                            Log.d("Share", "Share Event")
+                                        }
+                                        is ActionButtonUiEvent.TextToSpeech -> {
+                                            Log.d("TextToSpeech", "TextToSpeech Event")
+                                        }
+                                        else -> {}
+                                    }
+                                }
+                            }
+
+                            item {
+                                Text(text = "Gallery")
+                            }
+
+                            item {
                                 ContentUI(
-                                    contentUIModel = carouselContent,
-                                    modifier = Modifier.fillMaxSize()
+                                    contentUIModel = contentText, modifier = Modifier.fillMaxWidth()
                                 )
                             }
-                        }
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            ) {
+
+
+                            item {
                                 ContentUI(
-                                    contentUIModel = carouselContent,
-                                    modifier = Modifier.fillMaxSize()
+                                    contentUIModel = contentHtmlTextExpandable,
+                                    modifier = Modifier.fillMaxWidth()
                                 )
                             }
-                        }
-
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            ) {
-                                CarouselContainer(carouselDataList = carouselWithText,
-                                    addGradient = true,
-                                    onCarouselItemClick = {})
+                            item {
+                                ContentUI(
+                                    contentUIModel = contentHtmlTextExpandable,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
                             }
-                        }
-                        item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            ) {
-                                CarouselContainer(carouselDataList = carouselWithText,
-                                    addGradient = true,
-                                    onCarouselItemClick = {})
+
+                            item {
+                                ContentUI(
+                                    contentUIModel = contentHtmlText,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
                             }
+
+                            item {
+                                ContentUI(
+                                    contentUIModel = contentTextExpandable,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }
+                            item {
+                                IGalleryStaggered(imageContentList = listImages)
+                            }
+
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                ) {
+                                    ContentUI(
+                                        contentUIModel = carouselContent,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                }
+                            }
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                ) {
+                                    ContentUI(
+                                        contentUIModel = carouselContent,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                }
+                            }
+
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                ) {
+                                    CarouselContainer(carouselDataList = carouselWithText,
+                                        addGradient = true,
+                                        onCarouselItemClick = {})
+                                }
+                            }
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                ) {
+                                    CarouselContainer(carouselDataList = carouselWithText,
+                                        addGradient = true,
+                                        onCarouselItemClick = {})
+                                }
+                            }
+
+                            item {
+
+                                ContentUI(
+                                    contentUIModel = contentPano,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                )
+                            }
+                            item {
+
+                                ContentUI(
+                                    contentUIModel = contentImage,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                )
+                            }
+                            item {
+                                ContentUI(
+                                    contentUIModel = contentVideo,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                )
+                            }
+
                         }
 
-                        item {
-
-                            ContentUI(
-                                contentUIModel = contentPano,
+                        if (TtsAudioManager.showUi.value) {
+                            TtsAudioUI(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(200.dp)
+                                    .align(Alignment.BottomCenter)
                             )
                         }
-                        item {
-
-                            ContentUI(
-                                contentUIModel = contentImage,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            )
-                        }
-                        item {
-                            ContentUI(
-                                contentUIModel = contentVideo,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                            )
-                        }
-
                     }
                 }
             }
