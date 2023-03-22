@@ -2,7 +2,6 @@ package com.orlandev.icontent.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -45,7 +44,7 @@ fun IImageBlur(
     }
 
     data.value?.let { currentData ->
-        Box(modifier = Modifier.wrapContentSize()) {
+        Box(modifier = Modifier.fillMaxSize()) {
             AsyncImageBlurHash(
                 modifier = modifier,
                 model = currentData,
