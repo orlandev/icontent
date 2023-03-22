@@ -1,6 +1,7 @@
 package com.orlandev.icontent.components
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -77,9 +78,9 @@ fun ImageBlurHash(
     align: GradientAlignment = GradientAlignment.End,
     alphaValue: Float = 0.9f
 ) {
-    Box(modifier = Modifier.wrapContentSize()) {
+    Box(modifier = modifier) {
         AsyncImageBlurHash(
-            modifier = modifier,
+            modifier = Modifier.fillMaxSize(),
             model = model,
             notImageFoundRes = notImageFound,
             contentDescription = null,
