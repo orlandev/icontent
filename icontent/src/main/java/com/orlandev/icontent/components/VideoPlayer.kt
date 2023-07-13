@@ -149,6 +149,6 @@ private fun playYoutubeUrl(context: Context, simpleExoPlayer: ExoPlayer, videoPr
                 simpleExoPlayer.prepare()
             }
         }
-    }.extract(videoPromo)
+    }.extract(videoPromo,false, false)
 }
 
